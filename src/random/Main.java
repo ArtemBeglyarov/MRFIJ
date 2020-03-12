@@ -8,17 +8,52 @@ public class Main
     {
         Scanner scanner = new Scanner(System.in);
         String a = scanner.nextLine();
-
-        char [] roman = {'I', 'V', 'X', 'L', 'D', 'M'};
         char[] array = a.toCharArray();
-        for (int i = 0; i < array.length; i++)
+        int[] number = new int[10];
+        for (int i = 0; i <number.length ; i++)
         {
+            for (int j = 0; j <array.length ; j++)
+            {
+                {
+                    if (array[j] == 'I')
+                    {
+                        number[i] = 1;
 
+                    }
+                    if (array[j] == 'V')
+                    {
+                        number[i] = 5;
 
+                    }
+                    if (array[j] == 'X')
+                    {
+                        number[i] = 10;
 
-                    System.out.println("некорректный ввод");
+                    }
+                    if (array[j] == 'L')
+                    {
+                        number[i] = 50;
+
+                    }
+                    if (array[j] == 'D')
+                    {
+                        number[i] = 100;
+
+                    }
+                    if (array[j] == 'M')
+                    {
+                        number[i] = 1000;
+
+                    }
+                }
             }
+
+            System.out.println(number[i]);
         }
+
+
+
+
     }
 }
 
