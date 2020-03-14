@@ -9,52 +9,36 @@ public class Main
         Scanner scanner = new Scanner(System.in);
         String a = scanner.nextLine();
         char[] array = a.toCharArray();
-        int[] number = new int[10];
-        for (int i = 0; i <number.length ; i++)
+        int [] number = new int[array.length];
+        for (int i = 0; i < array.length; i++)
         {
-            for (int j = 0; j <array.length ; j++)
+            if (array[i] == 'I')
             {
-                {
-                    if (array[j] == 'I')
-                    {
-                        number[i] = 1;
-
-                    }
-                    if (array[j] == 'V')
-                    {
-                        number[i] = 5;
-
-                    }
-                    if (array[j] == 'X')
-                    {
-                        number[i] = 10;
-
-                    }
-                    if (array[j] == 'L')
-                    {
-                        number[i] = 50;
-
-                    }
-                    if (array[j] == 'D')
-                    {
-                        number[i] = 100;
-
-                    }
-                    if (array[j] == 'M')
-                    {
-                        number[i] = 1000;
-
-                    }
-                }
+                number[i] = 1;
             }
-
+            if (array[i] == 'V')
+            {
+                number[i] = 5;
+            }
+            if (array[i] == 'X')
+            {
+                number[i] = 10;
+            }
+            if (array[i] == 'L')
+            {
+                number[i] = 50;
+            }
+            if (array[i] == 'D')
+            {
+                number[i] = 100;
+            }
+            if (array[i] == 'M')
+            {
+                number[i] = 1000;
+            }
             System.out.println(number[i]);
         }
 
 
-
-
     }
 }
-
-
