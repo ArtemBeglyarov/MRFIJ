@@ -1,6 +1,6 @@
 package random;
 
-import java.nio.channels.NotYetBoundException;
+
 import java.util.Scanner;
 
 
@@ -13,6 +13,7 @@ public class Main
         String a = scanner.nextLine();
         char[] array = a.toCharArray();
         int [] number = new int[array.length];
+
         for (int i = 0; i < array.length; i++)
         {
             if (array[i] == 'I')
@@ -40,119 +41,74 @@ public class Main
                 number[i] = 1000;
             }
         }
-        for (int i = 0; i < number.length; i++)
+            NUMBER(number);
+    }
+    public static int NUMBER(int[] nubmber)
+    {
+        int sum = 0;
+        for (int valie:nubmber)
         {
-            if (number[0] == 1)
-            {
-                if (number.length == 1)
-                {
-                    System.out.println(number[0]);
-                    break;
-                }
-                if (number.length > 1)
-                {
-                    if (number.length == 2)
-                    {
-                        if (number[1] == 5)
-                        {
-                            System.out.println(number[1] - number[0]);
-                            break;
-                        }
-                        if (number[1] == 10)
-                        {
-                            System.out.println(number[1] - number[0]);
-                            break;
-                        }
-                        if (number[0] == 1 && number[1] == 1)
-                        {
-                            System.out.println(number[0] + number[1]);
-                            break;
-                        }
-
-                    }
-                    if (number.length == 3)
-                    {
-                        if (number[0] == 1 && number[1] == 1 && number[2] == 1)
-                        {
-                            System.out.println(number[0] + number[1] + number[2]);
-                            break;
-                        }
-
-                    }
-                    else
-                    {
-                        System.out.println("error");
-                        break;
-                    }
-                }
-
-            }
-            if (number[0] == 5)
-            {
-                if (number.length == 1)
-                {
-                    System.out.println(number[0]);
-                    break;
-                }
-                if (number.length > 1)
-                {
-                    if (number.length == 2 && number[1] == 1)
-                    {
-                        System.out.println(number[0] + number[1]);
-                        break;
-                    }
-                    if (number.length == 3 && number[1]== 1 && number[2] == 1)
-                    {
-                        System.out.println(number[0]+number[1]+number[2]);
-                        break;
-                    }
-                    if (number.length == 4 && number[1] == 1 && number[2] == 1 && number[3] == 1)
-                    {
-                        System.out.println(number[0] + number[1] + number[2] + number[3]);
-                        break;
-                    }
-                    else
-                    {
-                        System.out.println("error");
-                        break;
-                    }
-
-                }
-            }
-            if (number[0] == 10)
-            {
-                if (number.length == 1)
-                {
-                    System.out.println(number[0]);
-                    break;
-                }
-                if (number.length == 2)
-                {
-                    if (number[1] == 50)
-                    {
-
-                        System.out.println(number[1] - number[0]);
-                        break;
-                    }
-                    else if (number[1] == 100 || number[1] == 1000)
-                    {
-                        System.out.println("error");
-                    }
-                    else
-                    {
-                        System.out.println(number[0] + number[1]);
-                    }
-                    break;
-                }
-                if (number.length == 3)
-                {
-
-                }
-
-            }
-
+            sum = sum + valie;
         }
+        for (int i = 0; i < nubmber.length; i++)
+        {
+            if (nubmber.length == 1)
+            {
+                System.out.println(nubmber[0]);
+            }
+            if (nubmber.length > 1)
+            {
+               if(nubmber[i] == 5)
+               {
+                   if (nubmber[i - 1] == 1)
+                   {
+                       sum = sum - 2;
+                   }
+               }
 
+               if(nubmber[i] == 10)
+               {
+                   if(nubmber[i-1] == 1)
+                   {
+                       sum = sum - 2;
+                   }
+               }
+               if(nubmber[i] == 50)
+               {
+                   if (nubmber[i-1]==10)
+                   {
+                       sum = sum - 10;
+                   }
 
+               } if(nubmber[i] == 100)
+               {
+                   if (nubmber[i-1]==10)
+                   {
+                       sum = sum - 10;
+                   }
+
+               }
+               if(nubmber[i] == 500)
+               {
+                   if (nubmber[i-1]==100)
+                   {
+                       sum = sum - 100;
+                   }
+
+               }
+               if(nubmber[i] == 1000)
+               {
+                   if (nubmber[i-1]==100)
+                   {
+                       sum = sum - 100;
+                   }
+
+               }
+
+            }
+        }
+        System.out.println(sum);
+
+        return sum;
     }
 }
