@@ -50,7 +50,7 @@ public class Main
         {
             sum = sum + valie;
         }
-        for (int i = 0; i < nubmber.length; i++)
+        for (int i = 1; i < nubmber.length; i++)
         {
             if (nubmber.length == 1)
             {
@@ -77,14 +77,14 @@ public class Main
                {
                    if (nubmber[i-1]==10)
                    {
-                       sum = sum - 10;
+                       sum = sum - 20;
                    }
 
                } if(nubmber[i] == 100)
                {
                    if (nubmber[i-1]==10)
                    {
-                       sum = sum - 10;
+                       sum = sum - 20;
                    }
 
                }
@@ -92,7 +92,7 @@ public class Main
                {
                    if (nubmber[i-1]==100)
                    {
-                       sum = sum - 100;
+                       sum = sum - 200;
                    }
 
                }
@@ -100,7 +100,7 @@ public class Main
                {
                    if (nubmber[i-1]==100)
                    {
-                       sum = sum - 100;
+                       sum = sum - 200;
                    }
 
                }
