@@ -1,7 +1,8 @@
 package RandomTask;
 
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 
@@ -24,26 +25,35 @@ public class Data
         return firstName;
     }
 
-    public static String birthday()
+    public static  String birthday()
     {
 
         Random random = new Random();
-        Date date = new Date();
+        Calendar calendar = new GregorianCalendar();
 
-        int b = random.nextInt(30); int a = date.getDay(); int c = a - b;
-        int b2 = random.nextInt(12); int a2 = date.getMonth(); int c2 = a2 - b2;
-        int b3 = 1900 + random.nextInt(2020 - 1900); int a3 = date.getYear(); int c3 = a3 - b3;
 
-        if ((c > 0 && c < 31) & (c2 > 0 && c2 < 12) & (c3 > 1900 && c3 < 2020))
+        int day2 = random.nextInt(31);   int day1 = calendar.get(Calendar.DAY_OF_MONTH);   int day3 = day1 - day2;
+        int month2 = random.nextInt(12); int month1 = calendar.get(Calendar.MONTH);        int month3 = month1 - month2;
+        int year2 = random.nextInt(100); int year1 = calendar.get(Calendar.YEAR);          int year3 = year1 - year2;
+
+
+        if ((day3 > 0) && (month3 > 0) && (year3 > 0))
         {
-            System.out.println(c + "." + c2 + "." + c3 + ".");
+            String strDay = Integer.toString(day3);
+            String strMonth = Integer.toString(month3);
+            String strYear = Integer.toString(year3);
 
+
+            String strBirthDay = strDay + "." + strMonth + "." + strYear;
+
+            System.out.println(strBirthDay);
+
+            return strBirthDay;
+        }
+        else
+        {
+            return birthday();
         }
 
-        return birthday();
-
-
     }
-
-
 }
