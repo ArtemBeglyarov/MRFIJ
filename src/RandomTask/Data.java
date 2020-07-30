@@ -8,12 +8,12 @@ import java.util.Random;
 
 public class Data
 {
-    public static String secondName()
+    public static String secondName()         //Метод возвращающий случайную фамилию из массива
     {
         String[] surname = {"Иванов", "Петоров", "Сидоров", "Котов", "Мохнаткин", "Подопри - Гора", "Свинотов", "Царь",
                 "Свинотов"};
-        int randomSurname = new Random().nextInt(surname.length);
-        String secondName = surname[randomSurname];
+        int randomSurname = new Random().nextInt(surname.length); //случаный элемент массива инициализированный в int переменную
+        String secondName = surname[randomSurname];               // масив со случайным элеменотом приобарзоввнный в строку
         return secondName;
     }
 
@@ -25,7 +25,7 @@ public class Data
         return firstName;
     }
 
-    public static  String birthday()
+    public static  String birthday()   // метод
     {
 
         Random random = new Random();

@@ -21,7 +21,7 @@ import javax.xml.transform.stream.StreamResult;
 
 
 
-public class main
+public class MainRandomTask
 {
     public static void main(String[] args)
             throws ParserConfigurationException, TransformerException, FileNotFoundException
@@ -36,14 +36,15 @@ public class main
         Element secondName = document.createElement("secondName");
         Element birthDay = document.createElement("birthDay");
 
-        document.appendChild(root);
-        root.appendChild(firstName);
+        document.appendChild(root);             //добавить в xml докумет, корневой тег
+        root.appendChild(firstName);            // добавить в корневой тег, дочерниие теги
         root.appendChild(secondName);
         root.appendChild(birthDay);
 
-        firstName.setAttribute( "у",Data.firstName());
-  //      secondName.setAttribute(data.secondName());
-//        birthDay.setAttribute(birthday());
+        firstName.setTextContent(Data.firstName());
+        secondName.setTextContent(Data.secondName());
+        birthDay.setTextContent(Data.birthday());
+
 
         Transformer t = TransformerFactory.newDefaultInstance().newTransformer();
         t.setOutputProperty(OutputKeys.INDENT, "yes");
