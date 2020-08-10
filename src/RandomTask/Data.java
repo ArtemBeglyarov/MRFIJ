@@ -1,9 +1,9 @@
 package RandomTask;
 
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Data
@@ -46,8 +46,6 @@ public class Data
 
             String strBirthDay = strDay + "." + strMonth + "." + strYear;
 
-            System.out.println(strBirthDay);
-
             return strBirthDay;
         }
         else
@@ -56,4 +54,6 @@ public class Data
         }
 
     }
+
+
 }
