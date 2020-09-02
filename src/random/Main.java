@@ -9,7 +9,12 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < args.length ; i++)
+        {
+            System.out.println(args[i]);
+        }
+    }
+}        /*  Scanner scanner = new Scanner(System.in);
         String a = scanner.nextLine();
         char[] array = a.toCharArray();
         int [] number = new int[array.length];
@@ -110,5 +115,7 @@ public class Main
         System.out.println(sum);
 
         return sum;
-    }
-}
+    } /*
+
+
+         */
