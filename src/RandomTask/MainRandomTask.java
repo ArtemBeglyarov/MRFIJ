@@ -38,12 +38,12 @@ public class MainRandomTask {
 
             Map<String, String> map = new HashMap<>();
 
-            for (int i = 0; i < args.length; i += 2) {
+            for (int i = 0; i < args.length; i += 2)
+            {
 
                 map.put(args[i], args[i + 1]);
 
             }
-
 
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
@@ -54,18 +54,19 @@ public class MainRandomTask {
 
             document.appendChild(gen);
 
-            System.out.println(map.get("-c"));
-            System.out.println(map.get("-f"));
 
 
-            if (map.containsKey("-c")) {
 
-                String size =  map.get("-c");
+            if (map.containsKey("-c"))
+            {
+
+                String size = map.get("-c");
                 int count = Integer.parseInt(map.get("-c"));
-                System.out.println(count);
 
 
-                for (int i = 0; i < count; i++) {
+
+                for (int i = 0; i < count; i++)
+                {
 
 
                     Element root = document.createElement("person");
@@ -84,24 +85,21 @@ public class MainRandomTask {
                     birthDay.setTextContent(Data.birthday());
 
 
-
                 }
             }
 
-            if (map.containsKey("-s")) {
+            if (map.containsKey("-s"))
+            {
 
                 String size = map.get("-s");
 
 
                 int sum = 0;
-                int result=0;
+                int result = 0;
 
 
-
-
-
-
-                for (int i = 0; i <sizeInt(size,result); i++) {
+                for (int i = 0; i < sizeInt(size, result); i++)
+                {
 
 
                     Element root = document.createElement("person");
@@ -126,31 +124,25 @@ public class MainRandomTask {
 
                     sum += byteFirstName.length + byteSecondName.length + byteBirthDay.length + 128;
 
-                    if (sizeInt(size,result)- 71 <= sum) {
+                    if (sizeInt(size, result) - 71 <= sum)
+                    {
                         break;
                     }
                 }
 
 
-
-
-
-                if (map.containsKey("-f") == true) {
-
-                    Transformer t = TransformerFactory.newDefaultInstance().newTransformer();
-                    t.setOutputProperty(OutputKeys.INDENT, "yes");
-                    t.transform(new DOMSource(document), new StreamResult(new FileOutputStream(map.get("-f"))));
-                }
-                else {
-                    Transformer t = TransformerFactory.newDefaultInstance().newTransformer();
-                    t.setOutputProperty(OutputKeys.INDENT, "yes");
-                    t.transform(new DOMSource(document), new StreamResult(new FileOutputStream("output.xml")));
-                }
             }
 
+            if (map.containsKey("-f") == true) {
 
-            else {
-                System.out.println("некорректные аргументы");
+                Transformer t = TransformerFactory.newDefaultInstance().newTransformer();
+                t.setOutputProperty(OutputKeys.INDENT, "yes");
+                t.transform(new DOMSource(document), new StreamResult(new FileOutputStream(map.get("-f"))));
+            }
+            if (map.containsKey("-f") == false) {
+                Transformer t = TransformerFactory.newDefaultInstance().newTransformer();
+                t.setOutputProperty(OutputKeys.INDENT, "yes");
+                t.transform(new DOMSource(document), new StreamResult(new FileOutputStream("output.xml")));
             }
 
         }
