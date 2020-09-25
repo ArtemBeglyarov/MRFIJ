@@ -1,4 +1,4 @@
-package com.mrfij.generate;
+package RandomTask;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
