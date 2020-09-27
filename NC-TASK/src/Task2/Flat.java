@@ -11,6 +11,7 @@ public class Flat {
 
 
 
+
    public Flat() {
      this.area = AREA_DEFAULT;
      this.room = ROOM_DEFAULT;

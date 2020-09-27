@@ -2,39 +2,40 @@ package Task2;
 
 public class DwellingFloor {
 
-    public static final int COUNT_FLATS = 5;
-    private Object [] floor;
-    private int CountFlats;
 
-    public Object[] getFloor() {
+    private int countFlats;
+    private Flat [] floor;
+
+    public Flat[] getFloor() {
         return floor;
     }
 
-    public void setFloor(Object[] floor) {
+
+    public int getCountFlats() {
+        return countFlats;
+    }
+
+    public DwellingFloor(int countFlats) {
+
+       this.countFlats = countFlats;
+       this.floor = new Flat[countFlats];
+
+        for (int i = 0; i <floor.length ; i++) {
+            this.floor[i] = new Flat();
+        }
+ 
+    }
+
+    public DwellingFloor(Flat [] floor) {
         this.floor = floor;
     }
 
-    public int getCountFlats() {
-        return CountFlats;
-    }
-    public void setCountFlats(int CountFlats) {
-        this.CountFlats = CountFlats;
-    }
+   /* public int sumAreaFlatsFloor(Flat[]floor) {
+        int sumArea = 0;
+        for (int i = 0; i < ; i++) {
 
-    public DwellingFloor() {
-
-       this.CountFlats = COUNT_FLATS;
-
-        Object [] floor = new Object[CountFlats];
-
-        Flat Flat0 = new Flat(); this.floor[0] = Flat0;
-        Flat Flat1 = new Flat(); this.floor[1] = Flat1;
-        Flat Flat2 = new Flat(); this.floor[2] = Flat2;
-        Flat Flat3 = new Flat(); this.floor[3] = Flat3;
-        Flat Flat4 = new Flat(); this.floor[4] = Flat4;
-
-    }
-
-
+        }
+        return sumArea;
+    }*/
 
 }
