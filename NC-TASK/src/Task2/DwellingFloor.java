@@ -4,6 +4,7 @@ public class DwellingFloor {
     private Flat[] floor;
     private int numberFlats;
 
+
     public Flat[] getFloor() {
         return this.floor;
     }
@@ -59,6 +60,32 @@ public class DwellingFloor {
         }
 
         return bestSpace;
+    }
+    public boolean changeFlat(int changeNumberFlat, Flat change ) {
+
+        if (this.floor.length <= changeNumberFlat) {
+            this.floor[changeNumberFlat] = change;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+    public boolean deleteFlat(int deleteFlat, Flat delete) {
+
+        if (this.floor.length <= deleteFlat) {
+            this.floor[deleteFlat] = null;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+    public Flat getFlatNumber(int getFlatNumber) {
+        return this.floor[getFlatNumber];
+
     }
 
 }
