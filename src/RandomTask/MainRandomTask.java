@@ -1,4 +1,5 @@
-package com.mrfij.generate;
+package RandomTask;
+
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -8,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,6 +24,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 
+
+
 public class MainRandomTask {
 
 
@@ -34,7 +38,8 @@ public class MainRandomTask {
 
             Map<String, String> map = new HashMap<>();
 
-            for (int i = 0; i < args.length; i += 2) {
+            for (int i = 0; i < args.length; i += 2)
+            {
 
                 map.put(args[i], args[i + 1]);
 
@@ -50,13 +55,18 @@ public class MainRandomTask {
             document.appendChild(gen);
 
 
-            if (map.containsKey("-c")) {
+
+
+            if (map.containsKey("-c"))
+            {
 
                 String size = map.get("-c");
                 int count = Integer.parseInt(map.get("-c"));
 
 
-                for (int i = 0; i < count; i++) {
+
+                for (int i = 0; i < count; i++)
+                {
 
 
                     Element root = document.createElement("person");
@@ -78,7 +88,8 @@ public class MainRandomTask {
                 }
             }
 
-            if (map.containsKey("-s")) {
+            if (map.containsKey("-s"))
+            {
 
                 String size = map.get("-s");
 
@@ -87,7 +98,8 @@ public class MainRandomTask {
                 int result = 0;
 
 
-                for (int i = 0; i < sizeInt(size, result); i++) {
+                for (int i = 0; i < sizeInt(size, result); i++)
+                {
 
 
                     Element root = document.createElement("person");
@@ -112,7 +124,8 @@ public class MainRandomTask {
 
                     sum += byteFirstName.length + byteSecondName.length + byteBirthDay.length + 128;
 
-                    if (sizeInt(size, result) - 71 <= sum) {
+                    if (sizeInt(size, result) - 71 <= sum)
+                    {
                         break;
                     }
                 }
@@ -135,7 +148,7 @@ public class MainRandomTask {
         }
     }
 
-    public static int sizeInt(String size, int result) {
+    public static int  sizeInt(String size, int result) {
 
         String sizeByte = size.substring(size.length() - 2);
 
@@ -143,10 +156,11 @@ public class MainRandomTask {
             case "kb":
                 String sizeNumeralKB = size.substring(0, size.length() - 2);
 
-                result = Integer.parseInt(sizeNumeralKB) * 1000;
+               result = Integer.parseInt(sizeNumeralKB) * 1000;
 
 
-                break;
+
+                 break;
 
             case "mb":
                 String sizeNumeralMB = size.substring(0, size.length() - 2);
@@ -154,14 +168,14 @@ public class MainRandomTask {
                 result = Integer.parseInt(sizeNumeralMB) * 1000000;
 
 
-                break;
+                  break;
 
             case "gb":
                 String sizeNumeralGB = size.substring(0, size.length() - 2);
 
-                result = Integer.parseInt(sizeNumeralGB) * 1000000000;
+                 result = Integer.parseInt(sizeNumeralGB) * 1000000000;
 
-                break;
+                  break;
 
 
             default:
@@ -171,7 +185,8 @@ public class MainRandomTask {
                 if (result < 260) {
 
                     System.out.println("слишком маленькое число");
-                } else
+                }
+                else
 
                     break;
         }
