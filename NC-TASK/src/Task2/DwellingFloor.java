@@ -1,41 +1,64 @@
 package Task2;
 
 public class DwellingFloor {
-
-
-    private int countFlats;
-    private Flat [] floor;
+    private Flat[] floor;
+    private int numberFlats;
 
     public Flat[] getFloor() {
-        return floor;
+        return this.floor;
     }
 
-
-    public int getCountFlats() {
-        return countFlats;
+    public int getNumberFlats() {
+        return this.numberFlats;
     }
 
-    public DwellingFloor(int countFlats) {
+    public DwellingFloor(int numberFlats) {
+        this.numberFlats = numberFlats;
+        this.floor = new Flat[numberFlats];
 
-       this.countFlats = countFlats;
-       this.floor = new Flat[countFlats];
-
-        for (int i = 0; i <floor.length ; i++) {
+        for(int i = 0; i < this.floor.length; ++i) {
             this.floor[i] = new Flat();
         }
- 
+
     }
 
-    public DwellingFloor(Flat [] floor) {
+    public DwellingFloor(Flat[] floor) {
         this.floor = floor;
     }
 
-   /* public int sumAreaFlatsFloor(Flat[]floor) {
-        int sumArea = 0;
-        for (int i = 0; i < ; i++) {
+    public int getSumAreaFlatFloor() {
+        int sunNumberArea = 0;
 
+        for(int i = 0; i < this.floor.length; ++i) {
+            sunNumberArea += this.floor[i].getArea();
         }
-        return sumArea;
-    }*/
+
+        return sunNumberArea;
+    }
+
+    public int getSumRoomFlatFloor() {
+        int sunNumberRoom = 0;
+
+        for(int i = 0; i < this.floor.length; ++i) {
+            sunNumberRoom += this.floor[i].getRoom();
+        }
+
+        return sunNumberRoom;
+    }
+
+    public Flat getBestSpace() {
+        int intBestSpace = 0;
+        Flat bestSpace = null;
+
+        for(int i = 0; i < this.floor.length; ++i) {
+            if (this.floor[i].getArea() > intBestSpace) {
+                intBestSpace = this.floor[i].getArea();
+            }
+
+            bestSpace = this.floor[i];
+        }
+
+        return bestSpace;
+    }
 
 }
