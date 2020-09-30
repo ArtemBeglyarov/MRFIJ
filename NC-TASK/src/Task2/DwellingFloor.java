@@ -1,6 +1,7 @@
 package Task2;
 
-public class DwellingFloor {
+public class DwellingFloor
+{
 
     private Flat[] floor;
     private int numberFlats;
@@ -8,10 +9,6 @@ public class DwellingFloor {
     public Flat[] getFloor() {
         return floor;
     }
-
-
-
-
 
     public int getNumberFlats() {
         return this.numberFlats;
@@ -93,18 +90,19 @@ public class DwellingFloor {
 
     }
     public void setNewFlat(int numberNewFlats, Flat newFlat) {
-        if ( numberNewFlats< this.floor.length) {
+        if ( numberNewFlats<= this.floor.length) {
 
             this.floor[numberNewFlats] = newFlat;
         }
         if (  numberNewFlats > this.floor.length){
 
             Flat[] floor = new Flat[numberNewFlats];
+            floor[numberNewFlats-1] = newFlat;
             for (int i = 0; i < this.floor.length; i++) {
                     floor[i] = this.floor[i];
 
             }
-
+            this.floor=floor;
         }
 
     }
