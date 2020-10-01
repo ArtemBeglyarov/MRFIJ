@@ -1,4 +1,4 @@
-package Task2;
+package Task2.buildings;
 
 
 public class Flat {
