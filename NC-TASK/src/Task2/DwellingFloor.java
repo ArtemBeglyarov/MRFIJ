@@ -54,11 +54,14 @@ public class DwellingFloor
         Flat bestSpace = null;
 
         for(int i = 0; i < this.floor.length; ++i) {
-            if (this.floor[i].getArea() > intBestSpace) {
-                intBestSpace = this.floor[i].getArea();
+
+            if (this.floor[i].getArea() >= intBestSpace) {
+
+                bestSpace = this.floor[i];
             }
 
-            bestSpace = this.floor[i];
+            intBestSpace = this.floor[i].getArea();
+
         }
 
         return bestSpace;
@@ -74,7 +77,7 @@ public class DwellingFloor
         }
 
     }
-    public boolean deleteFlat(int deleteFlat, Flat delete) {
+    public boolean deleteFlat(int deleteFlat) {
 
         if (this.floor.length <= deleteFlat) {
             this.floor[deleteFlat] = null;
@@ -85,19 +88,19 @@ public class DwellingFloor
         }
 
     }
-    public Flat getFlatNumber(int getFlatNumber) {
+    public Flat getFlatNum(int getFlatNumber) {
         return this.floor[getFlatNumber];
 
     }
-    public void setNewFlat(int numberNewFlats, Flat newFlat) {
-        if ( numberNewFlats<= this.floor.length) {
+    public void setNewFlat(int numNewFlats, Flat newFlat) {
+        if ( numNewFlats <= this.floor.length) {
 
-            this.floor[numberNewFlats] = newFlat;
+            this.floor[numNewFlats] = newFlat;
         }
-        if (  numberNewFlats > this.floor.length){
+        if (  numNewFlats > this.floor.length){
 
-            Flat[] floor = new Flat[numberNewFlats];
-            floor[numberNewFlats-1] = newFlat;
+            Flat[] floor = new Flat[numNewFlats];
+            floor[numNewFlats -1] = newFlat;
             for (int i = 0; i < this.floor.length; i++) {
                     floor[i] = this.floor[i];
 
