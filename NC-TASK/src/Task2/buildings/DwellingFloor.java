@@ -50,17 +50,17 @@ public class DwellingFloor
     }
 
     public Flat getBestSpace() {
-        int intBestSpace = 0;
+        int best = 0;
         Flat bestSpace = null;
 
         for(int i = 0; i < this.flats.length; ++i) {
 
-            if (this.flats[i].getArea() >= intBestSpace) {
+            if (this.flats[i].getArea() >= best) {
 
                 bestSpace = this.flats[i];
             }
 
-            intBestSpace = this.flats[i].getArea();
+            best = this.flats[i].getArea();
 
         }
 

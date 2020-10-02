@@ -22,14 +22,10 @@ public class MainTask2 {
 
         System.out.println();
         System.out.println();
-        System.out.println(dwelling.getBestSpace().getArea()+"1");
-        System.out.println(Arrays.toString(dwelling.getSortFlatArea()));
 
-       /* for (int i = 0; i <dwelling.getFloorHouse().length ; i++) {
-            sout
+       dwelling.getSortFlatArea();
 
-        }
-*/
+
 
 
 

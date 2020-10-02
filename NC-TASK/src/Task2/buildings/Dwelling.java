@@ -1,5 +1,7 @@
 package Task2.buildings;
 
+import java.sql.SQLOutput;
+
 public class Dwelling {
 
     private int numberFloor;
@@ -78,33 +80,55 @@ public class Dwelling {
     }
        public Flat getBestSpace() {          //получить самую большую по площади квартиру в доме
 
-        int intBestSpaceInHouse =0;
-        Flat bestSpaceInHouse = null;
+        int bestSpace =0;
+        Flat bestFlat = null;
         for (int i = 0; i <this.floors.length; i++) {
-            if (this.floors[i].getBestSpace().getArea() >= intBestSpaceInHouse) {
-                bestSpaceInHouse = this.floors[i].getBestSpace();
+            if (this.floors[i].getBestSpace().getArea() >= bestSpace) {
+                bestFlat = this.floors[i].getBestSpace();
+                bestSpace = this.floors[i].getBestSpace().getArea();
+                System.out.println(bestSpace);
             }
-            intBestSpaceInHouse = this.floors[i].getBestSpace().getArea();
+
         }
-        return bestSpaceInHouse;
+           System.out.println();
+           System.out.println(bestSpace);
+        return bestFlat;
     }
-    public Flat[] getSortFlatArea() {
-        Flat [] sort = new Flat[getAllRoom()];
-        int i =0;
+    public Flat[] getSortFlatArea() {                       //сортировка кварти всего дома
+        Flat[] sort = new Flat[getAllRoom()];
+        System.out.println(getAllRoom());
+        int i = 0;
         for (DwellingFloor floor : floors) {
-            for (Flat flat : floor.getFlats() ) {
+            for (Flat flat : floor.getFlats()) {
                 sort[i++] = flat;
 
             }
 
+            for (int k = 0; k <sort.length ; k++) {
+                System.out.println(sort[k].getArea());
+
+            }
+
         }
-        int buf =0;
+        Flat buf = null;
         boolean Sort = false;
-        for (int j = 0; j <sort.length ; j++) {
+        while (!Sort) {
+            Sort = true;
+            for (int j = 0; j < sort.length -1; j++) {
+
+                if (sort[j].getArea() > sort[j + 1].getArea()) {
+
+                    Sort = false;
+
+                    buf = sort[j];
+                    sort[j] = sort[j + 1];
+                    sort[j + 1] = buf;
+                }
+            }
 
 
         }
-
+        return sort;
     }
 }
 
