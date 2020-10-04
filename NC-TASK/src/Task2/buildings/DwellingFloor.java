@@ -33,7 +33,6 @@ public class DwellingFloor
 
         for(int i = 0; i < this.flats.length; ++i) {
             sunNumberArea += this.flats[i].getArea();
-            System.out.println(flats[i].getArea());
         }
 
         return sunNumberArea;
@@ -68,7 +67,7 @@ public class DwellingFloor
     }
     public boolean changeFlat(int changeNumberFlat, Flat change ) {
 
-        if (this.flats.length <= changeNumberFlat) {
+        if ( changeNumberFlat<=this.flats.length) {
             this.flats[changeNumberFlat] = change;
             return true;
         }
@@ -79,7 +78,7 @@ public class DwellingFloor
     }
     public boolean deleteFlat(int deleteFlat) {
 
-        if (this.flats.length <= deleteFlat) {
+        if ( deleteFlat<=this.flats.length ) {
             this.flats[deleteFlat] = null;
             return true;
         }

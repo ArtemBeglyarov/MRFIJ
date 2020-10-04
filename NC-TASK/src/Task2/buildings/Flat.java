@@ -10,9 +10,16 @@ public class Flat {
     private int room;
 
 
+    @Override
+    public String toString()
+    {
+        return "Flat{" +
+                "area=" + area +
+                ", room=" + room +
+                '}';
+    }
 
-
-   public Flat() {
+    public Flat() {
      this.area = AREA_DEFAULT;
      this.room = ROOM_DEFAULT;
     }

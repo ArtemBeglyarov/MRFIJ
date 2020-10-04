@@ -58,25 +58,25 @@ public class Dwelling {
     }
 
     public DwellingFloor getFloorHouse(int numFloor) {              //получение массива этажа
-        return this.floors[numFloor];
+        return this.floors[numFloor-1];
     }
 
     public Flat getFlatInHouse(int numFlat, int numFloor) {          //получение  объекта квартиры по ее номеру в доме
 
-        return this.floors[numFloor].getFlatNum(numFlat);
+        return this.floors[numFloor-1].getFlatNum(numFlat);
     }
 
     public void setFlatInHouse(int numFlat, int numFloor,Flat change) {          //измененение кварты по ее номеру в доме
 
-        this.floors[numFloor].changeFlat(numFlat, change);
+        this.floors[numFloor-1].changeFlat(numFlat, change);
     }
     public void  setNewFlatInHouse(int numFloor,int numFlat, Flat change) {         //создание новой квартиры в доме
 
-        this.floors[numFloor].setNewFlat(numFlat,change);
+        this.floors[numFloor-1].setNewFlat(numFlat,change);
     }
     public void deleteFlatInHouse(int numFloor,int numFlat) {           //удаление  кварты в доме
 
-       this.floors[numFloor].deleteFlat(numFlat);
+       this.floors[numFloor-1].deleteFlat(numFlat);
     }
        public Flat getBestSpace() {          //получить самую большую по площади квартиру в доме
 
@@ -90,25 +90,18 @@ public class Dwelling {
             }
 
         }
-           System.out.println();
-           System.out.println(bestSpace);
+
         return bestFlat;
     }
     public Flat[] getSortFlatArea() {                       //сортировка кварти всего дома
-        Flat[] sort = new Flat[getAllRoom()];
-        System.out.println(getAllRoom());
+        Flat[] sort = new Flat[getAllFlat()];
+
         int i = 0;
         for (DwellingFloor floor : floors) {
             for (Flat flat : floor.getFlats()) {
                 sort[i++] = flat;
 
             }
-
-            for (int k = 0; k <sort.length ; k++) {
-                System.out.println(sort[k].getArea());
-
-            }
-
         }
         Flat buf = null;
         boolean Sort = false;
@@ -116,7 +109,7 @@ public class Dwelling {
             Sort = true;
             for (int j = 0; j < sort.length -1; j++) {
 
-                if (sort[j].getArea() > sort[j + 1].getArea()) {
+                if (sort[j].getArea() < sort[j + 1].getArea()) {
 
                     Sort = false;
 
