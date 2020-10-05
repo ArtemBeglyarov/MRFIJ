@@ -26,12 +26,17 @@ public class DwellingFloor
 
     public DwellingFloor(Flat[] flats) {
         this.flats = flats;
+        this.numberFlats = flats.length;
+
     }
 
     public int getSumAreaFlatFloor() {
         int sunNumberArea = 0;
 
         for(int i = 0; i < this.flats.length; ++i) {
+            if (this.flats[i] == null) {
+                continue;
+            }
             sunNumberArea += this.flats[i].getArea();
         }
 
@@ -42,6 +47,9 @@ public class DwellingFloor
         int sunNumberRoom = 0;
 
         for(int i = 0; i < this.flats.length; ++i) {
+            if (this.flats[i] == null) {
+                continue;
+            }
             sunNumberRoom += this.flats[i].getRoom();
         }
 
@@ -53,13 +61,16 @@ public class DwellingFloor
         Flat bestSpace = null;
 
         for(int i = 0; i < this.flats.length; ++i) {
-
+            if (this.flats[i] == null) {
+                continue;
+            }
             if (this.flats[i].getArea() >= best) {
 
                 bestSpace = this.flats[i];
+                best = this.flats[i].getArea();
             }
 
-            best = this.flats[i].getArea();
+
 
         }
 
@@ -80,7 +91,9 @@ public class DwellingFloor
 
         if ( deleteFlat<=this.flats.length ) {
             this.flats[deleteFlat] = null;
+            this.numberFlats -=1;
             return true;
+
         }
         else {
             return false;

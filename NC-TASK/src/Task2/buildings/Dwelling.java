@@ -1,6 +1,6 @@
 package Task2.buildings;
 
-import java.sql.SQLOutput;
+
 
 public class Dwelling {
 
@@ -21,9 +21,11 @@ public class Dwelling {
 
     public int getAllFlat() {                     //получение количесва квартир
 
-        int getAllFlat = 0;
+        int getAllFlat= 0;
         for (int i = 0; i < floors.length; i++) {
+
             getAllFlat += floors[i].getNumberFlats();
+
         }
         return getAllFlat;
     }
@@ -55,6 +57,7 @@ public class Dwelling {
     }
     public Dwelling(DwellingFloor [] floors) {
         this.floors = floors;
+        this.numberFloor = floors.length;
     }
 
     public DwellingFloor getFloorHouse(int numFloor) {              //получение массива этажа
@@ -77,6 +80,8 @@ public class Dwelling {
     public void deleteFlatInHouse(int numFloor,int numFlat) {           //удаление  кварты в доме
 
        this.floors[numFloor-1].deleteFlat(numFlat);
+
+        System.out.println("квартира№"+numFlat+" "+"на этаже №"+numFloor+" " +"удалена");
     }
        public Flat getBestSpace() {          //получить самую большую по площади квартиру в доме
 
@@ -86,7 +91,7 @@ public class Dwelling {
             if (this.floors[i].getBestSpace().getArea() >= bestSpace) {
                 bestFlat = this.floors[i].getBestSpace();
                 bestSpace = this.floors[i].getBestSpace().getArea();
-                System.out.println(bestSpace);
+
             }
 
         }
@@ -99,6 +104,9 @@ public class Dwelling {
         int i = 0;
         for (DwellingFloor floor : floors) {
             for (Flat flat : floor.getFlats()) {
+                if (flat == null) {
+                    continue;
+                }
                 sort[i++] = flat;
 
             }
