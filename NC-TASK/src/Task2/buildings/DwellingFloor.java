@@ -76,35 +76,40 @@ public class DwellingFloor
 
         return bestSpace;
     }
-    public boolean changeFlat(int changeNumberFlat, Flat change ) {
-
-        if ( changeNumberFlat<=this.flats.length) {
-            this.flats[changeNumberFlat] = change;
-            return true;
-        }
-        else {
-            return false;
-        }
+    public void setFlat(int numFlat, Flat flat ) {
+        this.flats[numFlat-1] = flat;
 
     }
-    public boolean deleteFlat(int deleteFlat) {
+    public void removeFlat(int numFlat) {
 
-        if ( deleteFlat<=this.flats.length ) {
-            this.flats[deleteFlat] = null;
-            this.numberFlats -=1;
-            return true;
+
+            Flat[] flats = new Flat[this.flats.length - 1];
+
+        for (int i = 0; i <this.flats.length ; i++) {
+
+            if (i < numFlat-1) {
+                flats[i] = this.flats[i];
+            }
+            if (i == numFlat - 1) {
+                continue;
+            }
+            if (i > numFlat-1) {
+                flats[i-1] = this.flats[i];
+            }
 
         }
-        else {
-            return false;
-        }
+
+            numberFlats-=1;
+            this.flats =flats;
 
     }
+
     public Flat getFlatNum(int getFlatNumber) {
-        return this.flats[getFlatNumber];
+
+           return flats[getFlatNumber-1];
 
     }
-    public void setNewFlat(int numNewFlats, Flat newFlat) {
+    public void addFlat(int numNewFlats, Flat newFlat) {
         if ( numNewFlats <= this.flats.length) {
 
             this.flats[numNewFlats] = newFlat;

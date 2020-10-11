@@ -61,27 +61,74 @@ public class Dwelling {
     }
 
     public DwellingFloor getFloorHouse(int numFloor) {              //получение массива этажа
+
         return this.floors[numFloor-1];
+
     }
 
-    public Flat getFlatInHouse(int numFlat, int numFloor) {          //получение  объекта квартиры по ее номеру в доме
+    public Flat getFlatInHouse(int numFlat) {           //получение  объекта квартиры по ее номеру в доме
+        int buf = 0;
+        for (int i = 0; i <this.floors.length ; i++) {
+            for (int k = 0; k <this.floors[i].getFlats().length; k++) {
 
-        return this.floors[numFloor-1].getFlatNum(numFlat);
+               buf++;
+
+                if (buf == numFlat-1) {
+                   return this.floors[i].getFlats()[k];
+
+                }
+            }
+        }
+        return null;
     }
 
-    public void setFlatInHouse(int numFlat, int numFloor,Flat change) {          //измененение кварты по ее номеру в доме
-
-        this.floors[numFloor-1].changeFlat(numFlat, change);
+    public void setFlatInHouse(int numFlat, Flat flat) {          //измененение кварты по ее номеру в доме
+        int buf = 0;
+        for (int i = 0; i <this.floors.length ; i++) {
+            for (int k = 0; k <this.floors[i].getFlats().length; k++) {
+                    buf++;
+                if (buf == numFlat-1) {
+                    this.floors[i].getFlats()[k] = flat;
+                   break;
+                }
+            }
+        }
     }
-    public void  setNewFlatInHouse(int numFloor,int numFlat, Flat change) {         //создание новой квартиры в доме
+    public void  addNewFlatInHouse(int numFlat, Flat addFlat) {         //создание новой квартиры в доме
+        int buf=0;
+        for (int i = 0; i <floors.length; i++) {
+            for (int j = 0; j <floors[i].getFlats().length ; j++) {
+                if ( numFlat>floors[i].getFlats().length) {
+                    numFlat -= floors[i].getFlats().length;
+                    break;
 
-        this.floors[numFloor-1].setNewFlat(numFlat,change);
+                }
+                if (numFlat < floors[i].getFlats().length) {
+                    floors[i].addFlat(numFlat, addFlat);
+
+                }
+
+            }
+        }
     }
-    public void deleteFlatInHouse(int numFloor,int numFlat) {           //удаление  кварты в доме
+    public void removeFlatInHouse(int numFlat) {           //удаление  кварты в доме
 
-       this.floors[numFloor-1].deleteFlat(numFlat);
 
-        System.out.println("квартира№"+numFlat+" "+"на этаже №"+numFloor+" " +"удалена");
+        for (int i = 0; i <floors.length; i++) {
+            for (int j = 0; j <floors[i].getFlats().length ; j++) {
+                if ( numFlat>floors[i].getFlats().length) {
+                    numFlat -= floors[i].getFlats().length;
+                    break;
+
+                }
+                if (numFlat < floors[i].getFlats().length) {
+                    floors[i].removeFlat(numFlat);
+                    break;
+                }
+
+
+            }
+        }
     }
        public Flat getBestSpace() {          //получить самую большую по площади квартиру в доме
 
