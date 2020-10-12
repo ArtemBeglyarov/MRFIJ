@@ -25,8 +25,17 @@ public class OfficeFloor {
 
     }
 
-    private void addNode(Office office ) {
-        Node node = new Node(office,null);
+    private void addNode(Node node, int numNod ) {
+        if (first == null) {
+            first = new Node();
+            first.next = first;
+            last = first;
+        } else {
+            Node node = new Node(,first);
+            last.next = nлode;
+            last = node;
+        }
+        quantityOffice++;
 
     }
 
