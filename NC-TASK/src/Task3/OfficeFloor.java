@@ -31,8 +31,8 @@ public class OfficeFloor {
             first.next = first;
             last = first;
         } else {
-            Node node = new Node(,first);
-            last.next = nлode;
+            Node node = new Node(first);
+            last.next = node;
             last = node;
         }
         quantityOffice++;
