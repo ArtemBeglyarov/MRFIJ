@@ -2,6 +2,14 @@ package Task3;
 
 public class Office {
 
+    @Override
+    public String toString() {
+        return "Office{" +
+                "area=" + area +
+                ", room=" + room +
+                '}';
+    }
+
     private int area;
     private int room;
 
