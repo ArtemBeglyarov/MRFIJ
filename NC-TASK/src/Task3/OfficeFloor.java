@@ -1,73 +1,85 @@
 package Task3;
 
 
-
-
 public class OfficeFloor {
 
     private Node head;
-    private Node last;
+    private int countOffices;
 
     public static class Node {
 
         private Office office;
         private Node next;
 
-        public Node(Office office,Node next) {
+
+        public Node(Office office, Node next) {
             this.office = office;
             this.next = next;
-
         }
 
     }
-    public OfficeFloor() {
 
-    }
-    public void addOffice(Office office) {
-        if (head == null) {
+    public OfficeFloor(int officesNumber) {
+        head = new Node(new Office(), null);
+        head.next = head;
+        countOffices = 1;
+        Node current = head;
 
-            head = new Node(office,null);
+        while (officesNumber != countOffices) {
+            Node node = new Node(new Office(), head);
+            current.next = node;
+            current = node;
 
-            head.next = head;
-            last = head;
-        }
-        else {
-            Node node = new Node(office, head);
-            last.next = node;
-            last = node;
+            countOffices++;
         }
     }
+
+
+    public OfficeFloor(Office[] offices) {
+        this.countOffices = 0;
+        for (Office office : offices) {
+
+            if (head == null) {
+
+                head = new Node(office, null);
+                head.next = head;
+            } else {
+                Node node = new Node(office, head);
+                node.next = node;
+            }
+            countOffices++;
+        }
+    }
+
 
     public Office getOffice(int num) {
-     Node buf= head;
-     Office office = null;
-        for (int i = 1; i <num; i++) {
-
-            buf=buf.next;
-
+        Node buf = head;
+        for (int i = 1; i < num; i++) {
+            buf = buf.next;
         }
         return buf.office;
     }
 
     private Node getNode(int num) {
-        Node buf  = head;
-        for (int i = 1; i <num; i++) {
-            buf=buf.next;
-
+        Node buf = head;
+        for (int i = 1; i < num; i++) {
+            buf = buf.next;
         }
         return buf;
     }
+
     private void removeNode(int num) {
         Node buf = head;
-        for (int i = 1; i <num ; i++) {
+        for (int i = 1; i < num; i++) {
             buf = buf.next;
 
         }
 
     }
-    private void addNode(Node node, int num ) {
+
+    private void addNode(Node node, int num) {
         Node buf = head;
-        for (int i = 0; i <num ; i++) {
+        for (int i = 0; i < num; i++) {
 
         }
 
@@ -121,8 +133,6 @@ public class OfficeFloor {
 
 }
 */
-
-
 
 
 }
