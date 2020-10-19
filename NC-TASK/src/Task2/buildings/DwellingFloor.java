@@ -4,18 +4,18 @@ public class DwellingFloor
 {
 
     private Flat[] flats;
-    private int numberFlats;
+
+
+
+    private int сountFlats;
 
     public Flat[] getFlats() {
         return flats;
     }
 
-    public int getNumberFlats() {
-        return this.numberFlats;
-    }
 
-    public DwellingFloor(int numberFlats) {
-        this.numberFlats = numberFlats;
+    public DwellingFloor(int numberFlats) {  //конструктор принимает колличесвое
+        this.сountFlats = numberFlats;
         this.flats = new Flat[numberFlats];
 
         for(int i = 0; i < this.flats.length; ++i) {
@@ -24,12 +24,20 @@ public class DwellingFloor
 
     }
 
-    public DwellingFloor(Flat[] flats) {
+    public DwellingFloor(Flat[] flats) {  //конструктор принимает массив
         this.flats = flats;
-        this.numberFlats = flats.length;
+        this.сountFlats = flats.length;
 
     }
 
+    public int getСountFlats() { //получение количествао квартир на этаже
+        return сountFlats;
+    }
+    public Flat getFlatNum(int getFlatNumber) { //получение квартиры по номеру этаже
+
+        return flats[getFlatNumber-1];
+
+    }
     public int getSumAreaFlatFloor() {
         int sunNumberArea = 0;
 
@@ -99,16 +107,12 @@ public class DwellingFloor
 
         }
 
-            numberFlats-=1;
+            сountFlats -=1;
             this.flats =flats;
 
     }
 
-    public Flat getFlatNum(int getFlatNumber) {
 
-           return flats[getFlatNumber-1];
-
-    }
     public void addFlat(int numNewFlats, Flat newFlat) {
         if ( numNewFlats <= this.flats.length) {
 

@@ -6,17 +6,13 @@ public class MainOffice {
         Office office = new Office();
         Office office1 = new Office(30,4);
         Office office2 = new Office(14,1);
+        Office office3 = new Office(14,1);
+        Office office4 = new Office(14,1);
 
-        OfficeFloor officeFloor = new OfficeFloor();
-        officeFloor.addOffice(office);
-        officeFloor.addOffice(office1);
-        officeFloor.addOffice(office2);
+        OfficeFloor officeFloor = new OfficeFloor(4);
 
 
-        if (officeFloor.getOffice(2)  == office1) {
-            boolean of = true;
-            System.out.println(of);
+
         }
     }
 
-}

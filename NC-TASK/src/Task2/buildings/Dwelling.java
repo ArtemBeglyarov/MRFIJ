@@ -24,7 +24,7 @@ public class Dwelling {
         int getAllFlat= 0;
         for (int i = 0; i < floors.length; i++) {
 
-            getAllFlat += floors[i].getNumberFlats();
+            getAllFlat += floors[i].getСountFlats();
 
         }
         return getAllFlat;
