@@ -24,7 +24,7 @@ public class Dwelling {
         int getAllFlat= 0;
         for (int i = 0; i < floors.length; i++) {
 
-            getAllFlat += floors[i].getСountFlats();
+            getAllFlat += floors[i].getSpaceFloor();
 
         }
         return getAllFlat;
@@ -34,14 +34,14 @@ public class Dwelling {
         int getAllRoom = 0;
         for (int i = 0; i < floors.length ; i++) {
 
-            getAllRoom += floors[i].getSumRoomFlatFloor();
+            getAllRoom += floors[i].getSumFloorRoom();
         }
         return getAllRoom;
     }
     public int getAllArea() {                //получение всей полощади квартир в доме
         int getAllArea = 0;
         for (int i = 0; i < floors.length; i++) {
-           getAllArea += floors[i].getSumAreaFlatFloor();
+           getAllArea += floors[i].getSumFloorArea();
         }
         return getAllArea;
     }
@@ -69,12 +69,12 @@ public class Dwelling {
     public Flat getFlatInHouse(int numFlat) {           //получение  объекта квартиры по ее номеру в доме
         int buf = 0;
         for (int i = 0; i <this.floors.length ; i++) {
-            for (int k = 0; k <this.floors[i].getFlats().length; k++) {
+            for (int k = 0; k <this.floors[i].getArrayFloor().length; k++) {
 
                buf++;
 
                 if (buf == numFlat-1) {
-                   return this.floors[i].getFlats()[k];
+                   return this.floors[i].getArrayFloor()[k];
 
                 }
             }
@@ -85,10 +85,10 @@ public class Dwelling {
     public void setFlatInHouse(int numFlat, Flat flat) {          //измененение кварты по ее номеру в доме
         int buf = 0;
         for (int i = 0; i <this.floors.length ; i++) {
-            for (int k = 0; k <this.floors[i].getFlats().length; k++) {
+            for (int k = 0; k <this.floors[i].getArrayFloor().length; k++) {
                     buf++;
                 if (buf == numFlat-1) {
-                    this.floors[i].getFlats()[k] = flat;
+                    this.floors[i].getArrayFloor()[k] = flat;
                    break;
                 }
             }
@@ -97,13 +97,13 @@ public class Dwelling {
     public void  addNewFlatInHouse(int numFlat, Flat addFlat) {         //создание новой квартиры в доме
         int buf=0;
         for (int i = 0; i <floors.length; i++) {
-            for (int j = 0; j <floors[i].getFlats().length ; j++) {
-                if ( numFlat>floors[i].getFlats().length) {
-                    numFlat -= floors[i].getFlats().length;
+            for (int j = 0; j <floors[i].getArrayFloor().length ; j++) {
+                if ( numFlat>floors[i].getArrayFloor().length) {
+                    numFlat -= floors[i].getArrayFloor().length;
                     break;
 
                 }
-                if (numFlat < floors[i].getFlats().length) {
+                if (numFlat < floors[i].getArrayFloor().length) {
                     floors[i].addFlat(numFlat, addFlat);
 
                 }
@@ -115,13 +115,13 @@ public class Dwelling {
 
 
         for (int i = 0; i <floors.length; i++) {
-            for (int j = 0; j <floors[i].getFlats().length ; j++) {
-                if ( numFlat>floors[i].getFlats().length) {
-                    numFlat -= floors[i].getFlats().length;
+            for (int j = 0; j <floors[i].getArrayFloor().length ; j++) {
+                if ( numFlat>floors[i].getArrayFloor().length) {
+                    numFlat -= floors[i].getArrayFloor().length;
                     break;
 
                 }
-                if (numFlat < floors[i].getFlats().length) {
+                if (numFlat < floors[i].getArrayFloor().length) {
                     floors[i].removeFlat(numFlat);
                     break;
                 }
@@ -150,7 +150,7 @@ public class Dwelling {
 
         int i = 0;
         for (DwellingFloor floor : floors) {
-            for (Flat flat : floor.getFlats()) {
+            for (Flat flat : floor.getArrayFloor()) {
                 if (flat == null) {
                     continue;
                 }

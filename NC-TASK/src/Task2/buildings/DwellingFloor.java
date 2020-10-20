@@ -9,9 +9,6 @@ public class DwellingFloor
 
     private int сountFlats;
 
-    public Flat[] getFlats() {
-        return flats;
-    }
 
 
     public DwellingFloor(int numberFlats) {  //конструктор принимает колличесвое
@@ -30,38 +27,42 @@ public class DwellingFloor
 
     }
 
-    public int getСountFlats() { //получение количествао квартир на этаже
+    public int getSpaceFloor() { //получение количествао квартир на этаже
         return сountFlats;
     }
-    public Flat getFlatNum(int getFlatNumber) { //получение квартиры по номеру этаже
+    public Flat getSpaceFloorNum(int getFlatNumber) { //получение квартиры по номеру этаже
 
         return flats[getFlatNumber-1];
 
     }
-    public int getSumAreaFlatFloor() {
-        int sunNumberArea = 0;
+    public Flat[] getArrayFloor() { //получение массива квартир
+        return flats;
+}
+
+    public int getSumFloorArea() { //получение общей площади на этаже
+        int floorArea = 0;
 
         for(int i = 0; i < this.flats.length; ++i) {
             if (this.flats[i] == null) {
                 continue;
             }
-            sunNumberArea += this.flats[i].getArea();
+            floorArea += this.flats[i].getArea();
         }
 
-        return sunNumberArea;
+        return floorArea;
     }
 
-    public int getSumRoomFlatFloor() {
-        int sunNumberRoom = 0;
+    public int getSumFloorRoom() {
+        int floorRoom = 0;
 
         for(int i = 0; i < this.flats.length; ++i) {
             if (this.flats[i] == null) {
                 continue;
             }
-            sunNumberRoom += this.flats[i].getRoom();
+            floorRoom += this.flats[i].getRoom();
         }
 
-        return sunNumberRoom;
+        return floorRoom;
     }
 
     public Flat getBestSpace() {

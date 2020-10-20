@@ -50,17 +50,20 @@ public class OfficeFloor {
 
         }
     }
-    public int getCountOffices() { //получение количествао офисов на этаже
+
+    public int getSpaceCountFloor() { //получение количествао офисов на этаже
         return countOffices;
     }
-    public Office getOffice(int officesNumber) {  //получение офиса по номеру на этаже
+
+    public Office getSpaceFloorNum(int officesNumber) {  //получение офиса по номеру на этаже
         Node buf = head;
         for (int i = 1; i < officesNumber; i++) {
             buf = buf.next;
         }
         return buf.office;
     }
-    private Node getNode( int officesNumber) {
+
+    private Node getNode(int officesNumber) {
         Node buf = head;
         for (int i = 1; i < officesNumber; i++) {
             buf = buf.next;
@@ -70,68 +73,69 @@ public class OfficeFloor {
 
     public void removeNode(int officesNumber) {
         Node buf = head;
-        if (officesNumber==1) {
-            buf.next= buf.next.next;
-            head = buf.next;
-            countOffices--;
+        if (officesNumber == 1) {
+            int currentNumber = 1;
+            while (currentNumber != countOffices) {
+                buf = buf.next;
+                currentNumber++;
+            }
+            buf.next = buf.next.next;
+            head = buf.next.next;
+
         }
+        if (officesNumber > 1) {
+            for (int i = 1; i < officesNumber - 1; i++) {
+                buf = buf.next;
+            }
+            buf.next = buf.next.next;
+
+        }
+        countOffices--;
     }
 
-    private void addNode(Node node, int officesNumber) {
+    private void addNode(Node addNode, int officesNumber) {
         Node buf = head;
         for (int i = 0; i < officesNumber; i++) {
             buf = buf.next;
         }
-
+        addNode.next = buf.next;
+        buf.next = addNode;
+        countOffices++;
     }
 
+    public Office[] getArrayFloor() {      //получить массив офисов
+        Office[] offices = new Office[countOffices];
+        Node buf = head;
+        for (int i = 0; i < offices.length; i++) {
+            buf = buf.next;
+            offices[i] = buf.office;
 
-
-/*
-
-
-    private int quantityOffice;
-
-
-
-
-    Office[] offices;
-
-    public OfficeFloor(Office[] offices) {
-    }
-
-
-
-
-
-
-
-    public int getAllAreaOfficeFloor() {
-
-    }
-    public int getAllRoomOfficeFloor() {
-
-    }
-
-    public Office[] getOffices() {
+        }
         return offices;
     }
-    public getOffice(int numOffice) {
+
+    public int getSumFloorArea() { //получение общей площади этажа
+        int floorArea = 0;
+        Node buf = head;
+        for (int i = 0; i < countOffices; i++) {
+            buf = buf.next;
+            floorArea += buf.office.getArea();
+        }
+        return floorArea;
+    }
+
+    public int getSumFloorRoom() {  //получение количесва комнат на этаже
+        int floorRoom =0;
+        Node buf = head;
+        for (int i = 0; i < countOffices; i++) {
+            buf = buf.next;
+            floorRoom += buf.office.getRoom();
+        }
+        return floorRoom;
+    }
+
+    public Office getBestSpace() { // получение лушей площади на этаже
 
     }
-    public setOffice(int numOffice) {
-
-    }
-    public addNewOffice(int numOffice) {
-
-    }
-    public removeOffice(int numOffice) {
-
-    }
-    public getBestSpace() {
-
-}
-*/
-
 
 }
