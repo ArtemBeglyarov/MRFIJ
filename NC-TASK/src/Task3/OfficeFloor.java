@@ -134,8 +134,20 @@ public class OfficeFloor {
         return floorRoom;
     }
 
-    public Office getBestSpace() { // получение лушей площади на этаже
+    public Office getBestSpace() { // получение лучшей площади на этаже
+        int best =0;
+        Node buf = null;
+        Office bestOffice = null;
+        for (int i = 0; i <countOffices ; i++) {
+            buf = buf.next;
 
+            if (buf.office.getArea() >= best) {
+
+                bestOffice = buf.office;
+                best = buf.office.getArea();
+            }
+        }
+        return  bestOffice;ь
     }
 
 }
