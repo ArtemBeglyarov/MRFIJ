@@ -52,7 +52,7 @@ public class DwellingFloor
         return floorArea;
     }
 
-    public int getSumFloorRoom() {
+    public int getSumFloorRoom() { //получение всех комнат на этаже
         int floorRoom = 0;
 
         for(int i = 0; i < this.flats.length; ++i) {
@@ -65,7 +65,7 @@ public class DwellingFloor
         return floorRoom;
     }
 
-    public Flat getBestSpace() {
+    public Flat getBestSpace() { //лучшая площадь на этаже
         int best = 0;
         Flat bestSpace = null;
 
@@ -85,7 +85,7 @@ public class DwellingFloor
 
         return bestSpace;
     }
-    public void setFlat(int numFlat, Flat flat ) {
+    public void setSpaceFloor(int numFlat, Flat flat ) { //добавление квартиры по её номеру
         this.flats[numFlat-1] = flat;
 
     }

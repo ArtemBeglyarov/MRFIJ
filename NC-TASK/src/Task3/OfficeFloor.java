@@ -19,7 +19,7 @@ public class OfficeFloor {
     private Node head;
     private int countOffices;
 
-    public OfficeFloor(int officesNumber) {             //конструктор принимает колличесвое
+    public OfficeFloor(int officesNumber) {     //конструктор принимает колличесвое
         head = new Node(new Office(), null);
         head.next = head;
         countOffices = 1;
@@ -125,7 +125,7 @@ public class OfficeFloor {
     }
 
     public int getSumFloorRoom() {  //получение количесва комнат на этаже
-        int floorRoom =0;
+        int floorRoom = 0;
         Node buf = head;
         for (int i = 0; i < countOffices; i++) {
             buf = buf.next;
@@ -135,10 +135,10 @@ public class OfficeFloor {
     }
 
     public Office getBestSpace() { // получение лучшей площади на этаже
-        int best =0;
+        int best = 0;
         Node buf = null;
         Office bestOffice = null;
-        for (int i = 0; i <countOffices ; i++) {
+        for (int i = 0; i < countOffices; i++) {
             buf = buf.next;
 
             if (buf.office.getArea() >= best) {
@@ -147,7 +147,15 @@ public class OfficeFloor {
                 best = buf.office.getArea();
             }
         }
-        return  bestOffice;ь
+        return bestOffice;
+    }
+
+    public void setSpaceFloor(Office addOffice, int numOffice) { //добавление офиса на этаже
+        Node node = new Node(addOffice, head);
+        addNode(node, numOffice);
+    }
+    public void removeSpaceFloor(int numOffice) {
+        removeNode(numOffice);
     }
 
 }
