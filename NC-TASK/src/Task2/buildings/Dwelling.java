@@ -104,7 +104,7 @@ public class Dwelling {
 
                 }
                 if (numFlat < floors[i].getArrayFloor().length) {
-                    floors[i].addFlat(numFlat, addFlat);
+                    floors[i].addSpaceNumber(numFlat, addFlat);
 
                 }
 

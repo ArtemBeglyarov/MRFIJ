@@ -19,50 +19,6 @@ public class OfficeFloor {
     private Node head;
     private int countOffices;
 
-    public OfficeFloor(int officesNumber) {     //конструктор принимает колличесвое
-        head = new Node(new Office(), null);
-        head.next = head;
-        countOffices = 1;
-        Node current = head;
-
-        while (officesNumber != countOffices) {
-            Node node = new Node(new Office(), head);
-            current.next = node;
-            current = node;
-
-            countOffices++;
-        }
-    }
-
-
-    public OfficeFloor(Office[] offices) {   //конструктор принимает массив
-        countOffices = 0;
-        head = new Node(offices[0], null);
-        head.next = head;
-        countOffices = 1;
-        Node current = head;
-
-        for (int i = 1; i < offices.length; i++) {
-            Node node = new Node(offices[i], head);
-            current.next = node;
-            current = node;
-            countOffices++;
-
-        }
-    }
-
-    public int getSpaceCountFloor() { //получение количествао офисов на этаже
-        return countOffices;
-    }
-
-    public Office getSpaceFloorNum(int officesNumber) {  //получение офиса по номеру на этаже
-        Node buf = head;
-        for (int i = 1; i < officesNumber; i++) {
-            buf = buf.next;
-        }
-        return buf.office;
-    }
-
     private Node getNode(int officesNumber) {
         Node buf = head;
         for (int i = 1; i < officesNumber; i++) {
@@ -103,6 +59,59 @@ public class OfficeFloor {
         countOffices++;
     }
 
+    public OfficeFloor(int officesNumber) {     //конструктор принимает колличесвое
+        head = new Node(new Office(), null);
+        head.next = head;
+        countOffices = 1;
+        Node current = head;
+
+        while (officesNumber != countOffices) {
+            Node node = new Node(new Office(), head);
+            current.next = node;
+            current = node;
+
+            countOffices++;
+        }
+    }
+
+
+    public OfficeFloor(Office[] offices) {   //конструктор принимает массив
+        countOffices = 0;
+        head = new Node(offices[0], null);
+        head.next = head;
+        countOffices = 1;
+        Node current = head;
+
+        for (int i = 1; i < offices.length; i++) {
+            Node node = new Node(offices[i], head);
+            current.next = node;
+            current = node;
+            countOffices++;
+
+        }
+    }
+
+    public int getSpaceFloor() { //получение количествао офисов на этаже
+        return countOffices;
+    }
+    public int getSumFloorArea() { //получение общей площади этажа
+        int floorArea = 0;
+        Node buf = head;
+        for (int i = 0; i < countOffices; i++) {
+            buf = buf.next;
+            floorArea += buf.office.getArea();
+        }
+        return floorArea;
+    }
+    public int getSumFloorRoom() {  //получение количесва комнат на этаже
+        int floorRoom = 0;
+        Node buf = head;
+        for (int i = 0; i < countOffices; i++) {
+            buf = buf.next;
+            floorRoom += buf.office.getRoom();
+        }
+        return floorRoom;
+    }
     public Office[] getArrayFloor() {      //получить массив офисов
         Office[] offices = new Office[countOffices];
         Node buf = head;
@@ -113,27 +122,13 @@ public class OfficeFloor {
         }
         return offices;
     }
-
-    public int getSumFloorArea() { //получение общей площади этажа
-        int floorArea = 0;
+    public Office getSpaceFloorNum(int officesNumber) {  //получение офиса по номеру на этаже
         Node buf = head;
-        for (int i = 0; i < countOffices; i++) {
+        for (int i = 1; i < officesNumber; i++) {
             buf = buf.next;
-            floorArea += buf.office.getArea();
         }
-        return floorArea;
+        return buf.office;
     }
-
-    public int getSumFloorRoom() {  //получение количесва комнат на этаже
-        int floorRoom = 0;
-        Node buf = head;
-        for (int i = 0; i < countOffices; i++) {
-            buf = buf.next;
-            floorRoom += buf.office.getRoom();
-        }
-        return floorRoom;
-    }
-
     public Office getBestSpace() { // получение лучшей площади на этаже
         int best = 0;
         Node buf = null;
@@ -150,12 +145,15 @@ public class OfficeFloor {
         return bestOffice;
     }
 
-    public void setSpaceFloor(Office addOffice, int numOffice) { //добавление офиса на этаже
+    public void setSpaceFloor(Office addOffice, int numOffice) { //изменения офиса на этаже офиса на этаже
+
+        getNode(numOffice).office = addOffice;
+    }
+    public void removeSpaceFloor(int numOffice) { //удаление офиса по номеру
+        removeNode(numOffice);
+    }
+    public void addSpaceNumber(Office addOffice, int numOffice) { //добавление офиса оп номеру
         Node node = new Node(addOffice, head);
         addNode(node, numOffice);
     }
-    public void removeSpaceFloor(int numOffice) {
-        removeNode(numOffice);
-    }
-
 }
