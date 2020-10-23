@@ -24,7 +24,7 @@ public class DwellingFloor {
 
     }
 
-    public int getSpaceFloor() { //получение количествао квартир на этаже
+    public int getCountSpaceOnFloor() { //получение количествао квартир на этаже
         return сountFlats;
     }
 

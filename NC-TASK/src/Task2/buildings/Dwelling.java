@@ -4,51 +4,12 @@ package Task2.buildings;
 
 public class Dwelling {
 
-    private int numberFloor;
+    private int countFloor;
     private DwellingFloor [] floors;
-
-
-    public int getNumberFloor() {                            //получение количесва этажей
-
-        return numberFloor;
-    }
-
-
-    public DwellingFloor[] getFloors() {            //получение массива этажей
-
-        return floors;
-    }
-
-    public int getAllFlat() {                     //получение количесва квартир
-
-        int getAllFlat= 0;
-        for (int i = 0; i < floors.length; i++) {
-
-            getAllFlat += floors[i].getSpaceFloor();
-
-        }
-        return getAllFlat;
-    }
-
-    public int getAllRoom() {                    //получение общего количесва  комнат в доме
-        int getAllRoom = 0;
-        for (int i = 0; i < floors.length ; i++) {
-
-            getAllRoom += floors[i].getSumFloorRoom();
-        }
-        return getAllRoom;
-    }
-    public int getAllArea() {                //получение всей полощади квартир в доме
-        int getAllArea = 0;
-        for (int i = 0; i < floors.length; i++) {
-           getAllArea += floors[i].getSumFloorArea();
-        }
-        return getAllArea;
-    }
 
     public Dwelling(int numberFloor) {
 
-        this.numberFloor = numberFloor;
+        this.countFloor = numberFloor;
         this.floors = new DwellingFloor[numberFloor];
         for (int i = 0; i < floors.length ; i++) {
             this.floors[i] = new DwellingFloor(5);
@@ -57,23 +18,53 @@ public class Dwelling {
     }
     public Dwelling(DwellingFloor [] floors) {
         this.floors = floors;
-        this.numberFloor = floors.length;
+        this.countFloor = floors.length;
     }
+    public int getCountFloor() {                            //получение количесва этажей
 
-    public DwellingFloor getFloorHouse(int numFloor) {              //получение массива этажа
+        return countFloor;
+    }
+    public int getAllSpace() {                     //получение количесва квартир
 
+        int allSpace = 0;
+        for (int i = 0; i < floors.length; i++) {
+
+            allSpace += floors[i].getCountSpaceOnFloor();
+
+        }
+        return allSpace;
+    }
+    public int getAllArea() {                //получение всей полощади квартир в доме
+        int allArea = 0;
+        for (int i = 0; i < floors.length; i++) {
+            allArea += floors[i].getSumFloorArea();
+        }
+        return allArea;
+    }
+    public int getAllRoom() {                    //получение общего количесва  комнат в доме
+        int allRoom = 0;
+        for (int i = 0; i < floors.length ; i++) {
+
+            allRoom += floors[i].getSumFloorRoom();
+        }
+        return allRoom;
+    }
+    public DwellingFloor[] getArrayFloors() {            //получение массива этажей
+        return floors;
+    }
+    public DwellingFloor getFloorByNum(int numFloor) {              //получение этажа по номеру
         return this.floors[numFloor-1];
 
     }
 
-    public Flat getFlatInHouse(int numFlat) {           //получение  объекта квартиры по ее номеру в доме
-        int buf = 0;
+    public Flat getSpaceByNum(int numFlat) {           //получение  объекта квартиры по ее номеру в доме
+        int counter = 0;
         for (int i = 0; i <this.floors.length ; i++) {
             for (int k = 0; k <this.floors[i].getArrayFloor().length; k++) {
 
-               buf++;
+               counter++;
 
-                if (buf == numFlat-1) {
+                if (counter == numFlat-1) {
                    return this.floors[i].getArrayFloor()[k];
 
                 }
@@ -82,12 +73,12 @@ public class Dwelling {
         return null;
     }
 
-    public void setFlatInHouse(int numFlat, Flat flat) {          //измененение кварты по ее номеру в доме
-        int buf = 0;
+    public void setSpaceByNum(int numFlat, Flat flat) {          //измененение кварты по ее номеру в доме
+        int counter = 0;
         for (int i = 0; i <this.floors.length ; i++) {
             for (int k = 0; k <this.floors[i].getArrayFloor().length; k++) {
-                    buf++;
-                if (buf == numFlat-1) {
+                    counter++;
+                if (counter == numFlat-1) {
                     this.floors[i].getArrayFloor()[k] = flat;
                    break;
                 }
@@ -95,7 +86,7 @@ public class Dwelling {
         }
     }
     public void  addNewFlatInHouse(int numFlat, Flat addFlat) {         //создание новой квартиры в доме
-        int buf=0;
+        int counter =0;
         for (int i = 0; i <floors.length; i++) {
             for (int j = 0; j <floors[i].getArrayFloor().length ; j++) {
                 if ( numFlat>floors[i].getArrayFloor().length) {
@@ -146,7 +137,7 @@ public class Dwelling {
         return bestFlat;
     }
     public Flat[] getSortFlatArea() {                       //сортировка кварти всего дома
-        Flat[] sort = new Flat[getAllFlat()];
+        Flat[] sort = new Flat[getAllSpace()];
 
         int i = 0;
         for (DwellingFloor floor : floors) {
@@ -158,7 +149,7 @@ public class Dwelling {
 
             }
         }
-        Flat buf = null;
+        Flat current = null;
         boolean Sort = false;
         while (!Sort) {
             Sort = true;
@@ -168,9 +159,9 @@ public class Dwelling {
 
                     Sort = false;
 
-                    buf = sort[j];
+                    current = sort[j];
                     sort[j] = sort[j + 1];
-                    sort[j + 1] = buf;
+                    sort[j + 1] = current;
                 }
             }
 

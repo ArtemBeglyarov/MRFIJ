@@ -50,7 +50,7 @@ public class MainTask2 {
 
 
 
-        dwelling.setFlatInHouse(10,flatSet1);
+        dwelling.setSpaceByNum(10,flatSet1);
 
         dwelling.removeFlatInHouse(1);
         System.out.println();
@@ -59,10 +59,10 @@ public class MainTask2 {
         System.out.println();
 
         System.out.println();
-        System.out.println("квартира по номеру в доме" + " " + dwelling.getFlatInHouse(11));
-        System.out.println("количесво квартир"+" "+ dwelling.getAllFlat());
+        System.out.println("квартира по номеру в доме" + " " + dwelling.getSpaceByNum(11));
+        System.out.println("количесво квартир"+" "+ dwelling.getAllSpace());
         System.out.println("лучшая полощадь"+" "+dwelling.getBestSpace());
-        System.out.println("количество этажей"+" "+dwelling.getNumberFloor());
+        System.out.println("количество этажей"+" "+dwelling.getCountFloor());
         System.out.println("количество комнат в доме"+" "+ dwelling.getAllRoom());
         System.out.println("ощая площадь в доме"+" "+dwelling.getAllArea());
         System.out.println("сортировка квартир по убыванию площади в доме"+" "+Arrays.toString(dwelling.getSortFlatArea()));
