@@ -85,7 +85,7 @@ public class Dwelling {
             }
         }
     }
-    public void  addNewFlatInHouse(int numFlat, Flat addFlat) {         //создание новой квартиры в доме
+    public void addSpaceByNum(int numFlat, Flat addFlat) {         //создание новой квартиры в доме
         int counter =0;
         for (int i = 0; i <floors.length; i++) {
             for (int j = 0; j <floors[i].getArrayFloor().length ; j++) {
@@ -95,14 +95,14 @@ public class Dwelling {
 
                 }
                 if (numFlat < floors[i].getArrayFloor().length) {
-                    floors[i].addSpaceNumber(numFlat, addFlat);
+                    floors[i].addSpaceNumber(i, addFlat);
 
                 }
 
             }
         }
     }
-    public void removeFlatInHouse(int numFlat) {           //удаление  кварты в доме
+    public void removeSpaceByNum(int numFlat) {           //удаление  кварты в доме
 
 
         for (int i = 0; i <floors.length; i++) {
@@ -113,7 +113,7 @@ public class Dwelling {
 
                 }
                 if (numFlat < floors[i].getArrayFloor().length) {
-                    floors[i].removeFlat(numFlat);
+                    floors[i].removeFlat(i);
                     break;
                 }
 
@@ -136,7 +136,7 @@ public class Dwelling {
 
         return bestFlat;
     }
-    public Flat[] getSortFlatArea() {                       //сортировка кварти всего дома
+    public Flat[] getSortSpaceArray() {                       //сортировка кварти всего дома
         Flat[] sort = new Flat[getAllSpace()];
 
         int i = 0;

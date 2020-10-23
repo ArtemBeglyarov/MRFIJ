@@ -122,9 +122,9 @@ public class OfficeFloor {
         }
         return offices;
     }
-    public Office getSpaceFloorNum(int officesNumber) {  //получение офиса по номеру на этаже
+    public Office getSpaceFloorNum(int numSpace) {  //получение офиса по номеру на этаже
         Node current = head;
-        for (int i = 1; i < officesNumber; i++) {
+        for (int i = 0; i < numSpace; i++) {
             current = current.next;
         }
         return current.office;
@@ -145,15 +145,14 @@ public class OfficeFloor {
         return bestOffice;
     }
 
-    public void setSpaceFloor(Office addOffice, int numOffice) { //изменения офиса на этаже офиса на этаже
-
-        getNode(numOffice).office = addOffice;
+    public void setSpaceFloor(Office addSpace, int numSpace) { //изменения офиса на этаже офиса на этаже
+        getNode(numSpace).office = addSpace;
     }
-    public void removeSpaceFloor(int numOffice) { //удаление офиса по номеру
-        removeNode(numOffice);
+    public void removeSpaceFloor(int numSpace) { //удаление офиса по номеру
+        removeNode(numSpace);
     }
-    public void addSpaceNumber(Office addOffice, int numOffice) { //добавление офиса оп номеру
-        Node node = new Node(addOffice, head);
-        addNode(node, numOffice);
+    public void addSpaceNumber(Office addSpace, int numSpace) { //добавление офиса оп номеру
+        Node node = new Node(addSpace, head);
+        addNode(node, numSpace);
     }
 }

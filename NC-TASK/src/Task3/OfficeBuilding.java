@@ -151,33 +151,134 @@ public class OfficeBuilding {
         return floors;
     }
 
-    public OfficeFloor getFloorByNum(int numFloor) { //получение этажа по номеру
+    public OfficeFloor getFloorByNum(int numSpace) { //получение этажа по номеру
         Node current = head;
-        for (int i = 1; i < numFloor; i++) {
+        for (int i = 1; i < numSpace; i++) {
             current = current.next;
         }
         return current.floor;
     }
-    public Office getSpaceByNum(int numFlat){  //получение офиса по в доме
+
+    public Office getSpaceByNum(int numSpace) {  //получение офиса по номеру  в доме
         Node current = head;
         int counter = 0;
-        for (int i = 0; i <countFloor; i++) {
-            current=current.next;
-            for (int j = 0; j <current.floor.getCountSpaceOnFloor() ; j++) {
-                current.floor.
+        for (int i = 0; i < countFloor; i++) {
+            current = current.next;
+            for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
+                current.floor.getSpaceFloorNum(j);
 
                 counter++;
 
-                if (counter == numFlat) {
+                if (counter == numSpace) {
+                    return current.floor.getSpaceFloorNum(j);
+                }
+            }
 
+        }
+        return null;
+    }
+
+    public void setSpaceByNum(int numSpace, Office newSpace) {   //изменение квартиры по его номеру
+        Node current = head;
+        int counter = 0;
+        for (int i = 0; i < countFloor; i++) {
+            current = current.next;
+            for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
+                current.floor.getSpaceFloorNum(j);
+
+                counter++;
+
+                if (counter == numSpace) {
+                    current.floor.setSpaceFloor(newSpace, j);
                 }
             }
 
         }
     }
-    public void setSpaceByNum(int numFlat, Office newOffice){   //изменение квартиры по его номеру
+
+    public void addSpaceByNum(int numSpace, Office newSpace) { //добавление офиса по его номеру
+        Node current = head;
+        int counter = 0;
+        for (int i = 0; i < countFloor; i++) {
+            current = current.next;
+            for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
+                current.floor.getSpaceFloorNum(j);
+
+                counter++;
+
+                if (counter == numSpace) {
+                    current.floor.addSpaceNumber(newSpace, numSpace);
+                }
+            }
+
+        }
 
     }
 
+    public void removeSpaceByNum(int numSpace) { // удаление офиса по его номеру
+        Node current = head;
+        int counter = 0;
+        for (int i = 0; i < countFloor; i++) {
+            current = current.next;
+            for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
+                current.floor.getSpaceFloorNum(j);
+
+                counter++;
+
+                if (counter == numSpace) {
+                    current.floor.removeSpaceFloor(j);
+                }
+            }
+
+        }
+    }
+
+    public Office getBestSpace() { //поучить самуб большую по площади квартиру в доме
+        int bestSpace = 0;
+        Office bestOffice = null;
+        Node current = head;
+        for (int i = 0; i < countFloor; i++) {
+            current = current.next;
+            if (current.floor.getBestSpace().getArea() >= bestSpace)
+                bestOffice = current.floor.getBestSpace();
+            bestSpace = current.floor.getBestSpace().getArea();
+        }
+
+        return bestOffice;
+    }
+    public Office[] getSortSpaceArray() {
+        Office[] sort = new Office[getAllSpace()];
+        Node current = head;
+        int counter = 0;
+
+        for (int i = 0; i <countFloor; i++) {
+            current = current.next;
+            for (int j = 0; j <current.floor.getArrayFloor().length ; j++) {
+             sort[counter++] = current.floor.getArrayFloor()[j];
+            }
+
+        }
+        Office currentOffice = null;
+        boolean Sort = false;
+        while (!Sort) {
+            Sort = true;
+            for (int j = 0; j < sort.length -1; j++) {
+
+                if (sort[j].getArea() < sort[j + 1].getArea()) {
+
+                    Sort = false;
+
+                    currentOffice = sort[j];
+                    sort[j] = sort[j + 1];
+                    sort[j + 1] = currentOffice;
+                }
+            }
+
+
+        }
+        return sort;
+
+
+    }
 }
 

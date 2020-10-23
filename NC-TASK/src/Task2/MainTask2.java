@@ -52,7 +52,7 @@ public class MainTask2 {
 
         dwelling.setSpaceByNum(10,flatSet1);
 
-        dwelling.removeFlatInHouse(1);
+        dwelling.removeSpaceByNum(1);
         System.out.println();
 
         System.out.println();
@@ -65,7 +65,7 @@ public class MainTask2 {
         System.out.println("количество этажей"+" "+dwelling.getCountFloor());
         System.out.println("количество комнат в доме"+" "+ dwelling.getAllRoom());
         System.out.println("ощая площадь в доме"+" "+dwelling.getAllArea());
-        System.out.println("сортировка квартир по убыванию площади в доме"+" "+Arrays.toString(dwelling.getSortFlatArea()));
+        System.out.println("сортировка квартир по убыванию площади в доме"+" "+Arrays.toString(dwelling.getSortSpaceArray()));
 
 
 
