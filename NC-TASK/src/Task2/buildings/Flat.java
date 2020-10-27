@@ -1,6 +1,9 @@
 package Task2.buildings;
 
 
+import Task3.InvalidRoomsCountException;
+import Task3.InvalidSpaceAreaException;
+
 public class Flat {
 
     private static final int AREA_DEFAULT =50;
@@ -24,7 +27,7 @@ public class Flat {
      this.room = ROOM_DEFAULT;
     }
 
-    public Flat(int area) {
+    public Flat(int area) throws InvalidSpaceAreaException {
         room = 1;
         this.area = area;
 
