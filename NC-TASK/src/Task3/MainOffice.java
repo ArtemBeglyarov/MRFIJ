@@ -1,7 +1,9 @@
 package Task3;
 
 
-import Task2.buildings.DwellingFloor;
+import Task3.buildings.Office;
+import Task3.buildings.OfficeBuilding;
+import Task3.buildings.OfficeFloor;
 
 public class MainOffice {
     public static void main(String[] args) {

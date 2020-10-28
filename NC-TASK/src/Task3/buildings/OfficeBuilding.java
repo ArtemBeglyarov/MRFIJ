@@ -1,11 +1,11 @@
-package Task3;
+package Task3.buildings;
 
 
 public class OfficeBuilding {
 
     public static class Node {
 
-        private OfficeFloor floor;
+        private OfficeFloor    floor;
         private Node next;
         private Node prev;
 
