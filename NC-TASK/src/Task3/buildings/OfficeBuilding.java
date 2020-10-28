@@ -1,6 +1,9 @@
 package Task3.buildings;
 
 
+import Task3.FloorIndexOutIfBoundsException;
+import Task3.SpaceIndexOutOfBoundsException;
+
 public class OfficeBuilding {
 
     public static class Node {
@@ -24,17 +27,23 @@ public class OfficeBuilding {
     private int countFloor;
     private Node prev;
 
-    private Node getNode(int floorNumber) {
+    private Node getNode(int spaceNum)throws FloorIndexOutIfBoundsException {
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("this Node number does not exist");
+        }
         Node current = head;
-        for (int i = 1; i < floorNumber; i++) {
+        for (int i = 1; i < spaceNum; i++) {
             current = current.next;
         }
         return current;
     }
 
-    private void addNode(Node newNode, int floorNumber) {
+    private void addNode(Node newNode, int spaceNum)throws FloorIndexOutIfBoundsException {
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("this Node number does not exist");
+        }
         Node current = head;
-        if (floorNumber == 1) {
+        if (spaceNum == 1) {
             newNode.next = current;
             newNode.prev = current.prev;
             current.prev = newNode;
@@ -42,8 +51,8 @@ public class OfficeBuilding {
 
             countFloor++;
         }
-        if (floorNumber > 1) {
-            for (int i = 0; i < floorNumber; i++) {
+        if (spaceNum > 1) {
+            for (int i = 0; i < spaceNum; i++) {
                 current = current.next;
             }
             newNode.next = current.next;
@@ -53,11 +62,14 @@ public class OfficeBuilding {
         }
     }
 
-    private void removeNode(int floorNumber) {
+    private void removeNode(int spaceNum)throws FloorIndexOutIfBoundsException {
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("this Node number does not exist");
+        }
         Node current = head;
-        if (floorNumber == 1) {
+        if (spaceNum == 1) {
             int currentNumber = 1;
-            while (currentNumber != floorNumber) {
+            while (currentNumber != spaceNum) {
                 current = current.next;
                 currentNumber--;
             }
@@ -65,8 +77,8 @@ public class OfficeBuilding {
             current.next.prev = current;
             current.next.next = head;
         }
-        if (floorNumber > 1) {
-            for (int i = 1; i < floorNumber; i++) {
+        if (spaceNum > 1) {
+            for (int i = 1; i < spaceNum; i++) {
                 current.next = current.next.next;
                 current.next.prev = current;
             }
@@ -90,14 +102,17 @@ public class OfficeBuilding {
         }
     }
 
-    public OfficeBuilding(int floorNumber) {
+    public OfficeBuilding(int spaceNum)throws FloorIndexOutIfBoundsException {
+        if (spaceNum <= 0) {
+            throw new FloorIndexOutIfBoundsException("incorrect office number \n office number must be greater than 0");
+        }
         head = new Node(new OfficeFloor(5), null, null);
         head.next = head;
         head.prev = head;
         countFloor = 1;
 
         Node current = head;
-        while (floorNumber != countFloor) {
+        while (spaceNum != countFloor) {
             Node newNode = new Node(new OfficeFloor(5), head, prev);
             current.next = newNode;
             newNode.prev = current;
@@ -151,15 +166,21 @@ public class OfficeBuilding {
         return floors;
     }
 
-    public OfficeFloor getFloorByNum(int numSpace) { //получение этажа по номеру
+    public OfficeFloor getFloorByNum(int spaceNum)throws FloorIndexOutIfBoundsException { //получение этажа по номеру
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("The office doesn't exist");
+        }
         Node current = head;
-        for (int i = 1; i < numSpace; i++) {
+        for (int i = 1; i < spaceNum; i++) {
             current = current.next;
         }
         return current.floor;
     }
 
-    public Office getSpaceByNum(int numSpace) {  //получение офиса по номеру  в доме
+    public Office getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {  //получение офиса по номеру  в доме
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("The office doesn't exist");
+        }
         Node current = head;
         int counter = 0;
         for (int i = 0; i < countFloor; i++) {
@@ -169,7 +190,7 @@ public class OfficeBuilding {
 
                 counter++;
 
-                if (counter == numSpace) {
+                if (counter == spaceNum) {
                     return current.floor.getSpaceFloorNum(j);
                 }
             }
@@ -178,7 +199,10 @@ public class OfficeBuilding {
         return null;
     }
 
-    public void setSpaceByNum(int numSpace, Office newSpace) {   //изменение квартиры по его номеру
+    public void setSpaceByNum(int spaceNum, Office newSpace)throws FloorIndexOutIfBoundsException {   //изменение квартиры по его номеру
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("The office doesn't exist");
+        }
         Node current = head;
         int counter = 0;
         for (int i = 0; i < countFloor; i++) {
@@ -188,7 +212,7 @@ public class OfficeBuilding {
 
                 counter++;
 
-                if (counter == numSpace) {
+                if (counter == spaceNum) {
                     current.floor.setSpaceFloor(newSpace, j);
                 }
             }
@@ -196,7 +220,10 @@ public class OfficeBuilding {
         }
     }
 
-    public void addSpaceByNum(int numSpace, Office newSpace) { //добавление офиса по его номеру
+    public void addSpaceByNum(int spaceNum, Office newSpace)throws FloorIndexOutIfBoundsException { //добавление офиса по его номеру
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("The office doesn't exist");
+        }
         Node current = head;
         int counter = 0;
         for (int i = 0; i < countFloor; i++) {
@@ -206,8 +233,8 @@ public class OfficeBuilding {
 
                 counter++;
 
-                if (counter == numSpace) {
-                    current.floor.addSpaceNumber(newSpace, numSpace);
+                if (counter == spaceNum) {
+                    current.floor.addSpaceNumber(newSpace, spaceNum);
                 }
             }
 
@@ -215,7 +242,10 @@ public class OfficeBuilding {
 
     }
 
-    public void removeSpaceByNum(int numSpace) { // удаление офиса по его номеру
+    public void removeSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException { // удаление офиса по его номеру
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("The office doesn't exist");
+        }
         Node current = head;
         int counter = 0;
         for (int i = 0; i < countFloor; i++) {
@@ -225,7 +255,7 @@ public class OfficeBuilding {
 
                 counter++;
 
-                if (counter == numSpace) {
+                if (counter == spaceNum) {
                     current.floor.removeSpaceFloor(j);
                 }
             }

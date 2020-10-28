@@ -58,7 +58,7 @@ public class Dwelling {
     }
     public DwellingFloor getFloorByNum(int spaceNum)throws FloorIndexOutIfBoundsException {              //получение этажа по номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
-            throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
+            throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
         return this.floors[spaceNum -1];
 
@@ -66,7 +66,7 @@ public class Dwelling {
 
     public Flat getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {           //получение  объекта квартиры по ее номеру в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
-            throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
+            throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
         int counter = 0;
         for (int i = 0; i <this.floors.length ; i++) {
@@ -85,7 +85,7 @@ public class Dwelling {
 
     public void setSpaceByNum(int spaceNum, Flat flat)throws FloorIndexOutIfBoundsException {          //измененение кварты по ее номеру в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
-            throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
+            throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
         int counter = 0;
         for (int i = 0; i <this.floors.length ; i++) {
@@ -100,7 +100,7 @@ public class Dwelling {
     }
     public void addSpaceByNum(int spaceNum, Flat addFlat)throws FloorIndexOutIfBoundsException {         //создание новой квартиры в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
-            throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
+            throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
         int counter =0;
         for (int i = 0; i <floors.length; i++) {
@@ -120,7 +120,7 @@ public class Dwelling {
     }
     public void removeSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {           //удаление  кварты в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
-            throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
+            throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
 
         for (int i = 0; i <floors.length; i++) {
