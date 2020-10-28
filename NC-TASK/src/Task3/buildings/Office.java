@@ -1,58 +1,52 @@
-package Task2.buildings;
-
+package Task3.buildings;
 
 import Task3.InvalidRoomsCountException;
 import Task3.InvalidSpaceAreaException;
 import Task3.Space;
 
-public class Space implements Task3.Space {
+public class Office implements Space {
 
     @Override
     public String toString() {
-        return "Flat{" +
+        return "Office{" +
                 "area=" + area +
                 ", room=" + room +
                 '}';
     }
-    private static final int AREA_DEFAULT = 50;
-    private static final int ROOM_DEFAULT = 2;
+    private static final int DEFAULT_AREA = 250;
+    private static final int DEFAULT_ROOM =1;
 
     private int area;
     private int room;
 
-    public Space() {
-        this.area = AREA_DEFAULT;
-        this.room = ROOM_DEFAULT;
-    }
+    public Office() {
+        this.area =DEFAULT_AREA;
+        this.room =DEFAULT_ROOM;
 
-    public Space(int area) throws InvalidSpaceAreaException {
+    }
+    public Office(int area)  {
         if (area <= 0) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
-        room = 1;
-        this.area = area;
-
+        this.area=area;
+        this.room=1;
     }
-
-    public Space(int room, int area) throws InvalidRoomsCountException, InvalidSpaceAreaException {
+    public Office(int area, int room) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
         if (room <= 0 & room > 5) {
             throw new InvalidRoomsCountException("incorrect Room \n area must be greater than 0");
         }
-        this.room = room;
-        this.area = area;
-
+        this.room=room;
+        this.area=area;
     }
-
     @Override
     public int getArea() {
         return area;
     }
-
     @Override
-    public void setArea(int area) throws InvalidSpaceAreaException {
+    public void setArea(int area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
@@ -62,12 +56,13 @@ public class Space implements Task3.Space {
     public int getRoom() {
         return room;
     }
-
-     @Override
-     public void setRoom(int room) throws InvalidRoomsCountException {
+    @Override
+    public void setRoom(int room) {
         if (room <= 0 & room > 5) {
             throw new InvalidRoomsCountException("incorrect Room \n area must be greater than 0");
         }
         this.room = room;
     }
 }
+
+

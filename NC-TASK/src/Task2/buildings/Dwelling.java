@@ -2,13 +2,15 @@ package Task2.buildings;
 
 
 import Task3.FloorIndexOutIfBoundsException;
+import Task3.Space;
+
 
 public class Dwelling {
 
     private int countFloor;
     private DwellingFloor [] floors;
 
-    public Dwelling(int spaceNum)throws FloorIndexOutIfBoundsException {
+    public Dwelling(int spaceNum) {
         if (spaceNum <= 0) {
             throw new FloorIndexOutIfBoundsException("incorrect floors number \n floors number must be greater than 0");
         }
@@ -55,7 +57,7 @@ public class Dwelling {
     public DwellingFloor[] getArrayFloors() {            //получение массива этажей
         return floors;
     }
-    public DwellingFloor getFloorByNum(int spaceNum)throws FloorIndexOutIfBoundsException {              //получение этажа по номеру
+    public DwellingFloor getFloorByNum(int spaceNum) {              //получение этажа по номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -63,7 +65,7 @@ public class Dwelling {
 
     }
 
-    public Space getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {           //получение  объекта квартиры по ее номеру в доме
+    public Space getSpaceByNum(int spaceNum) {           //получение  объекта квартиры по ее номеру в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -82,7 +84,7 @@ public class Dwelling {
         return null;
     }
 
-    public void setSpaceByNum(int spaceNum, Space flat)throws FloorIndexOutIfBoundsException {          //измененение кварты по ее номеру в доме
+    public void setSpaceByNum(int spaceNum, Space flat) {          //измененение кварты по ее номеру в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -97,7 +99,7 @@ public class Dwelling {
             }
         }
     }
-    public void addSpaceByNum(int spaceNum, Space addFlat)throws FloorIndexOutIfBoundsException {         //создание новой квартиры в доме
+    public void addSpaceByNum(int spaceNum, Space addFlat) {         //создание новой квартиры в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -110,14 +112,14 @@ public class Dwelling {
 
                 }
                 if (spaceNum < floors[i].getArrayFloor().length) {
-                    floors[i].addSpaceNumber(i, addFlat);
+                    floors[i].addSpaceNumber(addFlat, i);
 
                 }
 
             }
         }
     }
-    public void removeSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {           //удаление  кварты в доме
+    public void removeSpaceByNum(int spaceNum) {           //удаление  кварты в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -130,7 +132,7 @@ public class Dwelling {
 
                 }
                 if (spaceNum < floors[i].getArrayFloor().length) {
-                    floors[i].removeFlat(i);
+                    floors[i].removeSpaceFloor(i);
                     break;
                 }
 

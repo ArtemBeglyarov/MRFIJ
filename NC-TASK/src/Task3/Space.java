@@ -4,9 +4,9 @@ public interface Space {
 
     public int getArea();
 
-    void setArea(int area) throws InvalidSpaceAreaException;
+    void setArea(int area);
 
     public int getRoom();
 
-    void setRoom(int room) throws InvalidRoomsCountException;
+    void setRoom(int room);
 }

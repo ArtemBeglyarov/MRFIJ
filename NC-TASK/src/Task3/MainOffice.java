@@ -2,8 +2,7 @@ package Task3;
 
 
 import Task3.buildings.Space;
-import Task3.buildings.OfficeBuilding;
-import Task3.buildings.OfficeFloor;
+import Task3.buildings.Building;
 
 public class MainOffice {
     public static void main(String[] args) {
@@ -29,14 +28,14 @@ public class MainOffice {
         Space[] off1 = {office6,office7,office8,office9,office10};
         Space[] off2 = {office11,office12,office13,office14,office15};
 
-        OfficeFloor officeFloor1 = new OfficeFloor(off);
-        OfficeFloor officeFloor2 = new OfficeFloor(off1);
-        OfficeFloor officeFloor3 = new OfficeFloor(off2);
+        Building officeFloor1 = new Building(off);
+        Building officeFloor2 = new Building(off1);
+        Building officeFloor3 = new Building(off2);
 
-        OfficeFloor[] floors = {officeFloor1,officeFloor2,officeFloor3};
+        Building[] floors = {officeFloor1,officeFloor2,officeFloor3};
 
 
-        OfficeBuilding officeBuilding1 = new OfficeBuilding(4);
+
 
         }
     }

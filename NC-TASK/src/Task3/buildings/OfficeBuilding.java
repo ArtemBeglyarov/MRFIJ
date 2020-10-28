@@ -1,18 +1,21 @@
 package Task3.buildings;
 
 
+import Task3.Building;
+import Task3.Floor;
 import Task3.FloorIndexOutIfBoundsException;
+import Task3.Space;
 
-public class OfficeBuilding {
+public class OfficeBuilding implements Building {
 
     public static class Node {
 
-        private OfficeFloor    floor;
+        private Floor floor;
         private Node next;
         private Node prev;
 
 
-        public Node(OfficeFloor floor, Node next, Node prev) {
+        public Node(Floor floor, Node next, Node prev) {
             this.floor = floor;
             this.next = next;
             this.prev = prev;
@@ -26,7 +29,7 @@ public class OfficeBuilding {
     private int countFloor;
     private Node prev;
 
-    private Node getNode(int spaceNum)throws FloorIndexOutIfBoundsException {
+    private Node getNode(int spaceNum) {
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("this Node number does not exist");
         }
@@ -37,7 +40,7 @@ public class OfficeBuilding {
         return current;
     }
 
-    private void addNode(Node newNode, int spaceNum)throws FloorIndexOutIfBoundsException {
+    private void addNode(Node newNode, int spaceNum) {
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("this Node number does not exist");
         }
@@ -61,7 +64,7 @@ public class OfficeBuilding {
         }
     }
 
-    private void removeNode(int spaceNum)throws FloorIndexOutIfBoundsException {
+    private void removeNode(int spaceNum){
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("this Node number does not exist");
         }
@@ -85,7 +88,7 @@ public class OfficeBuilding {
         countFloor--;
     }
 
-    public OfficeBuilding(OfficeFloor[] floor) {
+    public OfficeBuilding(Floor[] floor) {
         head = new Node(floor[0], null, null);
         head.next = head;
         head.prev = head;
@@ -101,18 +104,18 @@ public class OfficeBuilding {
         }
     }
 
-    public OfficeBuilding(int spaceNum)throws FloorIndexOutIfBoundsException {
+    public OfficeBuilding(int spaceNum){
         if (spaceNum <= 0) {
             throw new FloorIndexOutIfBoundsException("incorrect office number \n office number must be greater than 0");
         }
-        head = new Node(new OfficeFloor(5), null, null);
+        head = new Node(new OfficeFloor(), null, null);
         head.next = head;
         head.prev = head;
         countFloor = 1;
 
         Node current = head;
         while (spaceNum != countFloor) {
-            Node newNode = new Node(new OfficeFloor(5), head, prev);
+            Node newNode = new Node(new OfficeFloor(1), head, prev);
             current.next = newNode;
             newNode.prev = current;
             current = newNode;
@@ -154,8 +157,8 @@ public class OfficeBuilding {
         return allRoom;
     }
 
-    public OfficeFloor[] getArrayFloors() { // получениме массива этажа
-        OfficeFloor[] floors = new OfficeFloor[countFloor];
+    public Floor[] getArrayFloors() { // получениме массива этажа
+        Floor[] floors = new Floor[countFloor];
         Node current = head;
         for (int i = 0; i < countFloor; i++) {
             floors[i] = current.floor;
@@ -165,7 +168,7 @@ public class OfficeBuilding {
         return floors;
     }
 
-    public OfficeFloor getFloorByNum(int spaceNum)throws FloorIndexOutIfBoundsException { //получение этажа по номеру
+    public Floor getFloorByNum(int spaceNum) { //получение этажа по номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -176,7 +179,7 @@ public class OfficeBuilding {
         return current.floor;
     }
 
-    public Space getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {  //получение офиса по номеру  в доме
+    public Space getSpaceByNum(int spaceNum) {  //получение офиса по номеру  в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -198,7 +201,7 @@ public class OfficeBuilding {
         return null;
     }
 
-    public void setSpaceByNum(int spaceNum, Space newSpace)throws FloorIndexOutIfBoundsException {   //изменение квартиры по его номеру
+    public void setSpaceByNum(int spaceNum, Space newSpace) {   //изменение квартиры по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -219,7 +222,7 @@ public class OfficeBuilding {
         }
     }
 
-    public void addSpaceByNum(int spaceNum, Space newSpace)throws FloorIndexOutIfBoundsException { //добавление офиса по его номеру
+    public void addSpaceByNum(int spaceNum, Space newSpace) { //добавление офиса по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -241,7 +244,7 @@ public class OfficeBuilding {
 
     }
 
-    public void removeSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException { // удаление офиса по его номеру
+    public void removeSpaceByNum(int spaceNum) { // удаление офиса по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
