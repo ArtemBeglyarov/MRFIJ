@@ -1,10 +1,11 @@
 package Task2.buildings;
 
+import Task3.Floor;
 import Task3.SpaceIndexOutOfBoundsException;
 
-public class DwellingFloor {
+public class DwellingFloor implements Floor{
 
-    private Flat[] flats;
+    private Space[] flats;
 
 
     private int сountFlats;
@@ -15,15 +16,15 @@ public class DwellingFloor {
             throw new SpaceIndexOutOfBoundsException("incorrect flats number \n flats number must be greater than 0");
         }
         this.сountFlats = spaceNum;
-        this.flats = new Flat[spaceNum];
+        this.flats = new Space[spaceNum];
 
         for (int i = 0; i < this.flats.length; ++i) {
-            this.flats[i] = new Flat();
+            this.flats[i] = new Space();
         }
 
     }
 
-    public DwellingFloor(Flat[] flats) {  //конструктор принимает массив
+    public DwellingFloor(Space[] flats) {  //конструктор принимает массив
         this.flats = flats;
         this.сountFlats = flats.length;
 
@@ -59,11 +60,12 @@ public class DwellingFloor {
         return floorRoom;
     }
 
-    public Flat[] getArrayFloor() { //получение массива квартир
+ @Override
+ public Space[] getArrayFloor() { //получение массива квартир
         return flats;
     }
 
-    public Flat getSpaceFloorNum(int spaceNum)throws SpaceIndexOutOfBoundsException { //получение квартиры по номеру этаже
+    @Override   public Space getSpaceFloorNum(int spaceNum)throws SpaceIndexOutOfBoundsException { //получение квартиры по номеру этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
         }
@@ -72,9 +74,9 @@ public class DwellingFloor {
     }
 
 
-    public Flat getBestSpace() { //лучшая площадь на этаже
+    @Override   public Space getBestSpace() { //лучшая площадь на этаже
         int best = 0;
-        Flat bestSpace = null;
+        Space bestSpace = null;
 
         for (int i = 0; i < this.flats.length; ++i) {
             if (this.flats[i] == null) {
@@ -92,7 +94,7 @@ public class DwellingFloor {
         return bestSpace;
     }
 
-    public void setSpaceFloor(int spaceNum, Flat flat) throws SpaceIndexOutOfBoundsException { //изменение  квартиры по её номеру
+    @Override  public void setSpaceFloor(int spaceNum, Space flat) throws SpaceIndexOutOfBoundsException { //изменение  квартиры по её номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
         }
@@ -105,7 +107,7 @@ public class DwellingFloor {
             throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
         }
 
-        Flat[] flats = new Flat[this.flats.length - 1];
+        Space[] flats = new Space[this.flats.length - 1];
 
         for (int i = 0; i < this.flats.length; i++) {
 
@@ -127,7 +129,7 @@ public class DwellingFloor {
     }
 
 
-    public void addSpaceNumber(int spaceNum, Flat newFlat) throws SpaceIndexOutOfBoundsException { //добавление офиса оп номеру
+    public void addSpaceNumber(int spaceNum, Space newFlat) throws SpaceIndexOutOfBoundsException { //добавление офиса оп номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this flat number does not exist");
         }
@@ -137,7 +139,7 @@ public class DwellingFloor {
         }
         if (spaceNum > this.flats.length) {
 
-            Flat[] floor = new Flat[spaceNum];
+            Space[] floor = new Space[spaceNum];
             floor[spaceNum - 1] = newFlat;
             for (int i = 0; i < this.flats.length; i++) {
                 floor[i] = this.flats[i];

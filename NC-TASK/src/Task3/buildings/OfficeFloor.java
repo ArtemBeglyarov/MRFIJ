@@ -1,17 +1,18 @@
 package Task3.buildings;
 
 
+import Task3.Floor;
 import Task3.SpaceIndexOutOfBoundsException;
 
-public class OfficeFloor {
+public class OfficeFloor implements Floor {
 
     public static class Node {
 
-        private Office office;
+        private Space office;
         private Node next;
 
 
-        public Node(Office office, Node next) {
+        public Node(Space office, Node next) {
             this.office = office;
             this.next = next;
         }
@@ -74,13 +75,13 @@ public class OfficeFloor {
         if (spaceNum <= 0) {
             throw new SpaceIndexOutOfBoundsException("incorrect flats number \n flats number must be greater than 0");
         }
-        head = new Node(new Office(), null);
+        head = new Node(new Space(), null);
         head.next = head;
         countOffices = 1;
         Node current = head;
 
         while (spaceNum != countOffices) {
-            Node node = new Node(new Office(), head);
+            Node node = new Node(new Space(), head);
             current.next = node;
             current = node;
 
@@ -89,7 +90,7 @@ public class OfficeFloor {
     }
 
 
-    public OfficeFloor(Office[] offices) {   //конструктор принимает массив
+    public OfficeFloor(Space[] offices) {   //конструктор принимает массив
         countOffices = 0;
         head = new Node(offices[0], null);
         head.next = head;
@@ -104,10 +105,11 @@ public class OfficeFloor {
 
         }
     }
-
+    @Override
     public int getCountSpaceOnFloor() { //получение количествао офисов на этаже
         return countOffices;
     }
+    @Override
     public int getSumFloorArea() { //получение общей площади этажа
         int floorArea = 0;
         Node current = head;
@@ -117,7 +119,9 @@ public class OfficeFloor {
         }
         return floorArea;
     }
-    public int getSumFloorRoom() {  //получение количесва комнат на этаже
+
+   @Override
+   public int getSumFloorRoom() {  //получение количесва комнат на этаже
         int floorRoom = 0;
         Node current = head;
         for (int i = 0; i < countOffices; i++) {
@@ -126,8 +130,9 @@ public class OfficeFloor {
         }
         return floorRoom;
     }
-    public Office[] getArrayFloor() {      //получить массив офисов
-        Office[] offices = new Office[countOffices];
+    @Override
+    public Space[] getArrayFloor() {      //получить массив офисов
+        Space[] offices = new Space[countOffices];
         Node current = head;
         for (int i = 0; i < offices.length; i++) {
             current = current.next;
@@ -136,7 +141,8 @@ public class OfficeFloor {
         }
         return offices;
     }
-    public Office getSpaceFloorNum(int spaceNum)throws SpaceIndexOutOfBoundsException {  //получение офиса по номеру на этаже
+   @Override
+   public Space getSpaceFloorNum(int spaceNum)throws SpaceIndexOutOfBoundsException {  //получение офиса по номеру на этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }
@@ -146,10 +152,11 @@ public class OfficeFloor {
         }
         return current.office;
     }
-    public Office getBestSpace() { // получение лучшей площади на этаже
+   @Override
+   public Space getBestSpace() { // получение лучшей площади на этаже
         int best = 0;
         Node current = null;
-        Office bestOffice = null;
+        Space bestOffice = null;
         for (int i = 0; i < countOffices; i++) {
             current = current.next;
 
@@ -162,18 +169,21 @@ public class OfficeFloor {
         return bestOffice;
     }
 
-    public void setSpaceFloor(Office addSpace, int spaceNum)throws SpaceIndexOutOfBoundsException { //изменения офиса на этаже офиса на этаже
+    @Override
+    public void setSpaceFloor(Space addSpace, int spaceNum)throws SpaceIndexOutOfBoundsException { //изменения офиса на этаже офиса на этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }        getNode(spaceNum).office = addSpace;
     }
+    @Override
     public void removeSpaceFloor(int spaceNum)throws SpaceIndexOutOfBoundsException { //удаление офиса по номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }
         removeNode(spaceNum);
     }
-    public void addSpaceNumber(Office addSpace, int spaceNum)throws SpaceIndexOutOfBoundsException { //добавление офиса оп номеру
+    @Override
+    public void addSpaceNumber(Space addSpace, int spaceNum)throws SpaceIndexOutOfBoundsException { //добавление офиса оп номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }

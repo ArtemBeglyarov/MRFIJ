@@ -1,33 +1,33 @@
 package Task3;
 
 
-import Task3.buildings.Office;
+import Task3.buildings.Space;
 import Task3.buildings.OfficeBuilding;
 import Task3.buildings.OfficeFloor;
 
 public class MainOffice {
     public static void main(String[] args) {
-        Office office1 = new Office(30,4);
-        Office office2 = new Office(45,3);
-        Office office3 = new Office(154,2);
-        Office office4 = new Office(145,11);
-        Office office5 = new Office(34,11);
+        Space office1 = new Space(30,4);
+        Space office2 = new Space(45,3);
+        Space office3 = new Space(154,2);
+        Space office4 = new Space(145,11);
+        Space office5 = new Space(34,11);
 
-        Office office6 = new Office(34,3);
-        Office office7 = new Office(155,1);
-        Office office8 = new Office(15,12);
-        Office office9 = new Office(141,4);
-        Office office10 = new Office(14,5);
+        Space office6 = new Space(34,3);
+        Space office7 = new Space(155,1);
+        Space office8 = new Space(15,12);
+        Space office9 = new Space(141,4);
+        Space office10 = new Space(14,5);
 
-        Office office11 = new Office(123,6);
-        Office office12 = new Office(43,3);
-        Office office13 = new Office(43,2);
-        Office office14 = new Office(34,3);
-        Office office15 = new Office(53,1);
+        Space office11 = new Space(123,6);
+        Space office12 = new Space(43,3);
+        Space office13 = new Space(43,2);
+        Space office14 = new Space(34,3);
+        Space office15 = new Space(53,1);
 
-        Office [] off = {office1,office2,office3,office4,office5};
-        Office [] off1 = {office6,office7,office8,office9,office10};
-        Office [] off2 = {office11,office12,office13,office14,office15};
+        Space[] off = {office1,office2,office3,office4,office5};
+        Space[] off1 = {office6,office7,office8,office9,office10};
+        Space[] off2 = {office11,office12,office13,office14,office15};
 
         OfficeFloor officeFloor1 = new OfficeFloor(off);
         OfficeFloor officeFloor2 = new OfficeFloor(off1);

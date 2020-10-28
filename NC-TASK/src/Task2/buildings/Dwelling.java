@@ -2,7 +2,6 @@ package Task2.buildings;
 
 
 import Task3.FloorIndexOutIfBoundsException;
-import Task3.SpaceIndexOutOfBoundsException;
 
 public class Dwelling {
 
@@ -64,7 +63,7 @@ public class Dwelling {
 
     }
 
-    public Flat getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {           //получение  объекта квартиры по ее номеру в доме
+    public Space getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {           //получение  объекта квартиры по ее номеру в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -83,7 +82,7 @@ public class Dwelling {
         return null;
     }
 
-    public void setSpaceByNum(int spaceNum, Flat flat)throws FloorIndexOutIfBoundsException {          //измененение кварты по ее номеру в доме
+    public void setSpaceByNum(int spaceNum, Space flat)throws FloorIndexOutIfBoundsException {          //измененение кварты по ее номеру в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -98,7 +97,7 @@ public class Dwelling {
             }
         }
     }
-    public void addSpaceByNum(int spaceNum, Flat addFlat)throws FloorIndexOutIfBoundsException {         //создание новой квартиры в доме
+    public void addSpaceByNum(int spaceNum, Space addFlat)throws FloorIndexOutIfBoundsException {         //создание новой квартиры в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
@@ -139,10 +138,10 @@ public class Dwelling {
             }
         }
     }
-       public Flat getBestSpace() {          //получить самую большую по площади квартиру в доме
+       public Space getBestSpace() {          //получить самую большую по площади квартиру в доме
 
         int bestSpace =0;
-        Flat bestFlat = null;
+        Space bestFlat = null;
         for (int i = 0; i <this.floors.length; i++) {
             if (this.floors[i].getBestSpace().getArea() >= bestSpace) {
                 bestFlat = this.floors[i].getBestSpace();
@@ -154,12 +153,12 @@ public class Dwelling {
 
         return bestFlat;
     }
-    public Flat[] getSortSpaceArray() {                       //сортировка кварти всего дома
-        Flat[] sort = new Flat[getAllSpace()];
+    public Space[] getSortSpaceArray() {                       //сортировка кварти всего дома
+        Space[] sort = new Space[getAllSpace()];
 
         int i = 0;
         for (DwellingFloor floor : floors) {
-            for (Flat flat : floor.getArrayFloor()) {
+            for (Space flat : floor.getArrayFloor()) {
                 if (flat == null) {
                     continue;
                 }
@@ -167,7 +166,7 @@ public class Dwelling {
 
             }
         }
-        Flat current = null;
+        Space current = null;
         boolean Sort = false;
         while (!Sort) {
             Sort = true;

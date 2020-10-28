@@ -2,7 +2,6 @@ package Task3.buildings;
 
 
 import Task3.FloorIndexOutIfBoundsException;
-import Task3.SpaceIndexOutOfBoundsException;
 
 public class OfficeBuilding {
 
@@ -125,7 +124,7 @@ public class OfficeBuilding {
         return countFloor;
     }
 
-    public int getAllSpace() { // получение общего колличесва фоисов
+    public int getAllSpace() { // получение общего колличесва офисов
         int allSpace = 0;
         Node current = head;
         for (int i = 1; i < countFloor; i++) {
@@ -177,7 +176,7 @@ public class OfficeBuilding {
         return current.floor;
     }
 
-    public Office getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {  //получение офиса по номеру  в доме
+    public Space getSpaceByNum(int spaceNum)throws FloorIndexOutIfBoundsException {  //получение офиса по номеру  в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -199,7 +198,7 @@ public class OfficeBuilding {
         return null;
     }
 
-    public void setSpaceByNum(int spaceNum, Office newSpace)throws FloorIndexOutIfBoundsException {   //изменение квартиры по его номеру
+    public void setSpaceByNum(int spaceNum, Space newSpace)throws FloorIndexOutIfBoundsException {   //изменение квартиры по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -220,7 +219,7 @@ public class OfficeBuilding {
         }
     }
 
-    public void addSpaceByNum(int spaceNum, Office newSpace)throws FloorIndexOutIfBoundsException { //добавление офиса по его номеру
+    public void addSpaceByNum(int spaceNum, Space newSpace)throws FloorIndexOutIfBoundsException { //добавление офиса по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
@@ -263,9 +262,9 @@ public class OfficeBuilding {
         }
     }
 
-    public Office getBestSpace() { //поучить самуб большую по площади квартиру в доме
+    public Space getBestSpace() { //поучить самуб большую по площади квартиру в доме
         int bestSpace = 0;
-        Office bestOffice = null;
+        Space bestOffice = null;
         Node current = head;
         for (int i = 0; i < countFloor; i++) {
             current = current.next;
@@ -276,8 +275,8 @@ public class OfficeBuilding {
 
         return bestOffice;
     }
-    public Office[] getSortSpaceArray() {
-        Office[] sort = new Office[getAllSpace()];
+    public Space[] getSortSpaceArray() {
+        Space[] sort = new Space[getAllSpace()];
         Node current = head;
         int counter = 0;
 
@@ -288,7 +287,7 @@ public class OfficeBuilding {
             }
 
         }
-        Office currentOffice = null;
+        Space currentOffice = null;
         boolean Sort = false;
         while (!Sort) {
             Sort = true;
