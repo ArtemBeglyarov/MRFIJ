@@ -64,7 +64,7 @@ public class OfficeBuilding implements Building {
         }
     }
 
-    private void removeNode(int spaceNum){
+    private void removeNode(int spaceNum) {
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("this Node number does not exist");
         }
@@ -104,11 +104,11 @@ public class OfficeBuilding implements Building {
         }
     }
 
-    public OfficeBuilding(int spaceNum){
+    public OfficeBuilding(int spaceNum) {
         if (spaceNum <= 0) {
             throw new FloorIndexOutIfBoundsException("incorrect office number \n office number must be greater than 0");
         }
-        head = new Node(new OfficeFloor(), null, null);
+        head = new Node(new OfficeFloor(5), null, null);
         head.next = head;
         head.prev = head;
         countFloor = 1;
@@ -123,10 +123,12 @@ public class OfficeBuilding implements Building {
         }
     }
 
+    @Override
     public int getCountFloor() { //получение общего колличесва этажей
         return countFloor;
     }
 
+    @Override
     public int getAllSpace() { // получение общего колличесва офисов
         int allSpace = 0;
         Node current = head;
@@ -137,6 +139,7 @@ public class OfficeBuilding implements Building {
         return allSpace;
     }
 
+    @Override
     public int getAllArea() {  //получение всей площади в доме
         int allArea = 0;
         Node current = head;
@@ -147,6 +150,7 @@ public class OfficeBuilding implements Building {
         return allArea;
     }
 
+    @Override
     public int getAllRoom() {  //получение всех комнат в доме
         int allRoom = 0;
         Node current = head;
@@ -157,6 +161,7 @@ public class OfficeBuilding implements Building {
         return allRoom;
     }
 
+    @Override
     public Floor[] getArrayFloors() { // получениме массива этажа
         Floor[] floors = new Floor[countFloor];
         Node current = head;
@@ -168,6 +173,7 @@ public class OfficeBuilding implements Building {
         return floors;
     }
 
+    @Override
     public Floor getFloorByNum(int spaceNum) { //получение этажа по номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
@@ -179,6 +185,7 @@ public class OfficeBuilding implements Building {
         return current.floor;
     }
 
+    @Override
     public Space getSpaceByNum(int spaceNum) {  //получение офиса по номеру  в доме
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
@@ -201,6 +208,7 @@ public class OfficeBuilding implements Building {
         return null;
     }
 
+    @Override
     public void setSpaceByNum(int spaceNum, Space newSpace) {   //изменение квартиры по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
@@ -222,6 +230,7 @@ public class OfficeBuilding implements Building {
         }
     }
 
+    @Override
     public void addSpaceByNum(int spaceNum, Space newSpace) { //добавление офиса по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
@@ -244,6 +253,7 @@ public class OfficeBuilding implements Building {
 
     }
 
+    @Override
     public void removeSpaceByNum(int spaceNum) { // удаление офиса по его номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
@@ -265,6 +275,7 @@ public class OfficeBuilding implements Building {
         }
     }
 
+    @Override
     public Space getBestSpace() { //поучить самуб большую по площади квартиру в доме
         int bestSpace = 0;
         Space bestOffice = null;
@@ -278,15 +289,17 @@ public class OfficeBuilding implements Building {
 
         return bestOffice;
     }
+
+    @Override
     public Space[] getSortSpaceArray() {
         Space[] sort = new Space[getAllSpace()];
         Node current = head;
         int counter = 0;
 
-        for (int i = 0; i <countFloor; i++) {
+        for (int i = 0; i < countFloor; i++) {
             current = current.next;
-            for (int j = 0; j <current.floor.getArrayFloor().length ; j++) {
-             sort[counter++] = current.floor.getArrayFloor()[j];
+            for (int j = 0; j < current.floor.getArrayFloor().length; j++) {
+                sort[counter++] = current.floor.getArrayFloor()[j];
             }
 
         }
@@ -294,7 +307,7 @@ public class OfficeBuilding implements Building {
         boolean Sort = false;
         while (!Sort) {
             Sort = true;
-            for (int j = 0; j < sort.length -1; j++) {
+            for (int j = 0; j < sort.length - 1; j++) {
 
                 if (sort[j].getArea() < sort[j + 1].getArea()) {
 
