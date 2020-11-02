@@ -1,4 +1,4 @@
 package Task4;
 
-public class InexchangeableSpacesException {
+public class InexchangeableSpacesException  {
 }
