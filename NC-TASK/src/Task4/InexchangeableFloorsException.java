@@ -1,4 +1,4 @@
 package Task4;
 
-public class InexchangeableFloorsException {
+public class InexchangeableFloorsException  extends Exception{
 }
