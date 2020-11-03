@@ -10,23 +10,23 @@ public class PlacementExchanger {
         if (space1.getArea() == space2.getArea() && space1.getRoom() == space2.getRoom()) {
             return true;
         }
-
-        if (space1.getArea() != space2.getArea() && space1.getRoom() != space2.getRoom()) {
-            return false;
-        }
-
+        return false;
     }
     public boolean checkExchangeFloor(Floor floor1,Floor floor2) {
         if (floor1.getSumFloorArea() == floor2.getSumFloorArea() && floor1.getSumFloorRoom() == floor2.getSumFloorRoom()) {
             return true;
         }
-        if (floor1.getSumFloorArea() != floor2.getSumFloorArea() && floor1.getSumFloorRoom() != floor2.getSumFloorRoom()) {
-            return false;
-        }
-
-
+        return false;
     }
     public static void exchangeFloorRooms(Floor floor1, int index1, Floor floor2, int index2) throws InexchangeableSpacesException   {
+        try {
+
+        }
+        Space current1 = floor1.getSpaceFloorNum(index1);
+        Space current2 = floor2.getSpaceFloorNum(index2);
+
+        floor1.setSpaceFloor(current1,index1);
+        floor2.setSpaceFloor(current2,index2);
 
 
     }

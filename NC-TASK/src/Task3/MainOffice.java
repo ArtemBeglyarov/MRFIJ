@@ -28,7 +28,7 @@ public class MainOffice {
         Space[] off1 = {office6,office7,office8,office9,office10};
         Space[] off2 = {office11,office12,office13,office14,office15};
 
-        Building officeFloor1 = new Building(off);
+        Floor officeFloor1 = new Floor(off);
         Building officeFloor2 = new Building(off1);
         Building officeFloor3 = new Building(off2);
 
