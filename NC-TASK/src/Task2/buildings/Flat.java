@@ -34,7 +34,7 @@ public class Flat implements Space {
 
     }
 
-    public Flat(int room, int area)  {
+    public Flat(int room, int area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
