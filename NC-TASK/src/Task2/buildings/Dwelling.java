@@ -28,6 +28,15 @@ public class Dwelling implements Building {
         this.floors = floors;
         this.countFloor = floors.length;
     }
+    public void setFloor(int spaceNum,Floor floor) { // изменение этажа в здании
+        for (int i = 0; i <floors.length ; i++) {
+            if (i == spaceNum-1) {
+                floors[i] = floor;
+                break;
+            }
+        }
+
+    }
 
     @Override
     public int getCountFloor() {                            //получение количесва этажей

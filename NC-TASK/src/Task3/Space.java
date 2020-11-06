@@ -2,11 +2,11 @@ package Task3;
 
 public interface Space {
 
-    public int getArea();
+     int getArea();
 
     void setArea(int area);
 
-    public int getRoom();
+    int getRoom();
 
     void setRoom(int room);
 }

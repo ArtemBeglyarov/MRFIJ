@@ -5,3 +5,4 @@ public class InvalidSpaceAreaException extends IllegalArgumentException {
         super(s);
     }
 }
+

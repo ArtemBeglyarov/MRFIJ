@@ -128,6 +128,20 @@ public class OfficeBuilding implements Building {
         return countFloor;
     }
 
+
+    @Override
+    public void setFloor(int spaceNum, Floor floor) {
+        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+            throw new FloorIndexOutIfBoundsException("The floor doesn't exist");
+        }
+        Node current = head;
+        for (int i = 1; i < spaceNum; i++) {
+            current = current.next;
+        }
+        current.floor = floor;
+
+    }
+
     @Override
     public int getAllSpace() { // получение общего колличесва офисов
         int allSpace = 0;
@@ -176,7 +190,7 @@ public class OfficeBuilding implements Building {
     @Override
     public Floor getFloorByNum(int spaceNum) { //получение этажа по номеру
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
-            throw new FloorIndexOutIfBoundsException("The office doesn't exist");
+            throw new FloorIndexOutIfBoundsException("The floor doesn't exist");
         }
         Node current = head;
         for (int i = 1; i < spaceNum; i++) {

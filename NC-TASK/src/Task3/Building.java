@@ -4,6 +4,8 @@ package Task3;
 public interface Building {
     int getCountFloor();
 
+    void setFloor(int spaceNum, Floor floor);
+
     int getAllSpace();
 
     int getAllArea();
