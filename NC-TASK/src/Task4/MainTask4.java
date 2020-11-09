@@ -38,7 +38,7 @@ public class MainTask4 {
 
         // Buildings.outputBuilding(floor,);
 
-        System.out.println(office1.g);
+        System.out.println(office1);
     }
 
 }

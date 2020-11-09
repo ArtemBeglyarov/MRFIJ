@@ -110,6 +110,13 @@ public class OfficeFloor implements Floor {
     public int getCountSpaceOnFloor() { //получение количествао офисов на этаже
         return countOffices;
     }
+
+    @Override
+    public  int getClassID() {
+        int classID = 210;
+        return classID;
+    }
+
     @Override
     public double getSumFloorArea() { //получение общей площади этажа
         int floorArea = 0;

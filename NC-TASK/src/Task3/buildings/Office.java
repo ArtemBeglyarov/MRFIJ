@@ -13,6 +13,12 @@ public class Office implements Space {
                 ", room=" + room +
                 '}';
     }
+    @Override
+    public  int getClassID() {
+        int classID = 200;
+        return classID;
+    }
+
     private static final int DEFAULT_AREA = 250;
     private static final int DEFAULT_ROOM =1;
 

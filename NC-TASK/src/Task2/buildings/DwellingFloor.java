@@ -30,6 +30,12 @@ public class DwellingFloor implements Floor {
         this.сountFlats = flats.length;
 
     }
+    @Override
+    public  int getClassID() {
+        int classID = 110;
+        return classID;
+    }
+
 
     @Override
     public int getCountSpaceOnFloor() { //получение количествао квартир на этаже

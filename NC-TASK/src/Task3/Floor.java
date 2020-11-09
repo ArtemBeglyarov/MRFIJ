@@ -1,6 +1,9 @@
 package Task3;
 
 public interface Floor {
+
+    int getClassID();
+
     int getCountSpaceOnFloor();
 
     double getSumFloorArea();

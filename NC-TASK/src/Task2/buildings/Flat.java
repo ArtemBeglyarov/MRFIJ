@@ -21,6 +21,12 @@ public class Flat implements Space {
     private double area;
     private int room;
 
+    @Override
+    public  int getClassID() {
+        int classID = 100;
+        return classID;
+    }
+
     public Flat() {
         this.area = AREA_DEFAULT;
         this.room = ROOM_DEFAULT;

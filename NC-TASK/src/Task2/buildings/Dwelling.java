@@ -45,6 +45,13 @@ public class Dwelling implements Building {
     }
 
     @Override
+    public  int getClassID() {
+        int classID = 120;
+        return classID;
+    }
+
+
+    @Override
     public int getAllSpace() {                     //получение количесва квартир
 
         int allSpace = 0;

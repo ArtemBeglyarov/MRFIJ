@@ -9,4 +9,6 @@ public interface Space {
     int getRoom();
 
     void setRoom(int room);
+
+    int getClassID();
 }

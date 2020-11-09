@@ -2,6 +2,9 @@ package Task3;
 
 
 public interface Building {
+
+    int getClassID();
+
     int getCountFloor();
 
     void setFloor(int spaceNum, Floor floor);

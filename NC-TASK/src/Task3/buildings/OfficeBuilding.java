@@ -128,6 +128,13 @@ public class OfficeBuilding implements Building {
         return countFloor;
     }
 
+    @Override
+    public  int getClassID() {
+        int classID = 220;
+        return classID;
+    }
+
+
 
     @Override
     public void setFloor(int spaceNum, Floor floor) {
