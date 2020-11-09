@@ -111,7 +111,7 @@ public class OfficeFloor implements Floor {
         return countOffices;
     }
     @Override
-    public int getSumFloorArea() { //получение общей площади этажа
+    public double getSumFloorArea() { //получение общей площади этажа
         int floorArea = 0;
         Node current = head;
         for (int i = 0; i < countOffices; i++) {
@@ -155,7 +155,7 @@ public class OfficeFloor implements Floor {
     }
    @Override
    public Space getBestSpace() { // получение лучшей площади на этаже
-        int best = 0;
+        double best = 0;
         Node current = null;
         Space bestOffice = null;
         for (int i = 0; i < countOffices; i++) {

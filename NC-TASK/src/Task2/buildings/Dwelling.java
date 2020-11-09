@@ -57,8 +57,8 @@ public class Dwelling implements Building {
     }
 
     @Override
-    public int getAllArea() {                //получение всей полощади квартир в доме
-        int allArea = 0;
+    public double getAllArea() {                //получение всей полощади квартир в доме
+        double allArea = 0;
         for (int i = 0; i < floors.length; i++) {
             allArea += floors[i].getSumFloorArea();
         }
@@ -174,7 +174,7 @@ public class Dwelling implements Building {
     @Override
     public Space getBestSpace() {          //получить самую большую по площади квартиру в доме
 
-        int bestSpace = 0;
+        double bestSpace = 0;
         Space bestFlat = null;
         for (int i = 0; i < this.floors.length; i++) {
             if (this.floors[i].getBestSpace().getArea() >= bestSpace) {

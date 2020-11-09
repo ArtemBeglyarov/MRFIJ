@@ -2,9 +2,9 @@ package Task3;
 
 public interface Space {
 
-     int getArea();
+    double getArea();
 
-    void setArea(int area);
+    void setArea(double area);
 
     int getRoom();
 

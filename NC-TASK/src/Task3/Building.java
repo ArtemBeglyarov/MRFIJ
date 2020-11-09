@@ -8,7 +8,7 @@ public interface Building {
 
     int getAllSpace();
 
-    int getAllArea();
+    double getAllArea();
 
     int getAllRoom();
 

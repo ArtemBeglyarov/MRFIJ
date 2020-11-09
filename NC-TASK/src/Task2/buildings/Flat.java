@@ -14,10 +14,11 @@ public class Flat implements Space {
                 ", room=" + room +
                 '}';
     }
+
     private static final int AREA_DEFAULT = 50;
     private static final int ROOM_DEFAULT = 2;
 
-    private int area;
+    private double area;
     private int room;
 
     public Flat() {
@@ -25,7 +26,7 @@ public class Flat implements Space {
         this.room = ROOM_DEFAULT;
     }
 
-    public Flat(int area) {
+    public Flat(double area) {
         if (area <= 0) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
@@ -34,7 +35,7 @@ public class Flat implements Space {
 
     }
 
-    public Flat(int room, int area) {
+    public Flat(int room, double area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
@@ -47,12 +48,12 @@ public class Flat implements Space {
     }
 
     @Override
-    public int getArea() {
+    public double getArea() {
         return area;
     }
 
     @Override
-    public void setArea(int area) {
+    public void setArea(double area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }

@@ -37,7 +37,7 @@ public class DwellingFloor implements Floor {
     }
 
     @Override
-    public int getSumFloorArea() { //получение общей площади на этаже
+    public double getSumFloorArea() { //получение общей площади на этаже
         int floorArea = 0;
 
         for (int i = 0; i < this.flats.length; ++i) {
@@ -81,7 +81,7 @@ public class DwellingFloor implements Floor {
 
     @Override
     public Space getBestSpace() { //лучшая площадь на этаже
-        int best = 0;
+        double best = 0;
         Space bestSpace = null;
 
         for (int i = 0; i < this.flats.length; ++i) {

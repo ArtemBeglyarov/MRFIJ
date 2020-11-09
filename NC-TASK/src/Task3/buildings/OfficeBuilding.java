@@ -154,7 +154,7 @@ public class OfficeBuilding implements Building {
     }
 
     @Override
-    public int getAllArea() {  //получение всей площади в доме
+    public double getAllArea() {  //получение всей площади в доме
         int allArea = 0;
         Node current = head;
         for (int i = 0; i < countFloor; i++) {
@@ -291,7 +291,7 @@ public class OfficeBuilding implements Building {
 
     @Override
     public Space getBestSpace() { //поучить самуб большую по площади квартиру в доме
-        int bestSpace = 0;
+        double bestSpace = 0;
         Space bestOffice = null;
         Node current = head;
         for (int i = 0; i < countFloor; i++) {

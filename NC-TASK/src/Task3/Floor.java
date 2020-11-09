@@ -3,7 +3,7 @@ package Task3;
 public interface Floor {
     int getCountSpaceOnFloor();
 
-    int getSumFloorArea();
+    double getSumFloorArea();
 
     Space[] getArrayFloor();
 

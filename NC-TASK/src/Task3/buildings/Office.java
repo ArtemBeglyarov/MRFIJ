@@ -16,7 +16,7 @@ public class Office implements Space {
     private static final int DEFAULT_AREA = 250;
     private static final int DEFAULT_ROOM =1;
 
-    private int area;
+    private double area;
     private int room;
 
     public Office() {
@@ -24,7 +24,7 @@ public class Office implements Space {
         this.room =DEFAULT_ROOM;
 
     }
-    public Office(int area)  {
+    public Office(double area)  {
         if (area <= 0) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
@@ -42,11 +42,11 @@ public class Office implements Space {
         this.area=area;
     }
     @Override
-    public int getArea() {
+    public double getArea() {
         return area;
     }
     @Override
-    public void setArea(int area) {
+    public void setArea(double area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
