@@ -6,7 +6,9 @@ import Task2.buildings.Flat;
 import Task3.Floor;
 import Task3.Space;
 import Task3.buildings.Office;
+import Task3.buildings.OfficeBuilding;
 import Task3.buildings.OfficeFloor;
+import Task3.Building;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -33,12 +35,17 @@ public class MainTask4 {
         Space[] off1 = {office6, office7, office8, office9, office10};
 
         Floor floor = new OfficeFloor(off);
-        Floor floor1 = new DwellingFloor(off1);
+        Floor floor1 = new OfficeFloor(off1);
+
+        Floor[] floors = {floor,floor1};
+
+        Building building = new OfficeBuilding(floors);
 
 
-        // Buildings.outputBuilding(floor,);
+        DataOutputStream dataOutputStream = new DataOutputStream();
 
-        System.out.println(office1);
+
+        Buildings.outputBuilding(building,dataOutputStream);
     }
 
 }
