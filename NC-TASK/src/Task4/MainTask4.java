@@ -42,10 +42,9 @@ public class MainTask4 {
         Building building = new OfficeBuilding(floors);
 
 
-        DataOutputStream dataOutputStream = new DataOutputStream();
 
 
-        Buildings.outputBuilding(building,dataOutputStream);
+
     }
 
 }

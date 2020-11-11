@@ -57,7 +57,23 @@ public class Buildings {
     }
 
     public static Building readBuilding(Reader in) throws IOException {
-
+        StreamTokenizer tokenizer = new StreamTokenizer(in);
+        Floor[] floors = new Floor[tokenizer.nextToken()];
+        for (int i = 0; i <floors.length; i++) {
+            Space[] spaces = new Space[tokenizer.nextToken()];
+            for (int j = 0; j <spaces.length; j++) {
+                spaces[j].setRoom(tokenizer.nextToken());
+                spaces[j].setArea(tokenizer.nextToken());
+            }
+        }
+        if (tokenizer.nextToken() == 120) {
+            Building building = new Dwelling(floors);
+            return building;
+        }
+        if (tokenizer.nextToken() == 220) {
+            Building building = new OfficeBuilding(floors);
+            return building;
+        }
         return null;
     }
 
