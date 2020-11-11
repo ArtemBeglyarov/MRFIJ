@@ -13,26 +13,28 @@ public class Buildings {
 
     public static void outputBuilding(Building building, OutputStream out) throws IOException {
         DataOutputStream dataOutput = new DataOutputStream(out);
-        dataOutput.writeUTF(convertStr(building));
+        dataOutput.write(building.getCountFloor());
+        for (int i = 0; i < building.getCountFloor(); i++) {
+            dataOutput.write(building.getFloorByNum(i).getCountSpaceOnFloor());
+            for (int j = 0; j < building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
+                dataOutput.write(building.getFloorByNum(i).getSpaceFloorNum(j).getRoom());
+                dataOutput.writeDouble(building.getFloorByNum(i).getSpaceFloorNum(j).getArea());
+            }
+        }
         dataOutput.write(building.getClassID());
         dataOutput.close();
     }
 
     public static Building inputBuilding(InputStream in) throws IOException {
-
-
         DataInputStream dataInputStream = new DataInputStream(in);
-        StringTokenizer tokenStr = new StringTokenizer(dataInputStream.readUTF());
+        Floor[] floors = new Floor[dataInputStream.readInt()];
+        for (int i = 0; i < floors.length; i++) {
 
-          Floor[] floors = new Floor[Integer.parseInt(tokenStr.nextToken())];
-        for (int i = 0; i <floors.length ; i++) {
-
-            Space[] spaces = new Space[Integer.parseInt(tokenStr.nextToken())];
-            for (int j = 0; j <spaces.length; j++) {
-                spaces[j].setRoom(Integer.parseInt(tokenStr.nextToken()));
-                spaces[j].setArea(Double.parseDouble(tokenStr.nextToken()));
+            Space[] spaces = new Space[dataInputStream.readInt()];
+            for (int j = 0; j < spaces.length; j++) {
+                spaces[j].setRoom(dataInputStream.readInt());
+                spaces[j].setArea(dataInputStream.readDouble());
             }
-
         }
         if (dataInputStream.readInt() == 120) {
             dataInputStream.close();
@@ -44,29 +46,31 @@ public class Buildings {
             Building building = new OfficeBuilding(floors);
             return building;
         }
+        return null;
+    }
+
+    public static void writeBuilding(Building building, Writer out) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(out);
+        bufferedWriter.write(convertStr(building));
+        bufferedWriter.write(building.getClassID());
+        bufferedWriter.close();
+    }
+
+    public static Building readBuilding(Reader in) throws IOException {
 
         return null;
     }
-        public static void writeBuilding (Building building, Writer out){
 
-
-
-        }
-
-        public static Building readBuilding (Reader in){
-            return null;
-        }
-
-        public static String convertStr (Building building){
-            String current = String.valueOf(building.getCountFloor());
-            for (int i = 0; i < building.getCountFloor(); i++) {
-                current += " " + building.getFloorByNum(i).getCountSpaceOnFloor();
-                for (int j = 0; j < building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                    current += " " + building.getFloorByNum(i).getSpaceFloorNum(j).getRoom();
-                    current += " " + building.getFloorByNum(i).getSpaceFloorNum(j).getArea();
-                }
+    public static String convertStr(Building building) {
+        String current = String.valueOf(building.getCountFloor());
+        for (int i = 0; i < building.getCountFloor(); i++) {
+            current += " " + building.getFloorByNum(i).getCountSpaceOnFloor();
+            for (int j = 0; j < building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
+                current += " " + building.getFloorByNum(i).getSpaceFloorNum(j).getRoom();
+                current += " " + building.getFloorByNum(i).getSpaceFloorNum(j).getArea();
             }
-            return current;
         }
+        return current;
+    }
 
 }
