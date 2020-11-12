@@ -5,7 +5,9 @@ import Task3.InvalidRoomsCountException;
 import Task3.InvalidSpaceAreaException;
 import Task3.Space;
 
-public class Flat implements Space {
+import java.io.Serializable;
+
+public class Flat implements Space, Serializable {
 
     @Override
     public String toString() {

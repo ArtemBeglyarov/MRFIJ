@@ -6,8 +6,10 @@ import Task3.Floor;
 import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
 
+import java.io.Serializable;
 
-public class Dwelling implements Building {
+
+public class Dwelling implements Building, Serializable {
 
     private int countFloor;
     private Floor[] floors;

@@ -9,7 +9,7 @@ import Task3.buildings.OfficeBuilding;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class Buildings {
+public class Buildings  {
 
     public static void outputBuilding(Building building, OutputStream out) throws IOException {
         DataOutputStream dataOutput = new DataOutputStream(out);
@@ -59,9 +59,9 @@ public class Buildings {
     public static Building readBuilding(Reader in) throws IOException {
         StreamTokenizer tokenizer = new StreamTokenizer(in);
         Floor[] floors = new Floor[tokenizer.nextToken()];
-        for (int i = 0; i <floors.length; i++) {
+        for (int i = 0; i < floors.length; i++) {
             Space[] spaces = new Space[tokenizer.nextToken()];
-            for (int j = 0; j <spaces.length; j++) {
+            for (int j = 0; j < spaces.length; j++) {
                 spaces[j].setRoom(tokenizer.nextToken());
                 spaces[j].setArea(tokenizer.nextToken());
             }
@@ -74,6 +74,7 @@ public class Buildings {
             Building building = new OfficeBuilding(floors);
             return building;
         }
+
         return null;
     }
 
@@ -89,4 +90,22 @@ public class Buildings {
         return current;
     }
 
+    public static void serializeBuilding(Building building, OutputStream out) throws IOException {
+        ObjectOutputStream serialize = new ObjectOutputStream(out);
+        serialize.writeObject(building);
+        serialize.close();
+    }
+
+    public static Building deserializeBuilding(InputStream in) throws IOException {
+        ObjectInputStream deserialize = new ObjectInputStream(in);
+
+        Building newBulding = null;
+        try {
+            newBulding = (Building) deserialize.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        deserialize.close();
+        return newBulding;
+    }
 }

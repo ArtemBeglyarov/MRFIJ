@@ -5,9 +5,11 @@ import Task3.Floor;
 import Task3.Space;
 import Task3.SpaceIndexOutOfBoundsException;
 
-public class OfficeFloor implements Floor {
+import java.io.Serializable;
 
-    public static class Node {
+public class OfficeFloor implements Floor, Serializable {
+
+    public static class Node implements  Serializable {
 
         private Space office;
         private Node next;

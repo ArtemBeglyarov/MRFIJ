@@ -4,8 +4,10 @@ import Task3.Floor;
 import Task3.Space;
 import Task3.SpaceIndexOutOfBoundsException;
 
+import java.io.Serializable;
 
-public class DwellingFloor implements Floor {
+
+public class DwellingFloor implements Floor, Serializable {
 
     private Space[] flats;
 

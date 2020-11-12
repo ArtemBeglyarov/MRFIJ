@@ -6,9 +6,11 @@ import Task3.Floor;
 import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
 
-public class OfficeBuilding implements Building {
+import java.io.Serializable;
 
-    public static class Node {
+public class OfficeBuilding implements Building, Serializable {
+
+    public static class Node implements Serializable {
 
         private Floor floor;
         private Node next;
