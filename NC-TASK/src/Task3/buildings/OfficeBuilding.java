@@ -90,6 +90,15 @@ public class OfficeBuilding implements Building, Serializable {
         countFloor--;
     }
 
+    @Override
+    public String toString() {
+        return "OfficeBuilding{" +
+                "head=" + head +
+                ", countFloor=" + countFloor +
+                ", prev=" + prev +
+                '}';
+    }
+
     public OfficeBuilding(Floor[] floor) {
         head = new Node(floor[0], null, null);
         head.next = head;

@@ -5,6 +5,7 @@ import Task3.Space;
 import Task3.SpaceIndexOutOfBoundsException;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 
 public class DwellingFloor implements Floor, Serializable {
@@ -32,6 +33,15 @@ public class DwellingFloor implements Floor, Serializable {
         this.сountFlats = flats.length;
 
     }
+
+    @Override
+    public String toString() {
+        return "DwellingFloor{" +
+                "flats=" + Arrays.toString(flats) +
+                ", сountFlats=" + сountFlats +
+                '}';
+    }
+
     @Override
     public  int getClassID() {
         int classID = 110;

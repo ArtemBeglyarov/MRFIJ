@@ -105,7 +105,7 @@ public class Buildings  {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        deserialize.close();
+
         return newBulding;
     }
 }

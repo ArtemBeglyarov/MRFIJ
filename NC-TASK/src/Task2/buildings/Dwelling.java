@@ -7,6 +7,7 @@ import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 
 public class Dwelling implements Building, Serializable {
@@ -24,6 +25,14 @@ public class Dwelling implements Building, Serializable {
             this.floors[i] = new DwellingFloor(5);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Dwelling{" +
+                "countFloor=" + countFloor +
+                ", floors=" + Arrays.toString(floors) +
+                '}';
     }
 
     public Dwelling(Floor[] floors) {

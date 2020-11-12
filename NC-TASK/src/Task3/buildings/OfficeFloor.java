@@ -92,6 +92,13 @@ public class OfficeFloor implements Floor, Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "OfficeFloor{" +
+                "head=" + head +
+                ", countOffices=" + countOffices +
+                '}';
+    }
 
     public OfficeFloor(Space[] offices) {   //конструктор принимает массив
         countOffices = 0;
