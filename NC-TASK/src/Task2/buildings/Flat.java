@@ -25,8 +25,7 @@ public class Flat implements Space, Serializable {
 
     @Override
     public  int getClassID() {
-        int classID = 100;
-        return classID;
+        return 100;
     }
 
     public Flat() {

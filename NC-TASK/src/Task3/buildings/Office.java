@@ -17,8 +17,7 @@ public class Office implements Space, Serializable {
     }
     @Override
     public  int getClassID() {
-        int classID = 200;
-        return classID;
+        return 200;
     }
 
     private static final int DEFAULT_AREA = 250;

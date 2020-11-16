@@ -7,7 +7,7 @@ public interface Building {
 
     int getCountFloor();
 
-    void setFloor(int spaceNum, Floor floor);
+    void setFloor(int floorNum, Floor floor);
 
     int getAllSpace();
 
@@ -17,7 +17,7 @@ public interface Building {
 
     Floor[] getArrayFloors();
 
-    Floor getFloorByNum(int spaceNum) ;
+    Floor getFloorByNum(int floorNum) ;
 
     Space getSpaceByNum(int spaceNum) ;
 

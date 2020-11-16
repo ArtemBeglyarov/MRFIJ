@@ -22,18 +22,16 @@ public class MainTask4 {
         Space office1 = new Flat(1, 10);
         Space office2 = new Flat(2, 20);
         Space office3 = new Flat(3, 30);
-        Space office4 = new Flat(4, 40);
-        Space office5 = new Flat(5, 50);
+
 
         Space office6 = new Flat(5, 50);
         Space office7 = new Flat(4, 40);
         Space office8 = new Flat(3, 30);
-        Space office9 = new Flat(2, 20);
-        Space office10 = new Flat(1, 10);
 
 
-        Space[] off = {office1, office2, office3, office4, office5};
-        Space[] off1 = {office6, office7, office8, office9, office10};
+
+        Space[] off = {office1, office2, office3};
+        Space[] off1 = {office6, office7, office8};
 
         Floor floor = new DwellingFloor(off);
         Floor floor1 = new DwellingFloor(off1);
@@ -42,25 +40,21 @@ public class MainTask4 {
 
         Building building = new Dwelling(floors);
 
-        FileWriter fileWriter = new FileWriter("builds");
-        Buildings.writeBuilding(building,fileWriter);
 
-        FileReader reader = new FileReader("builds");
-        Buildings.readBuilding(reader);
+        Buildings.outputBuilding(building, new DataOutputStream(System.out));
+        Buildings.inputBuilding(new DataInputStream(System.in));
 
-        System.out.println(building);
-        System.out.println(Buildings.readBuilding(reader));
-     /*
-        FileOutputStream fileOut = new FileOutputStream("buldings");
-        Buildings.serializeBuilding(building, fileOut);
-
-        FileInputStream fileInput = new FileInputStream("buldings");
-
-        Building building1 = (Buildings.deserializeBuilding(fileInput));
+        Buildings.writeBuilding(building,new FileWriter("builds"));
+        Buildings.readBuilding(new FileReader("builds"));
 
 
-        System.out.println(building);
-        System.out.println(building1);
-*/
+        Buildings.serializeBuilding(building, new FileOutputStream("buildings"));
+        Buildings.deserializeBuilding(new FileInputStream("buildings"));
+
+
+
+        Buildings.writeBuildingFormat(building,new OutputStreamWriter(System.out));
+
+
     }
 }

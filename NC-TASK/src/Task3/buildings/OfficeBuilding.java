@@ -115,8 +115,8 @@ public class OfficeBuilding implements Building, Serializable {
         }
     }
 
-    public OfficeBuilding(int spaceNum) {
-        if (spaceNum <= 0) {
+    public OfficeBuilding(int floorNum) {
+        if (floorNum <= 0) {
             throw new FloorIndexOutIfBoundsException("incorrect office number \n office number must be greater than 0");
         }
         head = new Node(new OfficeFloor(5), null, null);
@@ -125,7 +125,7 @@ public class OfficeBuilding implements Building, Serializable {
         countFloor = 1;
 
         Node current = head;
-        while (spaceNum != countFloor) {
+        while (floorNum != countFloor) {
             Node newNode = new Node(new OfficeFloor(1), head, prev);
             current.next = newNode;
             newNode.prev = current;
@@ -141,19 +141,18 @@ public class OfficeBuilding implements Building, Serializable {
 
     @Override
     public  int getClassID() {
-        int classID = 220;
-        return classID;
+        return 220;
     }
 
 
 
     @Override
-    public void setFloor(int spaceNum, Floor floor) {
-        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+    public void setFloor(int floorNum, Floor floor) {
+        if (floorNum <= 0 & floorNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The floor doesn't exist");
         }
         Node current = head;
-        for (int i = 1; i < spaceNum; i++) {
+        for (int i = 1; i < floorNum; i++) {
             current = current.next;
         }
         current.floor = floor;
@@ -206,12 +205,12 @@ public class OfficeBuilding implements Building, Serializable {
     }
 
     @Override
-    public Floor getFloorByNum(int spaceNum) { //получение этажа по номеру
-        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+    public Floor getFloorByNum(int floorNum) { //получение этажа по номеру
+        if (floorNum <= 0 & floorNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The floor doesn't exist");
         }
         Node current = head;
-        for (int i = 1; i < spaceNum; i++) {
+        for (int i = 1; i < floorNum; i++) {
             current = current.next;
         }
         return current.floor;

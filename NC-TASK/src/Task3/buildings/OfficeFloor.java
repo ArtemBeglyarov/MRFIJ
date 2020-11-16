@@ -122,8 +122,7 @@ public class OfficeFloor implements Floor, Serializable {
 
     @Override
     public  int getClassID() {
-        int classID = 210;
-        return classID;
+        return 210;
     }
 
     @Override

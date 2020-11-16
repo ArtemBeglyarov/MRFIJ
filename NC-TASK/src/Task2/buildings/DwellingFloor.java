@@ -44,8 +44,7 @@ public class DwellingFloor implements Floor, Serializable {
 
     @Override
     public  int getClassID() {
-        int classID = 110;
-        return classID;
+        return 110;
     }
 
 

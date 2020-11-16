@@ -15,12 +15,12 @@ public class Dwelling implements Building, Serializable {
     private int countFloor;
     private Floor[] floors;
 
-    public Dwelling(int spaceNum) {
-        if (spaceNum <= 0) {
+    public Dwelling(int floorNum) {
+        if (floorNum <= 0) {
             throw new FloorIndexOutIfBoundsException("incorrect floors number \n floors number must be greater than 0");
         }
-        this.countFloor = spaceNum;
-        this.floors = new Floor[spaceNum];
+        this.countFloor = floorNum;
+        this.floors = new Floor[floorNum];
         for (int i = 0; i < floors.length; i++) {
             this.floors[i] = new DwellingFloor(5);
         }
@@ -39,9 +39,9 @@ public class Dwelling implements Building, Serializable {
         this.floors = floors;
         this.countFloor = floors.length;
     }
-    public void setFloor(int spaceNum,Floor floor) { // изменение этажа в здании
+    public void setFloor(int floorNum, Floor floor) { // изменение этажа в здании
         for (int i = 0; i <floors.length ; i++) {
-            if (i == spaceNum-1) {
+            if (i == floorNum -1) {
                 floors[i] = floor;
                 break;
             }
@@ -57,8 +57,7 @@ public class Dwelling implements Building, Serializable {
 
     @Override
     public  int getClassID() {
-        int classID = 120;
-        return classID;
+        return 120;
     }
 
 
@@ -99,11 +98,11 @@ public class Dwelling implements Building, Serializable {
     }
 
     @Override
-    public Floor getFloorByNum(int spaceNum) {              //получение этажа по номеру
-        if (spaceNum <= 0 & spaceNum > getCountFloor()) {
+    public Floor getFloorByNum(int floorNum) {              //получение этажа по номеру
+        if (floorNum <= 0 & floorNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The flat doesn't exist");
         }
-        return this.floors[spaceNum - 1];
+        return this.floors[floorNum - 1];
 
     }
 
