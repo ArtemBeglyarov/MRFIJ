@@ -84,7 +84,7 @@ public class DwellingFloor implements Floor, Serializable {
     }
 
     @Override
-    public Space getSpaceFloorNum(int spaceNum) { //получение квартиры по номеру этаже
+    public Space getSpaceByNum(int spaceNum) { //получение квартиры по номеру этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
         }

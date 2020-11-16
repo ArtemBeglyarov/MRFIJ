@@ -1,6 +1,8 @@
 package Task4;
 
 import Task2.buildings.Dwelling;
+import Task2.buildings.DwellingFloor;
+import Task2.buildings.Flat;
 import Task3.Building;
 import Task3.Floor;
 import Task3.Space;
@@ -9,48 +11,65 @@ import Task3.buildings.OfficeBuilding;
 import java.io.*;
 import java.util.Scanner;
 
-public class Buildings  {
+public class Buildings {
 
     public static void outputBuilding(Building building, OutputStream out) throws IOException {
-        DataOutputStream dataOutput = new DataOutputStream(out);
-        dataOutput.write(building.getCountFloor());
-        for (int i = 1; i < building.getCountFloor(); i++) {
-            dataOutput.write(building.getFloorByNum(i).getCountSpaceOnFloor());
-            for (int j = 1; j < building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                dataOutput.write(building.getFloorByNum(i).getSpaceFloorNum(j).getRoom());
-                dataOutput.writeDouble(building.getFloorByNum(i).getSpaceFloorNum(j).getArea());
+        DataOutputStream dos = new DataOutputStream(out);
+        int floorsNumber = building.getCountFloor();
+
+        dos.writeInt(floorsNumber);
+        for (int i = 1; i <= floorsNumber; i++) {
+            Floor floor = building.getFloorByNum(i);
+            int spacesNumber = floor.getCountSpaceOnFloor();
+
+            dos.writeInt(spacesNumber);
+            for (int j = 1; j <= spacesNumber; j++) {
+                Space space = floor.getSpaceByNum(j);
+
+                dos.writeInt(space.getRoom());
+                dos.writeDouble(space.getArea());
+//                dos.writeInt(space.getClassID());
             }
+//            dos.writeInt(floor.getClassID());
         }
-        dataOutput.write(building.getClassID());
-        dataOutput.close();
+        dos.writeInt(building.getClassID());
     }
 
     public static Building inputBuilding(InputStream in) throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(in);
-        Floor[] floors = new Floor[dataInputStream.readInt()];
-        for (int i = 0; i <= floors.length; i++) {
+        DataInputStream dis = new DataInputStream(in);
 
-            Space[] spaces = new Space[dataInputStream.readInt()];
-            for (int j = 1; j <= spaces.length; j++) {
-                spaces[j].setRoom(dataInputStream.readInt());
-                spaces[j].setArea(dataInputStream.readDouble());
+        int floorsNumber = dis.readInt();
+
+
+        Floor[] floors = new Floor[floorsNumber];
+
+        for (int i = 0; i < floorsNumber; i++) {
+
+            int spaceNumber = dis.readInt();
+            Space[] spaces = new Space[spaceNumber];
+
+            for (int j = 0; j < spaces.length; j++) {
+                int rooms = dis.readInt();
+                double area = dis.readDouble();
+                spaces[j] = new Flat(rooms,area);
+
             }
+            floors[i] = new DwellingFloor(spaces);
         }
-        if (dataInputStream.readInt() == 120) {
-            dataInputStream.close();
+        if (dis.readInt() == 120) {
             return new Dwelling(floors);
         }
-        if (dataInputStream.readInt() == 220) {
-            dataInputStream.close();
+        if (dis.readInt() == 220) {
             return new OfficeBuilding(floors);
         }
+
         return null;
     }
 
     public static void writeBuilding(Building building, Writer out) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(out);
         bufferedWriter.write(convertStr(building));
-        bufferedWriter.write(" " +building.getClassID());
+        bufferedWriter.write(" " + building.getClassID());
         bufferedWriter.close();
     }
 
@@ -79,8 +98,8 @@ public class Buildings  {
         for (int i = 1; i <= building.getCountFloor(); i++) {
             result += " " + building.getFloorByNum(i).getCountSpaceOnFloor();
             for (int j = 1; j <= building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                result += " " + building.getFloorByNum(i).getSpaceFloorNum(j).getRoom();
-                result += " " + building.getFloorByNum(i).getSpaceFloorNum(j).getArea();
+                result += " " + building.getFloorByNum(i).getSpaceByNum(j).getRoom();
+                result += " " + building.getFloorByNum(i).getSpaceByNum(j).getArea();
             }
         }
         return result;
@@ -95,28 +114,33 @@ public class Buildings  {
     public static Building deserializeBuilding(InputStream in) throws IOException {
         ObjectInputStream deserialize = new ObjectInputStream(in);
 
-        Building newBulding = null;
+        Building newBuilding = null;
         try {
-            newBulding = (Building) deserialize.readObject();
+            newBuilding = (Building) deserialize.readObject();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return newBulding;
+        return newBuilding;
     }
-    public static void  writeBuildingFormat(Building building, Writer out) {
+
+    public static void writeBuildingFormat(Building building, Writer out) {
         PrintWriter printWriter = new PrintWriter(out);
 
-        printWriter.printf("Count floors - %d; ",building.getCountFloor());
+        printWriter.printf("Count floors - %d; ", building.getCountFloor());
+        printWriter.printf(" Class ID - %d\n", building.getClassID());
         for (int i = 1; i <= building.getCountFloor(); i++) {
-            printWriter.printf("\nCount space - %d;\n",building.getFloorByNum(i).getCountSpaceOnFloor());
+            printWriter.printf("Count space - %d;", building.getFloorByNum(i).getCountSpaceOnFloor());
+            printWriter.printf(" Class ID - %d\n", building.getFloorByNum(i).getClassID());
             for (int j = 1; j <= building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-               printWriter.printf("Count rooms in space - %d; ",building.getFloorByNum(i).getSpaceFloorNum(j).getRoom());
-               printWriter.printf("Area in space - %f;\n",building.getFloorByNum(i).getSpaceFloorNum(j).getArea());
+                printWriter.printf("Count rooms in space - %d; ", building.getFloorByNum(i).getSpaceByNum(j).getRoom());
+                printWriter.printf("Area in space - %f; ", building.getFloorByNum(i).getSpaceByNum(j).getArea());
+                printWriter.printf("Class ID - %d\n", building.getFloorByNum(i).getClassID());
             }
         }
         printWriter.close();
     }
+
     public static void writerBuildingFormat(Scanner scanner, Writer out) {
         PrintWriter printWriter = new PrintWriter(out);
 
@@ -132,7 +156,7 @@ public class Buildings  {
             }
         }
         if (scanner.nextInt() == 120) {
-           new Dwelling(floors);
+            new Dwelling(floors);
         }
         if (scanner.nextInt() == 220) {
             new OfficeBuilding(floors);

@@ -23,16 +23,16 @@ public class PlacementExchanger {
     }
 
     public static void exchangeFloorRooms(Floor floor1, int index1, Floor floor2, int index2) throws InexchangeableSpacesException {
-        if (checkExchangeSpace(floor1.getSpaceFloorNum(index1), floor2.getSpaceFloorNum(index2)) == false) {
+        if (checkExchangeSpace(floor1.getSpaceByNum(index1), floor2.getSpaceByNum(index2)) == false) {
             throw new InexchangeableSpacesException("the space do not correspond to the exchange");
         }
         if (index1 <= 0 & index1 > floor1.getCountSpaceOnFloor() && index2 <= 0 & index2 > floor2.getCountSpaceOnFloor()) {
             throw  new FloorIndexOutIfBoundsException("The space doesn't exist");
 
         } else {
-            Space current = floor1.getSpaceFloorNum(index1);
+            Space current = floor1.getSpaceByNum(index1);
 
-            floor1.setSpaceFloor(floor2.getSpaceFloorNum(index2), index1);
+            floor1.setSpaceFloor(floor2.getSpaceByNum(index2), index1);
             floor2.setSpaceFloor(current, index2);
         }
 

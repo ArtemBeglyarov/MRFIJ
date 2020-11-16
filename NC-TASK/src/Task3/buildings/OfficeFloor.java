@@ -6,6 +6,8 @@ import Task3.Space;
 import Task3.SpaceIndexOutOfBoundsException;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class OfficeFloor implements Floor, Serializable {
 
@@ -94,7 +96,7 @@ public class OfficeFloor implements Floor, Serializable {
 
     @Override
     public String toString() {
-        return "OfficeFloor(" + countOffices+head +')';
+        return "OfficeFloor(" + countOffices+ ", "  + Arrays.toString(getArrayFloor()) +')';
     }
 
     public OfficeFloor(Space[] offices) {   //конструктор принимает массив
@@ -155,7 +157,7 @@ public class OfficeFloor implements Floor, Serializable {
         return offices;
     }
    @Override
-   public Space getSpaceFloorNum(int spaceNum) {  //получение офиса по номеру на этаже
+   public Space getSpaceByNum(int spaceNum) {  //получение офиса по номеру на этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }

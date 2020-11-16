@@ -12,7 +12,7 @@ public interface Floor {
 
     int getSumFloorRoom();
 
-    Space getSpaceFloorNum(int spaceNum);
+    Space getSpaceByNum(int spaceNum);
 
     void setSpaceFloor(Space addSpace, int spaceNum);
 

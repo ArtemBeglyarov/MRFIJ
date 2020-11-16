@@ -7,6 +7,7 @@ import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class OfficeBuilding implements Building, Serializable {
 
@@ -92,11 +93,7 @@ public class OfficeBuilding implements Building, Serializable {
 
     @Override
     public String toString() {
-        return "OfficeBuilding{" +
-                "head=" + head +
-                ", countFloor=" + countFloor +
-                ", prev=" + prev +
-                '}';
+        return "OfficeBuilding(" +getCountFloor()+", "+ Arrays.toString(getArrayFloors())+ ')';
     }
 
     public OfficeBuilding(Floor[] floor) {
@@ -226,12 +223,12 @@ public class OfficeBuilding implements Building, Serializable {
         for (int i = 0; i < countFloor; i++) {
             current = current.next;
             for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
-                current.floor.getSpaceFloorNum(j);
+                current.floor.getSpaceByNum(j);
 
                 counter++;
 
                 if (counter == spaceNum) {
-                    return current.floor.getSpaceFloorNum(j);
+                    return current.floor.getSpaceByNum(j);
                 }
             }
 
@@ -249,7 +246,7 @@ public class OfficeBuilding implements Building, Serializable {
         for (int i = 0; i < countFloor; i++) {
             current = current.next;
             for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
-                current.floor.getSpaceFloorNum(j);
+                current.floor.getSpaceByNum(j);
 
                 counter++;
 
@@ -271,7 +268,7 @@ public class OfficeBuilding implements Building, Serializable {
         for (int i = 0; i < countFloor; i++) {
             current = current.next;
             for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
-                current.floor.getSpaceFloorNum(j);
+                current.floor.getSpaceByNum(j);
 
                 counter++;
 
@@ -294,7 +291,7 @@ public class OfficeBuilding implements Building, Serializable {
         for (int i = 0; i < countFloor; i++) {
             current = current.next;
             for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
-                current.floor.getSpaceFloorNum(j);
+                current.floor.getSpaceByNum(j);
 
                 counter++;
 
