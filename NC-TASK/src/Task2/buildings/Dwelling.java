@@ -29,10 +29,7 @@ public class Dwelling implements Building, Serializable {
 
     @Override
     public String toString() {
-        return "Dwelling{" +
-                "countFloor=" + countFloor +
-                ", floors=" + Arrays.toString(floors) +
-                '}';
+        return "Dwelling(" + countFloor + ", " + Arrays.toString(floors) + ')';
     }
 
     public Dwelling(Floor[] floors) {

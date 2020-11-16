@@ -11,10 +11,7 @@ public class Flat implements Space, Serializable {
 
     @Override
     public String toString() {
-        return "Flat{" +
-                "area=" + area +
-                ", room=" + room +
-                '}';
+        return "Flat(" +  room +','+ area + ')';
     }
 
     private static final int AREA_DEFAULT = 50;

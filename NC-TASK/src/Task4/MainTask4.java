@@ -13,6 +13,7 @@ import Task3.Building;
 
 import java.io.*;
 import java.sql.SQLOutput;
+import java.util.Scanner;
 import java.util.SortedMap;
 
 
@@ -40,21 +41,24 @@ public class MainTask4 {
 
         Building building = new Dwelling(floors);
 
+        System.out.println(building.toString());
+/*
 
         Buildings.outputBuilding(building, new DataOutputStream(System.out));
         Buildings.inputBuilding(new DataInputStream(System.in));
+*/
 
-        Buildings.writeBuilding(building,new FileWriter("builds"));
-        Buildings.readBuilding(new FileReader("builds"));
-
-
+      /*  Buildings.writeBuilding(building,new OutputStreamWriter(System.out));
+        Buildings.readBuilding(new InputStreamReader(System.in));
+*/
+/*
         Buildings.serializeBuilding(building, new FileOutputStream("buildings"));
         Buildings.deserializeBuilding(new FileInputStream("buildings"));
 
 
 
-        Buildings.writeBuildingFormat(building,new OutputStreamWriter(System.out));
+        Buildings.writeBuildingFormat(building,new OutputStreamWriter(System.out));*/
 
-
+        //Buildings.writerBuildingFormat(new Scanner(System.in),new OutputStreamWriter(System.out));
     }
 }

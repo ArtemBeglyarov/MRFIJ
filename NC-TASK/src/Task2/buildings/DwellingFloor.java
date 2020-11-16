@@ -36,10 +36,7 @@ public class DwellingFloor implements Floor, Serializable {
 
     @Override
     public String toString() {
-        return "DwellingFloor{" +
-                "flats=" + Arrays.toString(flats) +
-                ", сountFlats=" + сountFlats +
-                '}';
+        return "DwellingFloor(" + getCountSpaceOnFloor()+", "+ Arrays.toString(flats) + ')';
     }
 
     @Override

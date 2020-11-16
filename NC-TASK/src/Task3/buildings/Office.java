@@ -10,10 +10,7 @@ public class Office implements Space, Serializable {
 
     @Override
     public String toString() {
-        return "Office{" +
-                "area=" + area +
-                ", room=" + room +
-                '}';
+        return "Office(" +  room +','+ area + ')';
     }
     @Override
     public  int getClassID() {
