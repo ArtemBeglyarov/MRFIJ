@@ -127,39 +127,37 @@ public class Buildings {
     public static void writeBuildingFormat(Building building, Writer out) {
         PrintWriter printWriter = new PrintWriter(out);
 
-        printWriter.printf("Count floors - %d; ", building.getCountFloor());
-        printWriter.printf(" Class ID - %d\n", building.getClassID());
+        printWriter.printf("%d ", building.getCountFloor());
         for (int i = 1; i <= building.getCountFloor(); i++) {
-            printWriter.printf("Count space - %d;", building.getFloorByNum(i).getCountSpaceOnFloor());
-            printWriter.printf(" Class ID - %d\n", building.getFloorByNum(i).getClassID());
+            printWriter.printf("%d ", building.getFloorByNum(i).getCountSpaceOnFloor());
+
             for (int j = 1; j <= building.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                printWriter.printf("Count rooms in space - %d; ", building.getFloorByNum(i).getSpaceByNum(j).getRoom());
-                printWriter.printf("Area in space - %f; ", building.getFloorByNum(i).getSpaceByNum(j).getArea());
-                printWriter.printf("Class ID - %d\n", building.getFloorByNum(i).getClassID());
+                printWriter.printf("%d ", building.getFloorByNum(i).getSpaceByNum(j).getRoom());
+                printWriter.printf("%.1f ", building.getFloorByNum(i).getSpaceByNum(j).getArea());
             }
         }
         printWriter.close();
     }
 
-    public static void writerBuildingFormat(Scanner scanner, Writer out) {
-        PrintWriter printWriter = new PrintWriter(out);
-
-        Floor[] floors = new Floor[scanner.nextInt()];
-        for (int i = 0; i <= floors.length; i++) {
-
-            Space[] spaces = new Space[scanner.nextInt()];
-            for (int j = 1; j <= spaces.length; j++) {
-
-                spaces[j].setRoom(scanner.nextInt());
-
-                spaces[j].setArea(scanner.nextDouble());
-            }
-        }
-        if (scanner.nextInt() == 120) {
-            new Dwelling(floors);
-        }
-        if (scanner.nextInt() == 220) {
-            new OfficeBuilding(floors);
-        }
-    }
+//    public static void writerBuildingFormat(Scanner scanner, Writer out) {
+//        PrintWriter printWriter = new PrintWriter(out);
+//
+//        Floor[] floors = new Floor[scanner.nextInt()];
+//        for (int i = 0; i <= floors.length; i++) {
+//
+//            Space[] spaces = new Space[scanner.nextInt()];
+//            for (int j = 1; j <= spaces.length; j++) {
+//
+//                spaces[j].setRoom(scanner.nextInt());
+//
+//                spaces[j].setArea(scanner.nextDouble());
+//            }
+//        }
+//        if (scanner.nextInt() == 120) {
+//            new Dwelling(floors);
+//        }
+//        if (scanner.nextInt() == 220) {
+//            new OfficeBuilding(floors);
+//        }
+//    }
 }
