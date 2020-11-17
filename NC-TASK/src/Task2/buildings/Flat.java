@@ -6,13 +6,11 @@ import Task3.InvalidSpaceAreaException;
 import Task3.Space;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Flat implements Space, Serializable {
 
-    @Override
-    public String toString() {
-        return "Flat(" +  room +','+ area + ')';
-    }
+
 
     private static final int AREA_DEFAULT = 50;
     private static final int ROOM_DEFAULT = 2;
@@ -74,5 +72,22 @@ public class Flat implements Space, Serializable {
             throw new InvalidRoomsCountException("incorrect Room \n area must be greater than 0");
         }
         this.room = room;
+    }
+    @Override
+    public String toString() {
+        return "Flat(" +  room +','+ area + ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flat flat = (Flat) o;
+        return Double.compare(flat.area, area) == 0 && room == flat.room;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(area, room);
     }
 }

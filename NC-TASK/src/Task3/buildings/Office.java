@@ -35,7 +35,7 @@ public class Office implements Space, Serializable {
         this.area=area;
         this.room=1;
     }
-    public Office(int area, int room) {
+    public Office(int room, Double area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }

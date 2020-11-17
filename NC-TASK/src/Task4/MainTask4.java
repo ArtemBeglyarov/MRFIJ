@@ -28,8 +28,7 @@ public class MainTask4 {
         Space office7 = new Flat(4, 40);
 
 
-
-        Floor floor = new DwellingFloor(new Space[]{office1,office2});
+        Floor floor = new DwellingFloor(new Space[]{office1, office2});
         Floor floor1 = new DwellingFloor(new Space[]{office6, office7});
 
         Floor[] floors = {floor, floor1};
@@ -38,9 +37,9 @@ public class MainTask4 {
 //        System.out.println(building.toString());
 
 //        Building building = new OfficeBuilding(floors);
-//       System.out.println(building.toString());
+//        System.out.println(building.toString());
 //        System.out.println(floor.toString());
-//
+
 //        String filePath = ".\\test.txt";
 //
 //        DataOutputStream out = new DataOutputStream(new FileOutputStream(filePath));
@@ -50,7 +49,7 @@ public class MainTask4 {
 //
 //        Building resultBuilding = Buildings.inputBuilding(new DataInputStream(new FileInputStream(filePath)));
 //        System.out.println(resultBuilding);
-//
+////
 //
 //
 //        Buildings.writeBuilding(building, new OutputStreamWriter(System.out));
@@ -62,6 +61,8 @@ public class MainTask4 {
 //        Building bui = Buildings.deserializeBuilding(new FileInputStream("buildings.txt"));
 //        System.out.println(bui.toString());
 //
-        Buildings.writeBuildingFormat(building, new OutputStreamWriter(System.out));
+//        Buildings.writeBuildingFormat(building, new OutputStreamWriter(System.out));
+
+
     }
 }
