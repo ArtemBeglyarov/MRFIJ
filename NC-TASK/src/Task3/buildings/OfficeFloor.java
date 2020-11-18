@@ -231,13 +231,8 @@ public class OfficeFloor implements Floor, Serializable {
         if (o == null || getClass() != o.getClass()) return false;
 
         if (this.countOffices != ((OfficeFloor) o).countOffices) return false;
-       if (!this..equals(((OfficeFloor) o).getArrayFloor())) return false;
-//        Node temp = this.head;
-//        Node temp1 = ((OfficeFloor) o).head;
-//        for (int i = 1; i < countOffices; i++) {
-//            temp = temp.next;
-//            temp1 = temp1.next;
-//            if (!temp.office.equals(temp1.office)) return false;
+        for (int i = 0; i <countOffices ; i++) {
+           if (!this.getArrayFloor()[i].equals(((OfficeFloor) o).getArrayFloor()[i])) return false; }
 //
 //        }
 

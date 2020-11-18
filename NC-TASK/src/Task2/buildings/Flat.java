@@ -88,6 +88,6 @@ public class Flat implements Space, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(area, room);
+
     }
 }

@@ -351,15 +351,18 @@ public class OfficeBuilding implements Building, Serializable {
         return "OfficeBuilding(" + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OfficeBuilding that = (OfficeBuilding) o;
-        return countFloor == that.countFloor &&
-                Objects.equals(head, that.head) &&
-                Objects.equals(prev, that.prev);
-    }
+
+            for (int i = 0; i <countFloor ; i++) {
+                if(!this.getArrayFloors()[i].equals(((OfficeBuilding) o).getArrayFloors()[i])) return false;
+            }
+            return true;
+        }
 
     @Override
     public int hashCode() {

@@ -125,7 +125,7 @@ public class MainTask4 {
 
         Building building = new OfficeBuilding(floors);
         Building buildingtest = new OfficeBuilding(floors);
-        System.out.println(building.equals(buildingtest)+"!!!!");
+        System.out.println(building.equals(buildingtest));
         return new OfficeBuilding(floors);
     }
 
