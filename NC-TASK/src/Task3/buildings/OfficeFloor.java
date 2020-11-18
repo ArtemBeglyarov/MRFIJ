@@ -6,12 +6,13 @@ import Task3.Space;
 import Task3.SpaceIndexOutOfBoundsException;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
+
 import java.util.Arrays;
+import java.util.Objects;
 
 public class OfficeFloor implements Floor, Serializable {
 
-    public static class Node implements  Serializable {
+    public static class Node implements Serializable {
 
         private Space office;
         private Node next;
@@ -22,12 +23,25 @@ public class OfficeFloor implements Floor, Serializable {
             this.next = next;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+         if(!this.office.equals(((Node) o).office)) return false;
+         return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(office, next);
+        }
     }
 
     private Node head;
     private int countOffices;
 
-    private Node getNode(int spaceNum)  {
+    private Node getNode(int spaceNum) {
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Node number does not exist");
         }
@@ -94,10 +108,6 @@ public class OfficeFloor implements Floor, Serializable {
         }
     }
 
-    @Override
-    public String toString() {
-        return "OfficeFloor(" + countOffices+ ", "  + Arrays.toString(getArrayFloor()) +')';
-    }
 
     public OfficeFloor(Space[] offices) {   //конструктор принимает массив
         head = new Node(offices[0], null);
@@ -111,13 +121,14 @@ public class OfficeFloor implements Floor, Serializable {
         }
         countOffices = offices.length;
     }
+
     @Override
     public int getCountSpaceOnFloor() { //получение количествао офисов на этаже
         return countOffices;
     }
 
     @Override
-    public  int getClassID() {
+    public int getClassID() {
         return 210;
     }
 
@@ -132,8 +143,8 @@ public class OfficeFloor implements Floor, Serializable {
         return floorArea;
     }
 
-   @Override
-   public int getSumFloorRoom() {  //получение количесва комнат на этаже
+    @Override
+    public int getSumFloorRoom() {  //получение количесва комнат на этаже
         int floorRoom = 0;
         Node current = head;
         for (int i = 0; i < countOffices; i++) {
@@ -142,6 +153,7 @@ public class OfficeFloor implements Floor, Serializable {
         }
         return floorRoom;
     }
+
     @Override
     public Space[] getArrayFloor() {      //получить массив офисов
         Space[] offices = new Space[countOffices];
@@ -152,8 +164,9 @@ public class OfficeFloor implements Floor, Serializable {
         }
         return offices;
     }
-   @Override
-   public Space getSpaceByNum(int spaceNum) {  //получение офиса по номеру на этаже
+
+    @Override
+    public Space getSpaceByNum(int spaceNum) {  //получение офиса по номеру на этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }
@@ -163,8 +176,9 @@ public class OfficeFloor implements Floor, Serializable {
         }
         return current.office;
     }
-   @Override
-   public Space getBestSpace() { // получение лучшей площади на этаже
+
+    @Override
+    public Space getBestSpace() { // получение лучшей площади на этаже
         double best = 0;
         Node current = null;
         Space bestOffice = null;
@@ -184,8 +198,10 @@ public class OfficeFloor implements Floor, Serializable {
     public void setSpaceFloor(Space addSpace, int spaceNum) { //изменения офиса на этаже офиса на этаже
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
-        }        getNode(spaceNum).office = addSpace;
+        }
+        getNode(spaceNum).office = addSpace;
     }
+
     @Override
     public void removeSpaceFloor(int spaceNum) { //удаление офиса по номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
@@ -193,12 +209,44 @@ public class OfficeFloor implements Floor, Serializable {
         }
         removeNode(spaceNum);
     }
+
     @Override
-    public void addSpaceNumber(Space addSpace, int spaceNum){ //добавление офиса оп номеру
+    public void addSpaceNumber(Space addSpace, int spaceNum) { //добавление офиса оп номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }
         Node node = new Node(addSpace, head);
         addNode(node, spaceNum);
+    }
+
+    @Override
+    public String toString() {
+        return "OfficeFloor(" + countOffices + ", " + Arrays.toString(getArrayFloor()) + ')';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        if (this.countOffices != ((OfficeFloor) o).countOffices) return false;
+       if (!this..equals(((OfficeFloor) o).getArrayFloor())) return false;
+//        Node temp = this.head;
+//        Node temp1 = ((OfficeFloor) o).head;
+//        for (int i = 1; i < countOffices; i++) {
+//            temp = temp.next;
+//            temp1 = temp1.next;
+//            if (!temp.office.equals(temp1.office)) return false;
+//
+//        }
+
+        return true;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, countOffices);
     }
 }

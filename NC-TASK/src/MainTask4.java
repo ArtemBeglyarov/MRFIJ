@@ -1,6 +1,3 @@
-package Task4;
-
-
 import Task2.buildings.Dwelling;
 import Task2.buildings.DwellingFloor;
 import Task2.buildings.Flat;
@@ -10,17 +7,24 @@ import Task3.Building;
 import Task3.buildings.Office;
 import Task3.buildings.OfficeBuilding;
 import Task3.buildings.OfficeFloor;
+import Task4.InexchangeableFloorsException;
+import Task4.InexchangeableSpacesException;
+import Task4.PlacementExchanger;
 
 import java.io.*;
+import java.sql.SQLOutput;
 
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
 
-        testPlacementExchanger_checkExchangeSpace();
-        testPlacementExchanger_checkExchangeFloor();
-        testPlacementExchanger_exchangeFloorRooms();
-        testPlacementExchanger_exchangeBuildingFloors();
+        createDwelling();
+        createOfficeBuilding();
+
+//        testPlacementExchanger_checkExchangeSpace();
+//        testPlacementExchanger_checkExchangeFloor();
+//        testPlacementExchanger_exchangeFloorRooms();
+//        testPlacementExchanger_exchangeBuildingFloors();
 
 //        System.out.println(dwelling.toString());
 
@@ -69,21 +73,31 @@ public class MainTask4 {
 //        }
     }
 
+
     private static Building createDwelling() {
-        Space office1 = new Flat(1, 10);
-        Space office2 = new Flat(2, 20);
+        Space flat1 = new Flat(1, 10);
+        Space flat2 = new Flat(2, 20);
 
+        Space flat3 = new Flat(5, 50);
+        Space flat4 = new Flat(4, 40);
 
-        Space office6 = new Flat(5, 50);
-        Space office7 = new Flat(4, 40);
-
-
-        Floor floor = new DwellingFloor(new Space[]{office1, office2});
-        Floor floor1 = new DwellingFloor(new Space[]{office6, office7});
+        Floor floor = new DwellingFloor(new Space[]{flat1, flat2});
+        Floor floor1 = new DwellingFloor(new Space[]{flat3, flat4});
 
         Floor[] floors = {floor, floor1};
 
+        Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
+        System.out.println(floor.equals(testFloor));
+
+        Space testFlat = new Flat(1, 10);
+        System.out.println(flat1.equals(testFlat));
+
+        Building building = new Dwelling(floors);
+        Building buildingtest = new Dwelling(floors);
+
+        System.out.println(building.equals(buildingtest));
         return new Dwelling(floors);
+
 
     }
 
@@ -91,16 +105,27 @@ public class MainTask4 {
         Space office1 = new Office(1, 10);
         Space office2 = new Office(2, 20);
 
-
         Space office6 = new Office(5, 50);
         Space office7 = new Office(4, 40);
-
 
         Floor floor = new OfficeFloor(new Space[]{office1, office2});
         Floor floor1 = new OfficeFloor(new Space[]{office6, office7});
 
         Floor[] floors = {floor, floor1};
 
+
+        Floor floortest = new OfficeFloor(new Space[]{office1, office2});
+        System.out.println(floor.equals(floortest));
+
+
+        Space testOffice = new Office(1, 10);
+        System.out.println(office1.equals(testOffice));
+
+
+
+        Building building = new OfficeBuilding(floors);
+        Building buildingtest = new OfficeBuilding(floors);
+        System.out.println(building.equals(buildingtest)+"!!!!");
         return new OfficeBuilding(floors);
     }
 

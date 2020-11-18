@@ -6,6 +6,7 @@ import Task3.SpaceIndexOutOfBoundsException;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class DwellingFloor implements Floor, Serializable {
@@ -34,10 +35,6 @@ public class DwellingFloor implements Floor, Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return "DwellingFloor(" + getCountSpaceOnFloor()+", "+ Arrays.toString(flats) + ')';
-    }
 
     @Override
     public  int getClassID() {
@@ -172,5 +169,23 @@ public class DwellingFloor implements Floor, Serializable {
         }
 
     }
+    @Override
+    public String toString() {
+        return "DwellingFloor(" + getCountSpaceOnFloor()+", "+ Arrays.toString(flats) + ')';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DwellingFloor that = (DwellingFloor) o;
+        return сountFlats == that.сountFlats && Arrays.equals(flats, that.flats);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(сountFlats);
+        result = 31 * result + Arrays.hashCode(flats);
+        return result;
+    }
 }

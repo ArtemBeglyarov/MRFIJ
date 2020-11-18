@@ -8,6 +8,7 @@ import Task3.Space;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class Dwelling implements Building, Serializable {
@@ -27,10 +28,7 @@ public class Dwelling implements Building, Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return "Dwelling(" + countFloor + ", " + Arrays.toString(floors) + ')';
-    }
+
 
     public Dwelling(Floor[] floors) {
         this.floors = floors;
@@ -233,6 +231,26 @@ public class Dwelling implements Building, Serializable {
 
         }
         return sort;
+    }
+    @Override
+    public String toString() {
+        return "Dwelling(" + countFloor + ", " + Arrays.toString(floors) + ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dwelling dwelling = (Dwelling) o;
+        return countFloor == dwelling.countFloor &&
+                Arrays.equals(floors, dwelling.floors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(countFloor);
+        result = 31 * result + Arrays.hashCode(floors);
+        return result;
     }
 }
 

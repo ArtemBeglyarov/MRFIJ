@@ -5,13 +5,11 @@ import Task3.InvalidSpaceAreaException;
 import Task3.Space;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Office implements Space, Serializable {
 
-    @Override
-    public String toString() {
-        return "Office(" +  room +','+ area + ')';
-    }
+
     @Override
     public  int getClassID() {
         return 200;
@@ -66,6 +64,23 @@ public class Office implements Space, Serializable {
             throw new InvalidRoomsCountException("incorrect Room \n area must be greater than 0");
         }
         this.room = room;
+    }
+    @Override
+    public String toString() {
+        return "Office(" +  room +','+ area + ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Office office = (Office) o;
+        return Double.compare(office.area, area) == 0 && room == office.room;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(area, room);
     }
 }
 

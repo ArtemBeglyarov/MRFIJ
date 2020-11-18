@@ -8,6 +8,7 @@ import Task3.Space;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class OfficeBuilding implements Building, Serializable {
 
@@ -91,10 +92,7 @@ public class OfficeBuilding implements Building, Serializable {
         countFloor--;
     }
 
-    @Override
-    public String toString() {
-        return "OfficeBuilding(" + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
-    }
+
 
     public OfficeBuilding(Floor[] floor) {
         head = new Node(floor[0], null, null);
@@ -347,6 +345,25 @@ public class OfficeBuilding implements Building, Serializable {
         return sort;
 
 
+    }
+    @Override
+    public String toString() {
+        return "OfficeBuilding(" + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OfficeBuilding that = (OfficeBuilding) o;
+        return countFloor == that.countFloor &&
+                Objects.equals(head, that.head) &&
+                Objects.equals(prev, that.prev);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, countFloor, prev);
     }
 }
 
