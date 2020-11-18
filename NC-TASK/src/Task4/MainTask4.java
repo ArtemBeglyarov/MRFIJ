@@ -6,20 +6,70 @@ import Task2.buildings.DwellingFloor;
 import Task2.buildings.Flat;
 import Task3.Floor;
 import Task3.Space;
+import Task3.Building;
 import Task3.buildings.Office;
 import Task3.buildings.OfficeBuilding;
 import Task3.buildings.OfficeFloor;
-import Task3.Building;
 
 import java.io.*;
-
-import java.util.Scanner;
-import java.util.SortedMap;
 
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
 
+        testPlacementExchanger_checkExchangeSpace();
+        testPlacementExchanger_checkExchangeFloor();
+        testPlacementExchanger_exchangeFloorRooms();
+        testPlacementExchanger_exchangeBuildingFloors();
+
+//        System.out.println(dwelling.toString());
+
+//        Building dwelling = new OfficeBuilding(floors);
+//        System.out.println(dwelling.toString());
+//        System.out.println(floor.toString());
+
+//        String filePath = ".\\test.txt";
+//        try (DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(filePath));
+//             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filePath))) {
+//
+//            Buildings.outputBuilding(dwelling, outputStream);
+//
+//
+//            Building resultBuildinwg = Buildings.inputBuilding(dataInputStream);
+//            System.out.println(resultBuilding);
+//        }
+
+//
+//        try (OutputStreamWriter out = new OutputStreamWriter(System.out);
+//             InputStreamReader in = new InputStreamReader(System.in)) {
+//
+//            Buildings.writeBuilding(dwelling, out);
+//            Building build =  Buildings.readBuilding(in);
+//            System.out.println(build.toString());
+//        }
+//
+//
+//        try (FileOutputStream out = new FileOutputStream("buildings.txt");
+//             FileInputStream in = new FileInputStream("buildings.txt");) {
+//
+//            Buildings.serializeBuilding(dwelling, out);
+//            Building bui = Buildings.deserializeBuilding(in);
+//
+//            System.out.println(dwelling.toString());
+//            System.out.println(bui.toString());
+//        }
+//        try (OutputStreamWriter out = new OutputStreamWriter(System.out)) {
+//
+//            Buildings.writeBuildingFormat(dwelling, out);
+//        }
+//        try (Scanner scanner = new Scanner(System.in)) {
+//
+//            Building buildScan = Buildings.readBuilding(scanner);
+//            System.out.println(buildScan.toString());
+//        }
+    }
+
+    private static Building createDwelling() {
         Space office1 = new Flat(1, 10);
         Space office2 = new Flat(2, 20);
 
@@ -33,36 +83,115 @@ public class MainTask4 {
 
         Floor[] floors = {floor, floor1};
 
-        Building building = new Dwelling(floors);
-//        System.out.println(building.toString());
+        return new Dwelling(floors);
 
-//        Building building = new OfficeBuilding(floors);
-//        System.out.println(building.toString());
-//        System.out.println(floor.toString());
+    }
 
-//        String filePath = ".\\test.txt";
-//
-//        DataOutputStream out = new DataOutputStream(new FileOutputStream(filePath));
-//        Buildings.outputBuilding(building, out);
-//        out.close();
-//
-//
-//        Building resultBuilding = Buildings.inputBuilding(new DataInputStream(new FileInputStream(filePath)));
-//        System.out.println(resultBuilding);
-////
-//
-//
-//        Buildings.writeBuilding(building, new OutputStreamWriter(System.out));
-//        Buildings.readBuilding(new InputStreamReader(System.in));
-//
-//
-//        Buildings.serializeBuilding(building, new FileOutputStream("buildings.txt"));
-//        System.out.println(building.toString());
-//        Building bui = Buildings.deserializeBuilding(new FileInputStream("buildings.txt"));
-//        System.out.println(bui.toString());
-//
-//        Buildings.writeBuildingFormat(building, new OutputStreamWriter(System.out));
+    private static Building createOfficeBuilding() {
+        Space office1 = new Office(1, 10);
+        Space office2 = new Office(2, 20);
+
+
+        Space office6 = new Office(5, 50);
+        Space office7 = new Office(4, 40);
+
+
+        Floor floor = new OfficeFloor(new Space[]{office1, office2});
+        Floor floor1 = new OfficeFloor(new Space[]{office6, office7});
+
+        Floor[] floors = {floor, floor1};
+
+        return new OfficeBuilding(floors);
+    }
+
+    private static void testPlacementExchanger_checkExchangeSpace() {
+        Building dwelling = createDwelling();
+        Building officeBuilding = createOfficeBuilding();
+
+        officeBuilding.getFloorByNum(1).toString();
+
+        if (PlacementExchanger.checkExchangeSpace(dwelling.getSpaceByNum(1),
+                officeBuilding.getSpaceByNum(1))) {
+            System.out.println("checkExchangeSpace positive ok");
+        } else {
+            System.out.println("checkExchangeSpace positive error");
+        }
+
+        if (PlacementExchanger.checkExchangeSpace(dwelling.getSpaceByNum(1),
+                officeBuilding.getSpaceByNum(2))) {
+            System.out.println("checkExchangeSpace negative error");
+        } else {
+            System.out.println("checkExchangeSpace negative ok");
+        }
 
 
     }
+
+    private static void testPlacementExchanger_checkExchangeFloor() {
+        Building dwelling = createDwelling();
+        Building officeBuilding = createOfficeBuilding();
+
+        officeBuilding.getFloorByNum(1).toString();
+
+        if (PlacementExchanger.checkExchangeFloor(dwelling.getFloorByNum(1),
+                officeBuilding.getFloorByNum(1))) {
+            System.out.println("checkExchangeFloor positive ok");
+        } else {
+            System.out.println("checkExchangeFloor positive error");
+        }
+
+        if (PlacementExchanger.checkExchangeFloor(dwelling.getFloorByNum(1),
+                officeBuilding.getFloorByNum(2))) {
+            System.out.println("checkExchangeFloor negative error");
+        } else {
+            System.out.println("checkExchangeFloor negative ok");
+        }
+    }
+
+    private static void testPlacementExchanger_exchangeFloorRooms() {
+        Building dwelling = createDwelling();
+        Building officeBuilding = createOfficeBuilding();
+
+        try {
+            Floor floorByNum = dwelling.getFloorByNum(1);
+            Floor floorByNum1 = officeBuilding.getFloorByNum(1);
+            PlacementExchanger.exchangeFloorRooms(floorByNum, 1, floorByNum1, 1);
+            //корректное поведение
+            System.out.println("testPlacementExchanger_exchangeFloorRooms positive ok");
+        } catch (InexchangeableSpacesException e) {
+            System.out.println("testPlacementExchanger_exchangeFloorRooms positive error");
+        }
+
+        try {
+            PlacementExchanger.exchangeFloorRooms(dwelling.getFloorByNum(1), 1, officeBuilding.getFloorByNum(2), 1);
+            //некорректное поведение
+            System.out.println("testPlacementExchanger_exchangeFloorRooms negative error");
+        } catch (InexchangeableSpacesException e) {
+            System.out.println("testPlacementExchanger_exchangeFloorRooms negative ok");
+        }
+    }
+
+    private static void testPlacementExchanger_exchangeBuildingFloors() {
+        Building dwelling = createDwelling();
+        Building officeBuilding = createOfficeBuilding();
+
+        try {
+
+            PlacementExchanger.exchangeBuildingFloors(dwelling, 1, officeBuilding, 1);
+            //корректное поведение
+            System.out.println("testPlacementExchanger_exchangeFloorRooms positive ok");
+        } catch (InexchangeableFloorsException e) {
+            System.out.println("testPlacementExchanger_exchangeFloorRooms positive error");
+        }
+
+        try {
+            PlacementExchanger.exchangeBuildingFloors(dwelling, 1, officeBuilding, 2
+            );
+            //некорректное поведение
+            System.out.println("testPlacementExchanger_exchangeFloorRooms negative error");
+        } catch (InexchangeableFloorsException e) {
+            System.out.println("testPlacementExchanger_exchangeFloorRooms negative ok");
+        }
+    }
+
 }

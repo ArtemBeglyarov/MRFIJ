@@ -93,7 +93,7 @@ public class OfficeBuilding implements Building, Serializable {
 
     @Override
     public String toString() {
-        return "OfficeBuilding(" +getCountFloor()+", "+ Arrays.toString(getArrayFloors())+ ')';
+        return "OfficeBuilding(" + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
     }
 
     public OfficeBuilding(Floor[] floor) {
@@ -137,10 +137,9 @@ public class OfficeBuilding implements Building, Serializable {
     }
 
     @Override
-    public  int getClassID() {
+    public int getClassID() {
         return 220;
     }
-
 
 
     @Override
@@ -218,20 +217,16 @@ public class OfficeBuilding implements Building, Serializable {
         if (spaceNum <= 0 & spaceNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The office doesn't exist");
         }
-        Node current = head;
+        Node currentNode = head;
         int counter = 0;
         for (int i = 0; i < countFloor; i++) {
-            current = current.next;
-            for (int j = 0; j < current.floor.getCountSpaceOnFloor(); j++) {
-                current.floor.getSpaceByNum(j);
-
-                counter++;
-
-                if (counter == spaceNum) {
-                    return current.floor.getSpaceByNum(j);
+            Floor currentFloor = currentNode.floor;
+            for (int j = 1; j < currentFloor.getCountSpaceOnFloor(); j++) {
+                if (counter++ == spaceNum - 1) {
+                    return currentFloor.getSpaceByNum(j);
                 }
             }
-
+            currentNode = currentNode.next;
         }
         return null;
     }

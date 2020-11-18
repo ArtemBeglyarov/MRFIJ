@@ -84,31 +84,58 @@ public class Buildings {
     }
 
     public static void writeBuilding(Building building, Writer out) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(out);
-        bufferedWriter.write(convertStr(building));
-        bufferedWriter.write(" " + building.getClassID());
-        bufferedWriter.close();
+
+
+        out.write(building.getClassID()+" ");
+        out.write(convertStr(building));
+
+
     }
 
     public static Building readBuilding(Reader in) throws IOException {
         StreamTokenizer tokenizer = new StreamTokenizer(in);
-        Floor[] floors = new Floor[tokenizer.nextToken()];
 
-        for (int i = 1; i <= floors.length; i++) {
-            Space[] spaces = new Space[tokenizer.nextToken()];
+        tokenizer.nextToken();
+        int classID =(int)tokenizer.nval;
 
-            for (int j = 1; j <= spaces.length; j++) {
-                spaces[j].setRoom(tokenizer.nextToken());
-                spaces[j].setArea(tokenizer.nextToken());
+        if (classID == 120) {
+            tokenizer.nextToken();
+            Floor[] floors = new Floor[(int)tokenizer.nval];
+
+            for (int i = 0; i < floors.length; i++) {
+                tokenizer.nextToken();
+                Space[] spaces = new Space[(int)tokenizer.nval];
+
+                for (int j = 0; j < spaces.length; j++) {
+                    tokenizer.nextToken();
+                    int rooms =(int)tokenizer.nval;
+                    tokenizer.nextToken();
+                    double area = tokenizer.nval;
+                    spaces[j] = new Flat(rooms,area);
+                }
+                floors[i] = new DwellingFloor(spaces);
             }
-        }
-        if (tokenizer.nextToken() == 120) {
             return new Dwelling(floors);
         }
-        if (tokenizer.nextToken() == 220) {
+        if (classID == 220) {
+            tokenizer.nextToken();
+            Floor[] floors = new Floor[(int)tokenizer.nval];
+
+            for (int i = 0; i < floors.length; i++) {
+                tokenizer.nextToken();
+                Space[] spaces = new Space[(int)tokenizer.nval];
+
+                for (int j = 0; j < spaces.length; j++) {
+                    tokenizer.nextToken();
+                    int rooms = (int)tokenizer.nval;
+                    tokenizer.nextToken();
+                    double area = tokenizer.nval;
+                    spaces[j] = new Office(rooms,area);
+                }
+                floors[i] = new OfficeFloor(spaces);
+            }
             return new OfficeBuilding(floors);
         }
-
         return null;
     }
 
@@ -151,9 +178,9 @@ public class Buildings {
     public static void writeBuildingFormat(Building building, Writer out) {
         PrintWriter printWriter = new PrintWriter(out);
         int floorCount = building.getCountFloor();
+        printWriter.printf("%d ", building.getClassID());
         printWriter.printf("%d ", floorCount);
         for (int i = 1; i <= floorCount; i++) {
-
             int spaceCount = building.getFloorByNum(i).getCountSpaceOnFloor();
 
             printWriter.printf("%d ", spaceCount);
@@ -168,26 +195,47 @@ public class Buildings {
         printWriter.close();
     }
 
-    public static void writerBuildingFormat(Scanner scanner, Writer out) {
-        PrintWriter printWriter = new PrintWriter(out);
-        Scanner scanner1 = new Scanner(System.in);
-        scanner.useDelimiter(" ");
-        Floor[] floors = new Floor[scanner.nextInt()];
 
-        for (int i = 0; i <= floors.length; i++) {
-            Space[] spaces = new Space[scanner.nextInt()];
+    public static Building readBuilding(Scanner scanner) throws IOException {
+        int counter = 0;
+        String scan = scanner.nextLine();
+        String[] strings = scan.split(" ");
+        int classID = Integer.parseInt(strings[counter++]);
 
-            for (int j = 1; j <= spaces.length; j++) {
+        if (classID == 120) {
 
-                spaces[j].setRoom(scanner.nextInt());
-                spaces[j].setArea(scanner.nextDouble());
+
+            Floor[] floors = new Floor[Integer.parseInt(strings[counter++])];
+
+            for (int i = 0; i < floors.length; i++) {
+                Space[] spaces = new Space[Integer.parseInt(strings[counter++])];
+
+                for (int j = 0; j < spaces.length; j++) {
+                    int rooms = Integer.parseInt(strings[counter++]);
+                    double area = Double.parseDouble(strings[counter++]);
+                    spaces[j] = new Flat(rooms, area);
+                }
+                floors[i] = new DwellingFloor(spaces);
             }
+            return new Dwelling(floors);
         }
-        if (scanner.nextInt() == 120) {
-            new Dwelling(floors);
+        if (classID == 220) {
+            Floor[] floors = new Floor[Integer.parseInt(strings[counter++])];
+
+            for (int i = 0; i < floors.length; i++) {
+                Space[] spaces = new Space[Integer.parseInt(strings[counter++])];
+
+                for (int j = 0; j < spaces.length; j++) {
+                    int rooms = Integer.parseInt(strings[counter++]);
+                    double area = Double.parseDouble(strings[counter++]);
+                    spaces[j] = new Office(rooms, area);
+                }
+                floors[i] = new OfficeFloor(spaces);
+            }
+            return new OfficeBuilding(floors);
         }
-        if (scanner.nextInt() == 220) {
-            new OfficeBuilding(floors);
-        }
+
+        return null;
     }
+
 }

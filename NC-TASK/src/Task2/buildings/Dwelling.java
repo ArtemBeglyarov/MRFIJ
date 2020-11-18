@@ -112,9 +112,7 @@ public class Dwelling implements Building, Serializable {
         for (int i = 0; i < this.floors.length; i++) {
             for (int k = 0; k < this.floors[i].getArrayFloor().length; k++) {
 
-                counter++;
-
-                if (counter == spaceNum - 1) {
+                if (counter++ == spaceNum - 1) {
                     return this.floors[i].getArrayFloor()[k];
 
                 }

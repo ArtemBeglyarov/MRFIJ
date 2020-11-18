@@ -9,21 +9,15 @@ public class PlacementExchanger {
 
 
     public static boolean checkExchangeSpace(Space firstSpace, Space secondSpace) {
-        if (firstSpace.getArea() == secondSpace.getArea() && firstSpace.getRoom() == secondSpace.getRoom()) {
-            return true;
-        }
-        return false;
+        return firstSpace.getArea() == secondSpace.getArea() && firstSpace.getRoom() == secondSpace.getRoom();
     }
 
     public static boolean checkExchangeFloor(Floor firstFloor, Floor secondFloor) {
-        if (firstFloor.getSumFloorArea() == secondFloor.getSumFloorArea() && firstFloor.getSumFloorRoom() == secondFloor.getSumFloorRoom()) {
-            return true;
-        }
-        return false;
+        return firstFloor.getSumFloorArea() == secondFloor.getSumFloorArea() && firstFloor.getSumFloorRoom() == secondFloor.getSumFloorRoom();
     }
 
     public static void exchangeFloorRooms(Floor floor1, int index1, Floor floor2, int index2) throws InexchangeableSpacesException {
-        if (checkExchangeSpace(floor1.getSpaceByNum(index1), floor2.getSpaceByNum(index2)) == false) {
+        if (!checkExchangeSpace(floor1.getSpaceByNum(index1), floor2.getSpaceByNum(index2))) {
             throw new InexchangeableSpacesException("the space do not correspond to the exchange");
         }
         if (index1 <= 0 & index1 > floor1.getCountSpaceOnFloor() && index2 <= 0 & index2 > floor2.getCountSpaceOnFloor()) {
@@ -41,7 +35,7 @@ public class PlacementExchanger {
 
     public static void exchangeBuildingFloors(Building building1, int index1, Building building2, int index2) throws InexchangeableFloorsException {
 
-        if (checkExchangeFloor(building1.getFloorByNum(index1), building2.getFloorByNum(index2)) == false){
+        if (!checkExchangeFloor(building1.getFloorByNum(index1), building2.getFloorByNum(index2))){
             throw new InexchangeableFloorsException("the floor do not correspond to the exchange");
         }
         if (index1 <= 0 & index1 > building1.getCountFloor() && index2 <= 0 & index2 > building2.getCountFloor()) {

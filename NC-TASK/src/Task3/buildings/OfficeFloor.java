@@ -100,19 +100,16 @@ public class OfficeFloor implements Floor, Serializable {
     }
 
     public OfficeFloor(Space[] offices) {   //конструктор принимает массив
-        countOffices = 0;
         head = new Node(offices[0], null);
         head.next = head;
-        countOffices = 1;
         Node current = head;
 
         for (int i = 1; i < offices.length; i++) {
             Node node = new Node(offices[i], head);
             current.next = node;
             current = node;
-            countOffices++;
-
         }
+        countOffices = offices.length;
     }
     @Override
     public int getCountSpaceOnFloor() { //получение количествао офисов на этаже
@@ -150,9 +147,8 @@ public class OfficeFloor implements Floor, Serializable {
         Space[] offices = new Space[countOffices];
         Node current = head;
         for (int i = 0; i < offices.length; i++) {
-            current = current.next;
             offices[i] = current.office;
-
+            current = current.next;
         }
         return offices;
     }
@@ -162,7 +158,7 @@ public class OfficeFloor implements Floor, Serializable {
             throw new SpaceIndexOutOfBoundsException("this Office number does not exist");
         }
         Node current = head;
-        for (int i = 0; i < spaceNum; i++) {
+        for (int i = 1; i < spaceNum; i++) {
             current = current.next;
         }
         return current.office;
