@@ -6,10 +6,8 @@ import Task3.InvalidSpaceAreaException;
 import Task3.Space;
 
 import java.io.Serializable;
-import java.util.Objects;
 
-public class Flat implements Space, Serializable {
-
+public class Flat implements Space, Serializable, Cloneable {
 
 
     private static final int AREA_DEFAULT = 50;
@@ -19,7 +17,7 @@ public class Flat implements Space, Serializable {
     private int room;
 
     @Override
-    public  int getClassID() {
+    public int getClassID() {
         return 100;
     }
 
@@ -61,21 +59,23 @@ public class Flat implements Space, Serializable {
         }
         this.area = area;
     }
+
     @Override
     public int getRoom() {
         return room;
     }
 
-     @Override
-     public void setRoom(int room) {
+    @Override
+    public void setRoom(int room) {
         if (room <= 0 & room > 5) {
             throw new InvalidRoomsCountException("incorrect Room \n area must be greater than 0");
         }
         this.room = room;
     }
+
     @Override
     public String toString() {
-        return "Flat(" +  room +','+ area + ')';
+        return "Flat(" + room + ',' + area + ')';
     }
 
     @Override
@@ -86,8 +86,28 @@ public class Flat implements Space, Serializable {
         return Double.compare(flat.area, area) == 0 && room == flat.room;
     }
 
-    @Override
-    public int hashCode() {
+//    @Override
+//    public int hashCode() {
+//       String a = Integer.toBinaryString(room);
+//       int b = Integer.parseInt(a);
+//
+//       String bc =Integer.toBinaryString(b);
+//
+//      String c = a^bc;
+//
+//    }
 
+    @Override
+    public Object clone() {
+
+        Space cloneFlat = null;
+        try {
+            cloneFlat =(Space) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        }
+        return cloneFlat;
     }
 }
+
+

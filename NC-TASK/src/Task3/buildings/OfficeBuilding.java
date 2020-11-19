@@ -5,12 +5,13 @@ import Task3.Building;
 import Task3.Floor;
 import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
+import com.sun.jdi.InternalException;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class OfficeBuilding implements Building, Serializable {
+public class OfficeBuilding implements Building, Serializable, Cloneable {
 
     public static class Node implements Serializable {
 
@@ -91,7 +92,6 @@ public class OfficeBuilding implements Building, Serializable {
         }
         countFloor--;
     }
-
 
 
     public OfficeBuilding(Floor[] floor) {
@@ -346,6 +346,7 @@ public class OfficeBuilding implements Building, Serializable {
 
 
     }
+
     @Override
     public String toString() {
         return "OfficeBuilding(" + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
@@ -358,15 +359,34 @@ public class OfficeBuilding implements Building, Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         OfficeBuilding that = (OfficeBuilding) o;
 
-            for (int i = 0; i <countFloor ; i++) {
-                if(!this.getArrayFloors()[i].equals(((OfficeBuilding) o).getArrayFloors()[i])) return false;
-            }
-            return true;
+        for (int i = 0; i < countFloor; i++) {
+            if (!this.getArrayFloors()[i].equals(((OfficeBuilding) o).getArrayFloors()[i])) return false;
         }
+        return true;
+    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(head, countFloor, prev);
+        int result = Objects.hash(countFloor);
+        result = 31 * result + Arrays.hashCode(getArrayFloors());
+        return result;
+    }
+
+    @Override
+    public Object clone() {
+        Building cloneBuilding = null;
+        try {
+            cloneBuilding = (Building) super.clone();
+            for (int i = 0; i < cloneBuilding.getCountFloor(); i++) {
+                cloneBuilding.setFloor(i, (Floor) cloneBuilding.getFloorByNum(i).clone());
+                for (int j = 0; j < cloneBuilding.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
+                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(),j);
+                }
+            }
+        } catch (CloneNotSupportedException e) {
+            throw new InternalException();
+        }
+        return cloneBuilding;
     }
 }
 

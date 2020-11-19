@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class DwellingFloor implements Floor, Serializable {
+public class DwellingFloor implements Floor, Serializable, Cloneable {
 
     private Space[] flats;
 
@@ -188,4 +188,17 @@ public class DwellingFloor implements Floor, Serializable {
         result = 31 * result + Arrays.hashCode(flats);
         return result;
     }
+    public Object clone() {
+        Floor cloneFloor = null;
+        try {
+            cloneFloor = (Floor) super.clone();
+            for (int i = 1; i <cloneFloor.getCountSpaceOnFloor() ; i++) {
+                cloneFloor.setSpaceFloor((Space) cloneFloor.getSpaceByNum(i).clone(),i);
+            }
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        }
+        return cloneFloor;
+    }
+
 }

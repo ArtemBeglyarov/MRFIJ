@@ -7,7 +7,7 @@ import Task3.Space;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Office implements Space, Serializable {
+public class Office implements Space, Serializable,Cloneable {
 
 
     @Override
@@ -81,6 +81,17 @@ public class Office implements Space, Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(area, room);
+    }
+
+    @Override
+    public Object clone()  {
+       Space cloneSpace = null;
+        try {
+            cloneSpace =  (Space) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        }
+        return cloneSpace;
     }
 }
 

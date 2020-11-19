@@ -11,4 +11,6 @@ public interface Space {
     void setRoom(int room);
 
     int getClassID();
+
+    public Object clone();
 }

@@ -22,4 +22,6 @@ public interface Floor {
 
     Space getBestSpace();
 
+    public Object clone();
+
 }

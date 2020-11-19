@@ -5,13 +5,14 @@ import Task3.Building;
 import Task3.Floor;
 import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
+import com.sun.jdi.InternalException;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
 
-public class Dwelling implements Building, Serializable {
+public class Dwelling implements Building, Serializable,Cloneable {
 
     private int countFloor;
     private Floor[] floors;
@@ -251,6 +252,23 @@ public class Dwelling implements Building, Serializable {
         int result = Objects.hash(countFloor);
         result = 31 * result + Arrays.hashCode(floors);
         return result;
+    }
+
+    @Override
+    public Object clone() {
+        Building cloneBuilding = null;
+        try {
+            cloneBuilding = (Building) super.clone();
+            for (int i = 1; i < cloneBuilding.getCountFloor(); i++) {
+                cloneBuilding.setFloor(i, (Floor) cloneBuilding.getFloorByNum(i).clone());
+                for (int j = 1; j < cloneBuilding.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
+                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(),j);
+                }
+            }
+        } catch (CloneNotSupportedException e) {
+            throw new InternalException();
+        }
+        return cloneBuilding;
     }
 }
 

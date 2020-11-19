@@ -30,4 +30,6 @@ public interface Building {
     Space getBestSpace();
 
     Space[] getSortSpaceArray();
+
+    public Object clone();
 }

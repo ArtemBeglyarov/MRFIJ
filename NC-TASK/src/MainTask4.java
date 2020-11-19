@@ -13,13 +13,17 @@ import Task4.PlacementExchanger;
 
 import java.io.*;
 import java.sql.SQLOutput;
-
+import java.util.function.LongToDoubleFunction;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
 
         createDwelling();
         createOfficeBuilding();
+
+        Dwelling dwelling = (Dwelling) createDwelling().clone();
+
+
 
 //        testPlacementExchanger_checkExchangeSpace();
 //        testPlacementExchanger_checkExchangeFloor();
@@ -78,6 +82,15 @@ public class MainTask4 {
         Space flat1 = new Flat(1, 10);
         Space flat2 = new Flat(2, 20);
 
+
+        long temp = Double.doubleToLongBits(flat1.getArea());
+        int temp1 = Integer.bitCount(flat1.getRoom());
+        int temp3 = 31* temp1+ (int)(temp^(temp>>32));
+
+        System.out.println(temp3);
+
+
+
         Space flat3 = new Flat(5, 50);
         Space flat4 = new Flat(4, 40);
 
@@ -85,6 +98,7 @@ public class MainTask4 {
         Floor floor1 = new DwellingFloor(new Space[]{flat3, flat4});
 
         Floor[] floors = {floor, floor1};
+        System.out.println(floor.hashCode() +"1111");
 
         Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
         System.out.println(floor.equals(testFloor));
@@ -96,6 +110,8 @@ public class MainTask4 {
         Building buildingtest = new Dwelling(floors);
 
         System.out.println(building.equals(buildingtest));
+
+
         return new Dwelling(floors);
 
 
@@ -110,7 +126,7 @@ public class MainTask4 {
 
         Floor floor = new OfficeFloor(new Space[]{office1, office2});
         Floor floor1 = new OfficeFloor(new Space[]{office6, office7});
-
+        System.out.println( floor.hashCode()+ " hashCode");
         Floor[] floors = {floor, floor1};
 
 
@@ -120,7 +136,6 @@ public class MainTask4 {
 
         Space testOffice = new Office(1, 10);
         System.out.println(office1.equals(testOffice));
-
 
 
         Building building = new OfficeBuilding(floors);

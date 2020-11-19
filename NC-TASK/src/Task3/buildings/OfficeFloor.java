@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class OfficeFloor implements Floor, Serializable {
+public class OfficeFloor implements Floor, Serializable, Cloneable {
 
     public static class Node implements Serializable {
 
@@ -242,6 +242,23 @@ public class OfficeFloor implements Floor, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(head, countOffices);
+        int result = Objects.hash(countOffices);
+        result = 31 * result + Arrays.hashCode(getArrayFloor());
+        return result;
     }
+
+    @Override
+    public Object clone() {
+        Floor cloneFloor = null;
+        try {
+            cloneFloor = (Floor) super.clone();
+            for (int i = 1; i <cloneFloor.getCountSpaceOnFloor() ; i++) {
+            cloneFloor.setSpaceFloor((Space) cloneFloor.getSpaceByNum(i).clone(),i);
+            }
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        }
+    return cloneFloor;
+    }
+
 }
