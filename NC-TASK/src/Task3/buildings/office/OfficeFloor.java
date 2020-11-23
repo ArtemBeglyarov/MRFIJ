@@ -247,18 +247,30 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
         return result;
     }
 
+
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Object clone() {
-        Floor cloneFloor = null;
-        try {
-            cloneFloor = (Floor) super.clone();
-            for (int i = 1; i <cloneFloor.getCountSpaceOnFloor() ; i++) {
-            cloneFloor.setSpaceFloor((Space) cloneFloor.getSpaceByNum(i).clone(),i);
-            }
-        } catch (CloneNotSupportedException e) {
-            throw new InternalError();
-        }
-    return cloneFloor;
-    }
+        Space[] array = new Space[countOffices];
 
+        for (int i = 1; i <= countOffices; i++) {
+            array[i] = (Space) getSpaceByNum(i).clone();
+        }
+
+        return new OfficeFloor(array);
+    }
+//    @Override
+//    public Object clone() throws CloneNotSupportedException {
+//        OfficeFloor clone = (OfficeFloor) super.clone();
+//
+//        clone.head = new Node((Space) getSpaceByNum(1).clone(), null);
+//        clone.head.next = head;
+//        Node current = clone.head;
+//
+//        for (int i = 2; i <= countOffices; i++) {
+//            current.next = new Node((Space) getSpaceByNum(i).clone(), clone.head);
+//        }
+//
+//        return clone;
+//    }
 }
