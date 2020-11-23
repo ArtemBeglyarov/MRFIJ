@@ -1,19 +1,17 @@
-import Task2.buildings.Dwelling;
-import Task2.buildings.DwellingFloor;
-import Task2.buildings.Flat;
+import Task3.buildings.dwelings.Dwelling;
+import Task3.buildings.dwelings.DwellingFloor;
+import Task3.buildings.dwelings.Flat;
 import Task3.Floor;
 import Task3.Space;
 import Task3.Building;
-import Task3.buildings.Office;
-import Task3.buildings.OfficeBuilding;
-import Task3.buildings.OfficeFloor;
+import Task3.buildings.office.Office;
+import Task3.buildings.office.OfficeBuilding;
+import Task3.buildings.office.OfficeFloor;
 import Task4.InexchangeableFloorsException;
 import Task4.InexchangeableSpacesException;
 import Task4.PlacementExchanger;
 
 import java.io.*;
-import java.sql.SQLOutput;
-import java.util.function.LongToDoubleFunction;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {

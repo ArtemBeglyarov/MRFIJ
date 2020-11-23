@@ -1,52 +1,57 @@
-package Task3.buildings;
+package Task3.buildings.dwelings;
+
 
 import Task3.InvalidRoomsCountException;
 import Task3.InvalidSpaceAreaException;
 import Task3.Space;
 
 import java.io.Serializable;
-import java.util.Objects;
 
-public class Office implements Space, Serializable,Cloneable {
+public class Flat implements Space, Serializable, Cloneable {
 
 
-    @Override
-    public  int getClassID() {
-        return 200;
-    }
-
-    private static final int DEFAULT_AREA = 250;
-    private static final int DEFAULT_ROOM =1;
+    private static final int AREA_DEFAULT = 50;
+    private static final int ROOM_DEFAULT = 2;
 
     private double area;
     private int room;
 
-    public Office() {
-        this.area =DEFAULT_AREA;
-        this.room =DEFAULT_ROOM;
-
+    @Override
+    public int getClassID() {
+        return 100;
     }
-    public Office(double area)  {
+
+    public Flat() {
+        this.area = AREA_DEFAULT;
+        this.room = ROOM_DEFAULT;
+    }
+
+    public Flat(double area) {
         if (area <= 0) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
-        this.area=area;
-        this.room=1;
+        room = 1;
+        this.area = area;
+
     }
-    public Office(int room, double area) {
+
+    public Flat(int room, double area) {
         if (area <= 0 & area > 200) {
             throw new InvalidSpaceAreaException("incorrect Area \n area must be greater than 0");
         }
         if (room <= 0 & room > 5) {
             throw new InvalidRoomsCountException("incorrect Room \n area must be greater than 0");
         }
-        this.room=room;
-        this.area=area;
+        this.room = room;
+        this.area = area;
+
     }
+
     @Override
     public double getArea() {
         return area;
     }
+
     @Override
     public void setArea(double area) {
         if (area <= 0 & area > 200) {
@@ -54,10 +59,12 @@ public class Office implements Space, Serializable,Cloneable {
         }
         this.area = area;
     }
+
     @Override
     public int getRoom() {
         return room;
     }
+
     @Override
     public void setRoom(int room) {
         if (room <= 0 & room > 5) {
@@ -65,33 +72,41 @@ public class Office implements Space, Serializable,Cloneable {
         }
         this.room = room;
     }
+
     @Override
     public String toString() {
-        return "Office(" +  room +','+ area + ')';
+        return "Flat(" + room + ',' + area + ')';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Office office = (Office) o;
-        return Double.compare(office.area, area) == 0 && room == office.room;
+        Flat flat = (Flat) o;
+        return Double.compare(flat.area, area) == 0 && room == flat.room;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(area, room);
-    }
+//    @Override
+//    public int hashCode() {
+//       String a = Integer.toBinaryString(room);
+//       int b = Integer.parseInt(a);
+//
+//       String bc =Integer.toBinaryString(b);
+//
+//      String c = a^bc;
+//
+//    }
 
     @Override
-    public Object clone()  {
-       Space cloneSpace = null;
+    public Object clone() {
+
+        Space cloneFlat = null;
         try {
-            cloneSpace =  (Space) super.clone();
+            cloneFlat =(Space) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new InternalError();
         }
-        return cloneSpace;
+        return cloneFlat;
     }
 }
 

@@ -1,4 +1,4 @@
-package Task2.buildings;
+package Task3.buildings.dwelings;
 
 import Task3.Floor;
 import Task3.Space;

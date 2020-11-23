@@ -1,4 +1,4 @@
-package Task3.buildings;
+package Task3.buildings.office;
 
 
 import Task3.Building;
