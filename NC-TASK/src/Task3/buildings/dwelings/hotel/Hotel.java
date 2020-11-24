@@ -4,6 +4,8 @@ import Task3.Floor;
 import Task3.Space;
 import Task3.buildings.dwelings.Dwelling;
 
+import java.util.Arrays;
+
 public class Hotel extends Dwelling {
 
     public Hotel(int floorNum) {
@@ -27,17 +29,22 @@ public class Hotel extends Dwelling {
     }
     public Space getBestSpace() {
         double bestSpace = 0;
-        Space best = null;
+        Space bestCoeff = null;
         double[] coeff= {0.25,0.5,1,1.25,1.5,};
-        for (int i = 0; i < g; i++) {
-            if (.getArea()*coeff[getStars()-1] >= bestSpace) {
-                best = this.floors[i].getBestSpace();
-                bestSpace = this.floors[i].getBestSpace().getArea();
+        for (int i = 0; i <getAllSpace(); i++) {
+            Space currentArea = getSortSpaceArray()[i];
+            if (currentArea.getArea() *coeff[getStars()-1] >= bestSpace) {
+                bestCoeff =currentArea;
+                bestSpace =currentArea.getArea();
 
             }
 
         }
+        return bestCoeff;
+    }
 
-        return best;
+    @Override
+    public String toString() {
+            return "Hotel("+ getStars()+", " + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
     }
 }

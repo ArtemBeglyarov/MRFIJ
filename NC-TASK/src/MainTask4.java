@@ -4,6 +4,8 @@ import Task3.buildings.dwelings.Flat;
 import Task3.Floor;
 import Task3.Space;
 import Task3.Building;
+import Task3.buildings.dwelings.hotel.Hotel;
+import Task3.buildings.dwelings.hotel.HotelFloor;
 import Task3.buildings.office.Office;
 import Task3.buildings.office.OfficeBuilding;
 import Task3.buildings.office.OfficeFloor;
@@ -20,6 +22,7 @@ public class MainTask4 {
         createOfficeBuilding();
 
         Dwelling dwelling = (Dwelling) createDwelling().clone();
+        
 
 
 
@@ -108,6 +111,15 @@ public class MainTask4 {
         Building buildingtest = new Dwelling(floors);
 
         System.out.println(building.equals(buildingtest));
+
+
+        HotelFloor hotelFloor = new HotelFloor(new Space[]{flat1, flat2});
+        HotelFloor hotelFloor1 = new HotelFloor(new Space[]{flat3, flat4});
+
+        Hotel hotel = new Hotel(new HotelFloor[]{hotelFloor,hotelFloor1});
+        hotel.getFloorByNum(1).getSpaceByNum(1);
+        System.out.println("hotel@ - "+  hotel.toString());
+
 
 
         return new Dwelling(floors);

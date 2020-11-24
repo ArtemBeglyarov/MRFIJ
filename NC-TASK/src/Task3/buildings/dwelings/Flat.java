@@ -85,17 +85,18 @@ public class Flat implements Space, Serializable, Cloneable {
         Flat flat = (Flat) o;
         return Double.compare(flat.area, area) == 0 && room == flat.room;
     }
+    @Override
+    public int hashCode() {
+        long temp = Double.doubleToLongBits(area);
+        String strArea = Long.toBinaryString(temp);
+        int areaBit = Integer.parseInt(strArea.substring(0,8));
 
-//    @Override
-//    public int hashCode() {
-//       String a = Integer.toBinaryString(room);
-//       int b = Integer.parseInt(a);
-//
-//       String bc =Integer.toBinaryString(b);
-//
-//      String c = a^bc;
-//
-//    }
+        String strRoom = Integer.toBinaryString(room);
+        int roomBit= Integer.parseInt(strRoom);
+
+        int result = areaBit^roomBit;
+        return result;
+    }
 
     @Override
     public Object clone() {

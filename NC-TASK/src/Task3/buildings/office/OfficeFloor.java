@@ -8,6 +8,7 @@ import Task3.SpaceIndexOutOfBoundsException;
 import java.io.Serializable;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class OfficeFloor implements Floor, Serializable, Cloneable {
@@ -28,8 +29,8 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Node node = (Node) o;
-         if(!this.office.equals(((Node) o).office)) return false;
-         return true;
+            if (!this.office.equals(((Node) o).office)) return false;
+            return true;
         }
 
         @Override
@@ -220,6 +221,11 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
     }
 
     @Override
+    Iterator<Floor> iterator() {
+
+    }
+
+    @Override
     public String toString() {
         return "OfficeFloor(" + countOffices + ", " + Arrays.toString(getArrayFloor()) + ')';
     }
@@ -231,8 +237,9 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
         if (o == null || getClass() != o.getClass()) return false;
 
         if (this.countOffices != ((OfficeFloor) o).countOffices) return false;
-        for (int i = 0; i <countOffices ; i++) {
-           if (!this.getArrayFloor()[i].equals(((OfficeFloor) o).getArrayFloor()[i])) return false; }
+        for (int i = 0; i < countOffices; i++) {
+            if (!this.getArrayFloor()[i].equals(((OfficeFloor) o).getArrayFloor()[i])) return false;
+        }
 //
 //        }
 

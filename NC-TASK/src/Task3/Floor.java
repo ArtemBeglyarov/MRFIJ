@@ -1,5 +1,8 @@
 package Task3;
 
+
+import java.util.Iterator;
+
 public interface Floor {
 
     int getClassID();
@@ -23,5 +26,7 @@ public interface Floor {
     Space getBestSpace();
 
     public Object clone();
+    
+    Iterator<Floor> iterator();
 
 }

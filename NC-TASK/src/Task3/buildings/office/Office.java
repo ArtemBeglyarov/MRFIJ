@@ -80,7 +80,15 @@ public class Office implements Space, Serializable,Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(area, room);
+        long temp = Double.doubleToLongBits(area);
+        String strArea = Long.toBinaryString(temp);
+        int areaBit = Integer.parseInt(strArea.substring(0,8));
+
+        String strRoom = Integer.toBinaryString(room);
+        int roomBit= Integer.parseInt(strRoom);
+
+        int result = areaBit^roomBit;
+        return result;
     }
 
     @Override
