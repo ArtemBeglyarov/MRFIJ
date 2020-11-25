@@ -6,6 +6,7 @@ import Task3.SpaceIndexOutOfBoundsException;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 
@@ -13,14 +14,14 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
 
     private Space[] flats;
 
-    private int сountFlats;
+    private int countFlats;
 
 
-    public DwellingFloor(int spaceNum)  {  //конструктор принимает колличесво
+    public DwellingFloor(int spaceNum) {  //конструктор принимает колличесво
         if (spaceNum <= 0) {
             throw new SpaceIndexOutOfBoundsException("incorrect flats number \n flats number must be greater than 0");
         }
-        this.сountFlats = spaceNum;
+        this.countFlats = spaceNum;
         this.flats = new Space[spaceNum];
 
         for (int i = 0; i < this.flats.length; ++i) {
@@ -31,20 +32,20 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
 
     public DwellingFloor(Space[] flats) {  //конструктор принимает массив
         this.flats = flats;
-        this.сountFlats = flats.length;
+        this.countFlats = flats.length;
 
     }
 
 
     @Override
-    public  int getClassID() {
+    public int getClassID() {
         return 110;
     }
 
 
     @Override
     public int getCountSpaceOnFloor() { //получение количествао квартир на этаже
-        return сountFlats;
+        return countFlats;
     }
 
     @Override
@@ -121,7 +122,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
     }
 
     @Override
-    public void removeSpaceFloor(int spaceNum)  { //удаление офиса по номеру
+    public void removeSpaceFloor(int spaceNum) { //удаление офиса по номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("The flat doesn't exist");
         }
@@ -142,14 +143,14 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
 
         }
 
-        сountFlats -= 1;
+        countFlats -= 1;
         this.flats = flats;
 
     }
 
 
     @Override
-    public void addSpaceNumber(Space addSpace, int spaceNum)  { //добавление офиса оп номеру
+    public void addSpaceNumber(Space addSpace, int spaceNum) { //добавление офиса оп номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
             throw new SpaceIndexOutOfBoundsException("this flat number does not exist");
         }
@@ -169,9 +170,14 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
         }
 
     }
+
+    public Iterator<Space> iterator() {
+        return new DwellingFloorIterator();
+    }
+
     @Override
     public String toString() {
-        return "DwellingFloor(" + getCountSpaceOnFloor()+", "+ Arrays.toString(flats) + ')';
+        return "DwellingFloor(" + getCountSpaceOnFloor() + ", " + Arrays.toString(flats) + ')';
     }
 
     @Override
@@ -179,26 +185,46 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DwellingFloor that = (DwellingFloor) o;
-        return сountFlats == that.сountFlats && Arrays.equals(flats, that.flats);
+        return countFlats == that.countFlats && Arrays.equals(flats, that.flats);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(сountFlats);
+        int result = Objects.hash(countFlats);
         result = 31 * result + Arrays.hashCode(flats);
         return result;
     }
+
     public Object clone() {
         Floor cloneFloor = null;
         try {
             cloneFloor = (Floor) super.clone();
-            for (int i = 1; i <cloneFloor.getCountSpaceOnFloor() ; i++) {
-                cloneFloor.setSpaceFloor((Space) cloneFloor.getSpaceByNum(i).clone(),i);
+            for (int i = 1; i < cloneFloor.getCountSpaceOnFloor(); i++) {
+                cloneFloor.setSpaceFloor((Space) cloneFloor.getSpaceByNum(i).clone(), i);
             }
         } catch (CloneNotSupportedException e) {
             throw new InternalError();
         }
         return cloneFloor;
+    }
+
+    public class DwellingFloorIterator implements Iterator<Space> {
+        Space[] floor = getArrayFloor();
+        int position = 0;
+
+        @Override
+        public boolean hasNext() {
+            if (position >= floor.length || floor[position] == null) return false;
+            return true;
+        }
+
+        @Override
+        public Space next() {
+            Space temp = floor[position];
+            position++;
+            return temp;
+
+        }
     }
 
 }

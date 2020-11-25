@@ -221,8 +221,8 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
     }
 
     @Override
-    Iterator<Floor> iterator() {
-
+    public Iterator<Space> iterator() {
+        return null;
     }
 
     @Override

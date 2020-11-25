@@ -27,6 +27,6 @@ public interface Floor {
 
     public Object clone();
     
-    Iterator<Floor> iterator();
+    Iterator<Space> iterator();
 
 }

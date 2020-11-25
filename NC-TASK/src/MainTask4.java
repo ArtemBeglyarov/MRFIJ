@@ -17,13 +17,16 @@ import java.io.*;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
+        for (DwellingFloor.DwellingFloorIterator dwellingFloorIterator : )
 
+
+    }
+
+    private static void lab4_5() {
         createDwelling();
         createOfficeBuilding();
 
         Dwelling dwelling = (Dwelling) createDwelling().clone();
-        
-
 
 
 //        testPlacementExchanger_checkExchangeSpace();
@@ -78,7 +81,6 @@ public class MainTask4 {
 //        }
     }
 
-
     private static Building createDwelling() {
         Space flat1 = new Flat(1, 10);
         Space flat2 = new Flat(2, 20);
@@ -86,10 +88,9 @@ public class MainTask4 {
 
         long temp = Double.doubleToLongBits(flat1.getArea());
         int temp1 = Integer.bitCount(flat1.getRoom());
-        int temp3 = 31* temp1+ (int)(temp^(temp>>32));
+        int temp3 = 31 * temp1 + (int) (temp ^ (temp >> 32));
 
         System.out.println(temp3);
-
 
 
         Space flat3 = new Flat(5, 50);
@@ -99,7 +100,7 @@ public class MainTask4 {
         Floor floor1 = new DwellingFloor(new Space[]{flat3, flat4});
 
         Floor[] floors = {floor, floor1};
-        System.out.println(floor.hashCode() +"1111");
+        System.out.println(floor.hashCode() + "1111");
 
         Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
         System.out.println(floor.equals(testFloor));
@@ -116,10 +117,9 @@ public class MainTask4 {
         HotelFloor hotelFloor = new HotelFloor(new Space[]{flat1, flat2});
         HotelFloor hotelFloor1 = new HotelFloor(new Space[]{flat3, flat4});
 
-        Hotel hotel = new Hotel(new HotelFloor[]{hotelFloor,hotelFloor1});
+        Hotel hotel = new Hotel(new HotelFloor[]{hotelFloor, hotelFloor1});
         hotel.getFloorByNum(1).getSpaceByNum(1);
-        System.out.println("hotel@ - "+  hotel.toString());
-
+        System.out.println("hotel@ - " + hotel.toString());
 
 
         return new Dwelling(floors);
@@ -136,7 +136,7 @@ public class MainTask4 {
 
         Floor floor = new OfficeFloor(new Space[]{office1, office2});
         Floor floor1 = new OfficeFloor(new Space[]{office6, office7});
-        System.out.println( floor.hashCode()+ " hashCode");
+        System.out.println(floor.hashCode() + " hashCode");
         Floor[] floors = {floor, floor1};
 
 
