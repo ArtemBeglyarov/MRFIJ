@@ -148,7 +148,6 @@ public class Dwelling implements Building, Serializable,Cloneable {
                 if (spaceNum > floors[i].getArrayFloor().length) {
                     spaceNum -= floors[i].getArrayFloor().length;
                     break;
-
                 }
                 if (spaceNum < floors[i].getArrayFloor().length) {
                     floors[i].addSpaceNumber(addFlat, i);

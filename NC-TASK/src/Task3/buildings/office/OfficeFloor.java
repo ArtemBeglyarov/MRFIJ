@@ -240,8 +240,6 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
         for (int i = 0; i < countOffices; i++) {
             if (!this.getArrayFloor()[i].equals(((OfficeFloor) o).getArrayFloor()[i])) return false;
         }
-//
-//        }
 
         return true;
     }

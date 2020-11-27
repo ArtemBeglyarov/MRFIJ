@@ -25,7 +25,7 @@ public interface Floor {
 
     Space getBestSpace();
 
-    public Object clone();
+    Object clone();
     
     Iterator<Space> iterator();
 

@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 
-public class DwellingFloor implements Floor, Serializable, Cloneable {
+public class DwellingFloor implements Floor, Serializable, Cloneable,Iterable<Space> {
 
     private Space[] flats;
 
@@ -148,7 +148,6 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
 
     }
 
-
     @Override
     public void addSpaceNumber(Space addSpace, int spaceNum) { //добавление офиса оп номеру
         if (spaceNum <= 0 & spaceNum > getCountSpaceOnFloor()) {
@@ -172,8 +171,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
     }
 
     public Iterator<Space> iterator() {
-        return new DwellingFloorIterator();
-    }
+        return new DwellingFloorIterator(); }
 
     @Override
     public String toString() {
@@ -209,22 +207,25 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
     }
 
     public class DwellingFloorIterator implements Iterator<Space> {
-        Space[] floor = getArrayFloor();
+        Space[] spaces = getArrayFloor();
         int position = 0;
+
 
         @Override
         public boolean hasNext() {
-            if (position >= floor.length || floor[position] == null) return false;
+
+            if (position >= spaces.length || spaces[position] == null) return false;
             return true;
         }
 
         @Override
         public Space next() {
-            Space temp = floor[position];
-            position++;
+            Space temp = spaces[position];
+            this.position++;
             return temp;
 
         }
     }
+
 
 }

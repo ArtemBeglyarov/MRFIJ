@@ -56,6 +56,7 @@ public class HotelFloor extends DwellingFloor {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), stars);
+        int hash = Arrays.hashCode(getArrayFloor())^getStars();
+        return hash;
     }
 }

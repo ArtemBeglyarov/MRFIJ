@@ -17,7 +17,21 @@ import java.io.*;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
-        for (DwellingFloor.DwellingFloorIterator dwellingFloorIterator : )
+        Space flat1 = new Flat(1, 10);
+        Space flat2 = new Flat(2, 20);
+
+
+
+
+        Floor floor = new DwellingFloor(new Space[]{flat1, flat2});
+
+
+
+        DwellingFloor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
+
+       for (Space space : testFloor) {
+            System.out.println(space.toString());
+        }
 
 
     }
@@ -85,12 +99,6 @@ public class MainTask4 {
         Space flat1 = new Flat(1, 10);
         Space flat2 = new Flat(2, 20);
 
-
-        long temp = Double.doubleToLongBits(flat1.getArea());
-        int temp1 = Integer.bitCount(flat1.getRoom());
-        int temp3 = 31 * temp1 + (int) (temp ^ (temp >> 32));
-
-        System.out.println(temp3);
 
 
         Space flat3 = new Flat(5, 50);

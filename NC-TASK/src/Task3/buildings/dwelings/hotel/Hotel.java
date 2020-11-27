@@ -27,6 +27,8 @@ public class Hotel extends Dwelling {
         }
         return result;
     }
+
+
     public Space getBestSpace() {
         double bestSpace = 0;
         Space bestCoeff = null;
@@ -43,8 +45,24 @@ public class Hotel extends Dwelling {
         return bestCoeff;
     }
 
+
     @Override
     public String toString() {
             return "Hotel("+ getStars()+", " + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = Arrays.hashCode(getArrayFloors())^getCountFloor();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Hotel that = (Hotel) o;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return getCountFloor() == ((Hotel) o).getCountFloor() && Arrays.equals(getArrayFloors(),((Hotel) o).getArrayFloors());
+
     }
 }
