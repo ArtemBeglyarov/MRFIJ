@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 
-public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<Space> {
+public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<Space>,Comparable<Floor> {
 
     private Space[] flats;
 
@@ -33,15 +33,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
     public DwellingFloor(Space[] flats) {  //конструктор принимает массив
         this.flats = flats;
         this.countFlats = flats.length;
-
     }
-
-
-    @Override
-    public int getClassID() {
-        return 110;
-    }
-
 
     @Override
     public int getCountSpaceOnFloor() { //получение количествао квартир на этаже
@@ -172,6 +164,17 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
 
     public Iterator<Space> iterator() {
         return new DwellingFloorIterator();
+    }
+
+
+    @Override
+    public int compareTo(Floor o) {
+        if (getCountSpaceOnFloor() > o.getCountSpaceOnFloor()) {
+            return -1;
+        } else if (getCountSpaceOnFloor() < o.getCountSpaceOnFloor()) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override

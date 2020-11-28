@@ -53,12 +53,6 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
     }
 
     @Override
-    public int getClassID() {
-        return 120;
-    }
-
-
-    @Override
     public int getAllSpace() {                     //получение количесва квартир
 
         int allSpace = 0;
@@ -228,8 +222,6 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
                     sort[j + 1] = current;
                 }
             }
-
-
         }
         return sort;
     }

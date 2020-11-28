@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 public interface Building extends Iterable<Floor>{
 
-    int getClassID();
 
     int getCountFloor();
 

@@ -7,13 +7,8 @@ import Task3.Space;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Office implements Space, Serializable,Cloneable {
+public class Office implements Space, Serializable,Cloneable,Comparable<Space> {
 
-
-    @Override
-    public  int getClassID() {
-        return 200;
-    }
 
     private static final int DEFAULT_AREA = 250;
     private static final int DEFAULT_ROOM =1;
@@ -65,6 +60,16 @@ public class Office implements Space, Serializable,Cloneable {
         }
         this.room = room;
     }
+    @Override
+    public int compareTo(Space o) {
+        if (getArea() < o.getArea()) {
+            return 1;
+        } else if (getArea() > o.getArea()) {
+            return -1;
+        }
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "Office(" +  room +','+ area + ')';

@@ -136,12 +136,6 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
     }
 
     @Override
-    public int getClassID() {
-        return 220;
-    }
-
-
-    @Override
     public void setFloor(int floorNum, Floor floor) {
         if (floorNum <= 0 & floorNum > getCountFloor()) {
             throw new FloorIndexOutIfBoundsException("The floor doesn't exist");
@@ -351,6 +345,7 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
     public Iterator<Floor> iterator() {
         return new OfficeBuildingIterator();
     }
+
 
     @Override
     public String toString() {

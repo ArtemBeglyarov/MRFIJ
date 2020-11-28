@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Space> {
+public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Space>,Comparable<Floor> {
 
     public static class Node implements Serializable {
 
@@ -129,11 +129,6 @@ public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Spa
     }
 
     @Override
-    public int getClassID() {
-        return 210;
-    }
-
-    @Override
     public double getSumFloorArea() { //получение общей площади этажа
         int floorArea = 0;
         Node current = head;
@@ -223,6 +218,16 @@ public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Spa
     @Override
     public Iterator<Space> iterator() {
         return new OfficeFloorIterator();
+    }
+
+    @Override
+    public int compareTo(Floor o) {
+        if (getCountSpaceOnFloor() > o.getCountSpaceOnFloor()) {
+            return -1;
+        } else if (getCountSpaceOnFloor() < o.getCountSpaceOnFloor()) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override

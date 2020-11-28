@@ -11,8 +11,6 @@ public interface Space extends Comparable<Space> {
 
     void setRoom(int room);
 
-    int getClassID();
-
     Object clone();
 
     int compareTo (Space o);

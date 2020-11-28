@@ -7,7 +7,7 @@ import Task3.Space;
 
 import java.io.Serializable;
 
-public class Flat implements Space, Serializable, Cloneable {
+public class Flat implements Space, Serializable, Cloneable, Comparable<Space> {
 
 
     private static final int AREA_DEFAULT = 50;
@@ -16,10 +16,7 @@ public class Flat implements Space, Serializable, Cloneable {
     private double area;
     private int room;
 
-    @Override
-    public int getClassID() {
-        return 100;
-    }
+
 
     public Flat() {
         this.area = AREA_DEFAULT;
@@ -74,6 +71,16 @@ public class Flat implements Space, Serializable, Cloneable {
     }
 
     @Override
+    public int compareTo(Space o) {
+        if (getArea() < o.getArea()) {
+            return 1;
+        } else if (getArea() > o.getArea()) {
+            return -1;
+        }
+        return 0;
+    }
+
+    @Override
     public String toString() {
         return "Flat(" + room + ',' + area + ')';
     }
@@ -85,16 +92,17 @@ public class Flat implements Space, Serializable, Cloneable {
         Flat flat = (Flat) o;
         return Double.compare(flat.area, area) == 0 && room == flat.room;
     }
+
     @Override
     public int hashCode() {
         long temp = Double.doubleToLongBits(area);
         String strArea = Long.toBinaryString(temp);
-        int areaBit = Integer.parseInt(strArea.substring(0,8));
+        int areaBit = Integer.parseInt(strArea.substring(0, 8));
 
         String strRoom = Integer.toBinaryString(room);
-        int roomBit= Integer.parseInt(strRoom);
+        int roomBit = Integer.parseInt(strRoom);
 
-        int result = areaBit^roomBit;
+        int result = areaBit ^ roomBit;
         return result;
     }
 
@@ -103,7 +111,7 @@ public class Flat implements Space, Serializable, Cloneable {
 
         Space cloneFlat = null;
         try {
-            cloneFlat =(Space) super.clone();
+            cloneFlat = (Space) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new InternalError();
         }
