@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class OfficeFloor implements Floor, Serializable, Cloneable {
+public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Space> {
 
     public static class Node implements Serializable {
 
@@ -222,7 +222,7 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
 
     @Override
     public Iterator<Space> iterator() {
-        return null;
+        return new OfficeFloorIterator();
     }
 
     @Override
@@ -264,7 +264,8 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
 
         return new OfficeFloor(array);
     }
-//    @Override
+
+    //    @Override
 //    public Object clone() throws CloneNotSupportedException {
 //        OfficeFloor clone = (OfficeFloor) super.clone();
 //
@@ -278,4 +279,24 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
 //
 //        return clone;
 //    }
+    public class OfficeFloorIterator implements Iterator<Space> {
+        Node current = head;
+        int position = 0;
+
+        @Override
+        public boolean hasNext() {
+
+            if (position >= countOffices || current == null || current.office == null) return false;
+            return true;
+        }
+
+        @Override
+        public Space next() {
+            for (int i = 1; i < countOffices; i++) {
+                current = current.next;
+                position++;
+            }
+            return current.office;
+        }
+    }
 }

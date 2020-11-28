@@ -17,23 +17,52 @@ import java.io.*;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
+        lab_6_Iter();
+
+
+    }
+
+    private static void lab_6_Iter() {
         Space flat1 = new Flat(1, 10);
         Space flat2 = new Flat(2, 20);
+        Space flat3 = new Flat(5, 50);
+        Space flat4 = new Flat(4, 40);
 
-
-
+        Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
 
         Floor floor = new DwellingFloor(new Space[]{flat1, flat2});
+        Floor floor1 = new DwellingFloor(new Space[]{flat3, flat4});
+
+        Building building = new Dwelling(new Floor[]{floor,floor1});
+
+        for (Space space : testFloor) {
+             System.out.println(space.toString());
+         }
+        System.out.println();
+
+        for (Floor flr : building) {
+            System.out.println(flr.toString());
+        }
+        System.out.println();
+
+        Space office6 = new Office(5, 50);
+        Space office7 = new Office(4, 40);
+        Space office1 = new Office(1, 10);
+        Space office2 = new Office(2, 20);
 
 
+        Floor officeFloor = new OfficeFloor(new Space[]{office6, office7});
+        Floor  officeFloor1 = new OfficeFloor(new Space[]{office1, office2});
 
-        DwellingFloor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
-
-       for (Space space : testFloor) {
+        for (Space space : officeFloor) {
             System.out.println(space.toString());
         }
+        System.out.println();
 
-
+        Building building1 = new OfficeBuilding(new Floor[]{officeFloor,officeFloor1});
+        for (Floor flr2 : building1) {
+            System.out.println(flr2.toString());
+        }
     }
 
     private static void lab4_5() {

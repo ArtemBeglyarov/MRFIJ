@@ -101,6 +101,7 @@ public class Office implements Space, Serializable,Cloneable {
         }
         return cloneSpace;
     }
+
 }
 
 

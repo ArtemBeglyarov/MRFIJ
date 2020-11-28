@@ -9,10 +9,11 @@ import com.sun.jdi.InternalException;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 
-public class Dwelling implements Building, Serializable,Cloneable {
+public class Dwelling implements Building, Serializable, Cloneable, Iterable<Floor> {
 
     private int countFloor;
     private Floor[] floors;
@@ -30,14 +31,14 @@ public class Dwelling implements Building, Serializable,Cloneable {
     }
 
 
-
     public Dwelling(Floor[] floors) {
         this.floors = floors;
         this.countFloor = floors.length;
     }
+
     public void setFloor(int floorNum, Floor floor) { // изменение этажа в здании
-        for (int i = 0; i <floors.length ; i++) {
-            if (i == floorNum -1) {
+        for (int i = 0; i < floors.length; i++) {
+            if (i == floorNum - 1) {
                 floors[i] = floor;
                 break;
             }
@@ -52,7 +53,7 @@ public class Dwelling implements Building, Serializable,Cloneable {
     }
 
     @Override
-    public  int getClassID() {
+    public int getClassID() {
         return 120;
     }
 
@@ -232,6 +233,11 @@ public class Dwelling implements Building, Serializable,Cloneable {
         }
         return sort;
     }
+
+    public Iterator<Floor> iterator() {
+        return new DwellingIterator();
+    }
+
     @Override
     public String toString() {
         return "Dwelling(" + countFloor + ", " + Arrays.toString(floors) + ')';
@@ -261,13 +267,31 @@ public class Dwelling implements Building, Serializable,Cloneable {
             for (int i = 1; i < cloneBuilding.getCountFloor(); i++) {
                 cloneBuilding.setFloor(i, (Floor) cloneBuilding.getFloorByNum(i).clone());
                 for (int j = 1; j < cloneBuilding.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(),j);
+                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(), j);
                 }
             }
         } catch (CloneNotSupportedException e) {
             throw new InternalException();
         }
         return cloneBuilding;
+    }
+
+    public class DwellingIterator implements Iterator<Floor> {
+        Floor[] floors = getArrayFloors();
+        int position = 0;
+
+        @Override
+        public boolean hasNext() {
+            if (position >= floors.length || floors[position] == null) return false;
+            return true;
+        }
+
+        @Override
+        public Floor next() {
+            Floor temp = floors[position];
+            position++;
+            return temp;
+        }
     }
 }
 

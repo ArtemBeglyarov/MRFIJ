@@ -9,9 +9,10 @@ import com.sun.jdi.InternalException;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
-public class OfficeBuilding implements Building, Serializable, Cloneable {
+public class OfficeBuilding implements Building, Serializable, Cloneable, Iterable<Floor> {
 
     public static class Node implements Serializable {
 
@@ -347,6 +348,10 @@ public class OfficeBuilding implements Building, Serializable, Cloneable {
 
     }
 
+    public Iterator<Floor> iterator() {
+        return new OfficeBuildingIterator();
+    }
+
     @Override
     public String toString() {
         return "OfficeBuilding(" + getCountFloor() + ", " + Arrays.toString(getArrayFloors()) + ')';
@@ -380,7 +385,7 @@ public class OfficeBuilding implements Building, Serializable, Cloneable {
             for (int i = 0; i < cloneBuilding.getCountFloor(); i++) {
                 cloneBuilding.setFloor(i, (Floor) cloneBuilding.getFloorByNum(i).clone());
                 for (int j = 0; j < cloneBuilding.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(),j);
+                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(), j);
                 }
             }
         } catch (CloneNotSupportedException e) {
@@ -388,5 +393,29 @@ public class OfficeBuilding implements Building, Serializable, Cloneable {
         }
         return cloneBuilding;
     }
+
+    public class OfficeBuildingIterator implements Iterator<Floor> {
+
+       Node current = head;
+        int position = 0;
+
+        @Override
+        public boolean hasNext() {
+
+            if (position >=countFloor|| current == null || current.floor == null) return false;
+            return true;
+        }
+
+        @Override
+        public Floor next() {
+            for (int i = 1; i < countFloor;  i++) {
+                current = current.next;
+                position++;
+            }
+            return current.floor;
+        }
+    }
 }
+
+
 

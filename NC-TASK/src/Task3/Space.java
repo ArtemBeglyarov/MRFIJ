@@ -1,6 +1,7 @@
 package Task3;
 
-public interface Space {
+
+public interface Space extends Comparable<Space> {
 
     double getArea();
 
@@ -12,5 +13,7 @@ public interface Space {
 
     int getClassID();
 
-    public Object clone();
+    Object clone();
+
+    int compareTo (Space o);
 }

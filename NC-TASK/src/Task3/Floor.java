@@ -3,7 +3,7 @@ package Task3;
 
 import java.util.Iterator;
 
-public interface Floor {
+public interface Floor extends Iterable<Space>{
 
     int getClassID();
 

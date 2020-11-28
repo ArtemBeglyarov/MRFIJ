@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 
-public class DwellingFloor implements Floor, Serializable, Cloneable,Iterable<Space> {
+public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<Space> {
 
     private Space[] flats;
 
@@ -171,7 +171,8 @@ public class DwellingFloor implements Floor, Serializable, Cloneable,Iterable<Sp
     }
 
     public Iterator<Space> iterator() {
-        return new DwellingFloorIterator(); }
+        return new DwellingFloorIterator();
+    }
 
     @Override
     public String toString() {
@@ -194,7 +195,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable,Iterable<Sp
     }
 
     public Object clone() {
-        Floor cloneFloor = null;
+        Floor cloneFloor;
         try {
             cloneFloor = (Floor) super.clone();
             for (int i = 1; i < cloneFloor.getCountSpaceOnFloor(); i++) {
@@ -221,7 +222,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable,Iterable<Sp
         @Override
         public Space next() {
             Space temp = spaces[position];
-            this.position++;
+            position++;
             return temp;
 
         }

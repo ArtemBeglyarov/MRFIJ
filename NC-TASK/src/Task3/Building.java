@@ -1,7 +1,9 @@
 package Task3;
 
 
-public interface Building {
+import java.util.Iterator;
+
+public interface Building extends Iterable<Floor>{
 
     int getClassID();
 
@@ -31,5 +33,6 @@ public interface Building {
 
     Space[] getSortSpaceArray();
 
-    public Object clone();
+     Object clone();
+     Iterator<Floor> iterator();
 }
