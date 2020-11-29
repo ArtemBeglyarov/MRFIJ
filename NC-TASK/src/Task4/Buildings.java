@@ -6,9 +6,8 @@ import Task3.buildings.dwelings.Flat;
 import Task3.Building;
 import Task3.Floor;
 import Task3.Space;
-import Task3.buildings.office.Office;
-import Task3.buildings.office.OfficeBuilding;
-import Task3.buildings.office.OfficeFloor;
+import Task6.BuildingFactory;
+import Task6.DwellingFactory;
 
 import java.io.*;
 import java.util.Comparator;
@@ -162,12 +161,66 @@ public class Buildings {
 
     }
 
-    public static <Floor> void sortArraysAsc(Floor[] floors, Comparator<Floor> comparator) {
-        for (int i = 0; i < floors.length - 1; i++) {
+    public static <T extends Comparable<T>> void sortArrayAsc(T[] objects)  {
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 1; i < objects.length; i++) {
+                if (objects[i].compareTo(objects[i - 1])<0) {
+                    isSorted = false;
 
-
+                    T current = objects[i];
+                    objects[i] = objects[i - 1];
+                    objects[i - 1] = current;
+                }
+            }
         }
+    }
+    public static <T> void sortArrayDesc(T[] objects, Comparator<T>  comparator) {
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 1; i < objects.length; i++) {
+                if (comparator.compare(objects[i], objects[i - 1]) > 0) {
+                    isSorted = false;
 
+                    T current = objects[i];
+                    objects[i] = objects[i - 1];
+                    objects[i - 1] = current;
+                }
+            }
+        }
+    }
+
+
+    public static BuildingFactory buildingFactory = new DwellingFactory();
+
+    public static void setBuildingFactory(BuildingFactory buildingFactory) {
+        Buildings.buildingFactory = buildingFactory;
+    }
+
+    public Space createSpace(double area) {
+        return buildingFactory.createSpace(area);
+    }
+
+    public Space createSpace(int roomsCount, double area) {
+        return buildingFactory.createSpace(roomsCount, area);
+    }
+
+    public Floor createFloor(int spacesCount) {
+        return buildingFactory.createFloor(spacesCount);
+    }
+
+    public Floor createFloor(Space[] spaces) {
+        return buildingFactory.createFloor(spaces);
+    }
+
+    public Building createBuilding(int floorsCount) {
+        return buildingFactory.createBuilding(floorsCount);
+    }
+
+    public Building createBuilding(Floor[] floors) {
+        return buildingFactory.createBuilding(floors);
     }
 
 }

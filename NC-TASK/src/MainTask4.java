@@ -1,3 +1,4 @@
+import Task3.buildings.comparators.SpaceComparator;
 import Task3.buildings.dwelings.Dwelling;
 import Task3.buildings.dwelings.DwellingFloor;
 import Task3.buildings.dwelings.Flat;
@@ -9,11 +10,14 @@ import Task3.buildings.dwelings.hotel.HotelFloor;
 import Task3.buildings.office.Office;
 import Task3.buildings.office.OfficeBuilding;
 import Task3.buildings.office.OfficeFloor;
+import Task4.Buildings;
 import Task4.InexchangeableFloorsException;
 import Task4.InexchangeableSpacesException;
 import Task4.PlacementExchanger;
+import Task6.BuildingFactory;
 
 import java.io.*;
+import java.util.Comparator;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
@@ -23,46 +27,67 @@ public class MainTask4 {
     }
 
     private static void lab_6_Iter() {
-        Space flat1 = new Flat(1, 10);
-        Space flat2 = new Flat(2, 20);
-        Space flat3 = new Flat(5, 50);
-        Space flat4 = new Flat(4, 40);
+        Space flat1 = new Flat(1, 40);
+        Space flat2 = new Flat(2, 25);
+        Space flat3 = new Flat(5, 15);
+        Space flat4 = new Flat(4, 30);
+        Space flat5 = new Flat(4, 45);
+        Space flat6 = new Flat(4, 50);
+        Space flat7 = new Flat(4, 40);
+        Space flat8 = new Flat(4, 40);
 
         Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
 
-        Floor floor = new DwellingFloor(new Space[]{flat1, flat2});
-        Floor floor1 = new DwellingFloor(new Space[]{flat3, flat4});
+        Floor floor = new DwellingFloor(new Space[]{flat1, flat2,flat3,flat4,flat5,flat6});
+        Floor floor1 = new DwellingFloor(new Space[]{flat1, flat2,flat3});
+        Floor floor2 = new DwellingFloor(new Space[]{flat3, flat4});
+        Floor floor3 = new DwellingFloor(new Space[]{flat3, flat4});
 
-        Building building = new Dwelling(new Floor[]{floor,floor1});
-
-        for (Space space : testFloor) {
-             System.out.println(space.toString());
-         }
-        System.out.println();
-
-        for (Floor flr : building) {
-            System.out.println(flr.toString());
-        }
-        System.out.println();
-
-        Space office6 = new Office(5, 50);
-        Space office7 = new Office(4, 40);
-        Space office1 = new Office(1, 10);
-        Space office2 = new Office(2, 20);
+        SpaceComparator spaceComparator = new SpaceComparator();
 
 
-        Floor officeFloor = new OfficeFloor(new Space[]{office6, office7});
-        Floor  officeFloor1 = new OfficeFloor(new Space[]{office1, office2});
+        Buildings.sortArrayAsc(floor.getArrayFloor());
 
-        for (Space space : officeFloor) {
-            System.out.println(space.toString());
-        }
-        System.out.println();
 
-        Building building1 = new OfficeBuilding(new Floor[]{officeFloor,officeFloor1});
-        for (Floor flr2 : building1) {
-            System.out.println(flr2.toString());
-        }
+//
+//        Building building = new Dwelling(new Floor[]{floor,floor1});
+//
+//        for (Space space : testFloor) {
+//             System.out.println(space.toString());
+//         }
+//        System.out.println();
+//
+//        for (Floor flr : building) {
+//            System.out.println(flr.toString());
+//        }
+//        System.out.println();
+//
+//        Space office6 = new Office(5, 50);
+//        Space office7 = new Office(4, 40);
+//        Space office1 = new Office(1, 10);
+//        Space office2 = new Office(2, 20);
+//
+//
+//        Floor officeFloor = new OfficeFloor(new Space[]{office6, office7});
+//        Floor  officeFloor1 = new OfficeFloor(new Space[]{office1, office2});
+//
+//
+//        for (Space space : officeFloor) {
+//            System.out.println(space.toString());
+//        }
+//        System.out.println();
+//
+//        Building building1 = new OfficeBuilding(new Floor[]{officeFloor,officeFloor1});
+//        for (Floor flr2 : building1) {
+//            System.out.println(flr2.toString());
+//        }
+//
+//
+//
+//
+
+
+
     }
 
     private static void lab4_5() {
