@@ -10,6 +10,8 @@ import Task6.BuildingFactory;
 import Task6.DwellingFactory;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -199,28 +201,32 @@ public class Buildings {
         Buildings.buildingFactory = buildingFactory;
     }
 
-    public Space createSpace(double area) {
+    public static Space createSpace(double area) {
         return buildingFactory.createSpace(area);
     }
 
-    public Space createSpace(int roomsCount, double area) {
+    public static Space createSpace(int roomsCount, double area) {
         return buildingFactory.createSpace(roomsCount, area);
     }
 
-    public Floor createFloor(int spacesCount) {
+    public static Floor createFloor(int spacesCount) {
         return buildingFactory.createFloor(spacesCount);
     }
 
-    public Floor createFloor(Space[] spaces) {
+    public static  Floor createFloor(Space[] spaces) {
         return buildingFactory.createFloor(spaces);
     }
 
-    public Building createBuilding(int floorsCount) {
+    public static Building createBuilding(int floorsCount) {
         return buildingFactory.createBuilding(floorsCount);
     }
 
-    public Building createBuilding(Floor[] floors) {
+    public static Building createBuilding(Floor[] floors) {
         return buildingFactory.createBuilding(floors);
     }
 
+    public static Space createSpace(double area, Class<Space> spaceClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<Space> constructor = spaceClass.getConstructor(double.class);
+        return constructor.newInstance(area);
+    }
 }
