@@ -163,12 +163,12 @@ public class Buildings {
 
     }
 
-    public static <T extends Comparable<T>> void sortArrayAsc(T[] objects)  {
+    public static <T extends Comparable<T>> void sortArrayAsc(T[] objects) {
         boolean isSorted = false;
         while (!isSorted) {
             isSorted = true;
             for (int i = 1; i < objects.length; i++) {
-                if (objects[i].compareTo(objects[i - 1])<0) {
+                if (objects[i].compareTo(objects[i - 1]) < 0) {
                     isSorted = false;
 
                     T current = objects[i];
@@ -178,7 +178,8 @@ public class Buildings {
             }
         }
     }
-    public static <T> void sortArrayDesc(T[] objects, Comparator<T>  comparator) {
+
+    public static <T> void sortArrayDesc(T[] objects, Comparator<T> comparator) {
         boolean isSorted = false;
         while (!isSorted) {
             isSorted = true;
@@ -213,7 +214,7 @@ public class Buildings {
         return buildingFactory.createFloor(spacesCount);
     }
 
-    public static  Floor createFloor(Space[] spaces) {
+    public static Floor createFloor(Space[] spaces) {
         return buildingFactory.createFloor(spaces);
     }
 
@@ -228,5 +229,31 @@ public class Buildings {
     public static Space createSpace(double area, Class<Space> spaceClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<Space> constructor = spaceClass.getConstructor(double.class);
         return constructor.newInstance(area);
+    }
+
+    public static Space createSpace(int roomsCount, double area, Class<Space> spaceClass) throws  IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+            Constructor<Space> constructor = spaceClass.getConstructor(int.class, double.class);
+            return constructor.newInstance(roomsCount, area);
+
+    }
+    public static Floor createFloor(int spacesCount, Class<Floor> createFloor) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+        Constructor<Floor> constructor =createFloor.getConstructor(int.class);
+        return constructor.newInstance(spacesCount);
+    }
+
+    public static Floor createFloor(Space[] spaces, Class<Floor> createFloor) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<Floor> constructor =createFloor.getConstructor(Space.class);
+        return constructor.newInstance(spaces);
+    }
+
+    public static Building createBuilding(int floorsCount, Class<Building> createBuilding) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+        Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
+        return constructor.newInstance(floorsCount);
+    }
+
+    public static Building createBuilding(Floor[] floors, Class<Building> createBuilding) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
+        return constructor.newInstance(floors);
+
     }
 }
