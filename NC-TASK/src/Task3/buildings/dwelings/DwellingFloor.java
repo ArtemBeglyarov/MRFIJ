@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 
-public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<Space>,Comparable<Floor> {
+public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<Space>, Comparable<Floor> {
 
     private Space[] flats;
 
@@ -44,11 +44,11 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
     public double getSumFloorArea() { //получение общей площади на этаже
         int floorArea = 0;
 
-        for (int i = 0; i < this.flats.length; ++i) {
-            if (this.flats[i] == null) {
+        for (Space flat : this.flats) {
+            if (flat == null) {
                 continue;
             }
-            floorArea += this.flats[i].getArea();
+            floorArea += flat.getArea();
         }
 
         return floorArea;
@@ -58,11 +58,11 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
     public int getSumFloorRoom() { //получение всех комнат на этаже
         int floorRoom = 0;
 
-        for (int i = 0; i < this.flats.length; ++i) {
-            if (this.flats[i] == null) {
+        for (Space flat : this.flats) {
+            if (flat == null) {
                 continue;
             }
-            floorRoom += this.flats[i].getRoom();
+            floorRoom += flat.getRoom();
         }
 
         return floorRoom;
@@ -88,14 +88,14 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
         double best = 0;
         Space bestSpace = null;
 
-        for (int i = 0; i < this.flats.length; ++i) {
-            if (this.flats[i] == null) {
+        for (Space flat : this.flats) {
+            if (flat == null) {
                 continue;
             }
-            if (this.flats[i].getArea() >= best) {
+            if (flat.getArea() >= best) {
 
-                bestSpace = this.flats[i];
-                best = this.flats[i].getArea();
+                bestSpace = flat;
+                best = flat.getArea();
             }
 
 
@@ -162,6 +162,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
 
     }
 
+    @Override
     public Iterator<Space> iterator() {
         return new DwellingFloorIterator();
     }
@@ -196,7 +197,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
         result = 31 * result + Arrays.hashCode(flats);
         return result;
     }
-
+    @Override
     public Object clone() {
         Floor cloneFloor;
         try {
