@@ -3,7 +3,7 @@ package Task3;
 
 import java.util.Iterator;
 
-public interface Floor extends Iterable<Space>,Comparable<Floor>{
+public interface Floor extends Iterable<Space>,Comparable<Floor>,Cloneable{
 
     int getCountSpaceOnFloor();
 

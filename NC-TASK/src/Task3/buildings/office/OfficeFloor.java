@@ -258,7 +258,7 @@ public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Spa
     }
 
 
-    @SuppressWarnings("MethodDoesntCallSuperMethod")
+ @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Object clone() {
         Space[] array = new Space[countOffices];

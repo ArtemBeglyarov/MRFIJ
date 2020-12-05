@@ -138,7 +138,6 @@ public class Buildings {
                 printWriter.printf("%.1f ", space.getArea());
             }
         }
-        printWriter.close();
     }
 
 
@@ -226,9 +225,14 @@ public class Buildings {
         return buildingFactory.createBuilding(floors);
     }
 
-    public static Space createSpace(double area, Class<Space> spaceClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor<Space> constructor = spaceClass.getConstructor(double.class);
-        return constructor.newInstance(area);
+    public static Space createSpace(double area, Class<Space> spaceClass) {
+        try {
+            Constructor<Space> constructor = spaceClass.getConstructor(double.class);
+            return constructor.newInstance(area);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Space createSpace(int roomsCount, double area, Class<Space> spaceClass) throws  IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {

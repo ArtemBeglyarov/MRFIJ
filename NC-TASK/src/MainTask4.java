@@ -21,9 +21,12 @@ import java.util.Comparator;
 
 public class MainTask4 {
     public static void main(String[] args) throws IOException {
-        lab_6_Iter();
 
-
+        Space flat1 = new Flat(1, 40);
+        Space flat2 = new Flat(2, 25);
+        Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
+        Floor cloneFloor = (Floor) testFloor.clone();
+        System.out.println();
     }
 
     private static void lab_6_Iter() {
