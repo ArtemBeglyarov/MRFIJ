@@ -260,4 +260,49 @@ public class Buildings {
         return constructor.newInstance(floors);
 
     }
+
+
+    public static Building inputBuilding(InputStream in, Class<Space> spaceClass,Class <Floor> floorClass, Class<Building> buildingClass) throws IOException {
+        DataInputStream dis = new DataInputStream(in);
+
+        int floorsNumber = dis.readInt();
+        Floor[] floors = new Floor[floorsNumber];
+
+        for (int i = 0; i < floorsNumber; i++) {
+
+            int spaceNumber = dis.readInt();
+            Space[] spaces = new Space[spaceNumber];
+
+            for (int j = 0; j < spaces.length; j++) {
+                int rooms = dis.readInt();
+                double area = dis.readDouble();
+                spaces[j] = new Flat(rooms, area);
+
+            }
+            floors[i] = new DwellingFloor(spaces);
+        }
+        return new Dwelling(floors);
+    }
+    public static Building readBuilding(Reader in,  Class<Space> spaceClass,Class <Floor> floorClass, Class<Building> buildingClass) throws IOException {
+        StreamTokenizer tokenizer = new StreamTokenizer(in);
+
+        tokenizer.nextToken();
+        Floor[] floors = new Floor[(int) tokenizer.nval];
+
+        for (int i = 0; i < floors.length; i++) {
+            tokenizer.nextToken();
+            Space[] spaces = new Space[(int) tokenizer.nval];
+
+            for (int j = 0; j < spaces.length; j++) {
+                tokenizer.nextToken();
+                int rooms = (int) tokenizer.nval;
+                tokenizer.nextToken();
+                double area = tokenizer.nval;
+                spaces[j] = new Flat(rooms, area);
+            }
+            floors[i] = new DwellingFloor(spaces);
+        }
+        return new Dwelling(floors);
+
+    }
 }

@@ -56,9 +56,9 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
     public int getAllSpace() {                     //получение количесва квартир
 
         int allSpace = 0;
-        for (int i = 0; i < floors.length; i++) {
+        for (Floor floor : floors) {
 
-            allSpace += floors[i].getCountSpaceOnFloor();
+            allSpace += floor.getCountSpaceOnFloor();
 
         }
         return allSpace;
@@ -67,8 +67,8 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
     @Override
     public double getAllArea() {                //получение всей полощади квартир в доме
         double allArea = 0;
-        for (int i = 0; i < floors.length; i++) {
-            allArea += floors[i].getSumFloorArea();
+        for (Floor floor : floors) {
+            allArea += floor.getSumFloorArea();
         }
         return allArea;
     }
@@ -76,9 +76,9 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
     @Override
     public int getAllRoom() {                    //получение общего количесва  комнат в доме
         int allRoom = 0;
-        for (int i = 0; i < floors.length; i++) {
+        for (Floor floor : floors) {
 
-            allRoom += floors[i].getSumFloorRoom();
+            allRoom += floor.getSumFloorRoom();
         }
         return allRoom;
     }
@@ -226,6 +226,7 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
         return sort;
     }
 
+    @Override
     public Iterator<Floor> iterator() {
         return new DwellingIterator();
     }

@@ -342,6 +342,7 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
 
     }
 
+    @Override
     public Iterator<Floor> iterator() {
         return new OfficeBuildingIterator();
     }
@@ -391,19 +392,19 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
 
     public class OfficeBuildingIterator implements Iterator<Floor> {
 
-       Node current = head;
+        Node current = head;
         int position = 0;
 
         @Override
         public boolean hasNext() {
 
-            if (position >=countFloor|| current == null || current.floor == null) return false;
+            if (position >= countFloor || current == null || current.floor == null) return false;
             return true;
         }
 
         @Override
         public Floor next() {
-            for (int i = 1; i < countFloor;  i++) {
+            for (int i = 1; i < countFloor; i++) {
                 current = current.next;
                 position++;
             }

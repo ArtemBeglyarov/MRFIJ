@@ -109,7 +109,7 @@ public class Flat implements Space, Serializable, Cloneable, Comparable<Space> {
     @Override
     public Object clone() {
 
-        Space cloneFlat = null;
+        Space cloneFlat;
         try {
             cloneFlat = (Space) super.clone();
         } catch (CloneNotSupportedException e) {
