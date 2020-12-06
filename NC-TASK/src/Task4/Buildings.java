@@ -235,29 +235,54 @@ public class Buildings {
         }
     }
 
-    public static Space createSpace(int roomsCount, double area, Class<Space> spaceClass) throws  IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-            Constructor<Space> constructor = spaceClass.getConstructor(int.class, double.class);
-            return constructor.newInstance(roomsCount, area);
+    public static Space createSpace(int roomsCount, double area, Class<Space> spaceClass) {
+           try{
+               Constructor<Space> constructor = spaceClass.getConstructor(int.class, double.class);
+               return constructor.newInstance(roomsCount, area);
+           }
+           catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+               throw new RuntimeException(e);
+           }
 
     }
-    public static Floor createFloor(int spacesCount, Class<Floor> createFloor) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        Constructor<Floor> constructor =createFloor.getConstructor(int.class);
-        return constructor.newInstance(spacesCount);
+    public static Floor createFloor(int spacesCount, Class<Floor> createFloor){
+        try {
+            Constructor<Floor> constructor =createFloor.getConstructor(int.class);
+            return constructor.newInstance(spacesCount);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static Floor createFloor(Space[] spaces, Class<Floor> createFloor) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor<Floor> constructor =createFloor.getConstructor(Space.class);
-        return constructor.newInstance(spaces);
+    public static Floor createFloor(Space[] spaces, Class<Floor> createFloor){
+        try {
+            Constructor<Floor> constructor =createFloor.getConstructor(Space.class);
+            return constructor.newInstance(spaces);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static Building createBuilding(int floorsCount, Class<Building> createBuilding) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
-        return constructor.newInstance(floorsCount);
+    public static Building createBuilding(int floorsCount, Class<Building> createBuilding){
+        try {
+            Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
+            return constructor.newInstance(floorsCount);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static Building createBuilding(Floor[] floors, Class<Building> createBuilding) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
-        return constructor.newInstance(floors);
+    public static Building createBuilding(Floor[] floors, Class<Building> createBuilding) {
+        try {
+            Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
+            return constructor.newInstance(floors);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -298,6 +323,26 @@ public class Buildings {
                 int rooms = (int) tokenizer.nval;
                 tokenizer.nextToken();
                 double area = tokenizer.nval;
+                spaces[j] = new Flat(rooms, area);
+            }
+            floors[i] = new DwellingFloor(spaces);
+        }
+        return new Dwelling(floors);
+
+    }
+    public static Building readBuilding(Scanner scanner, Class<Space> spaceClass,Class <Floor> floorClass, Class<Building> buildingClass) throws IOException {
+        int counter = 0;
+        String scan = scanner.nextLine();
+        String[] strings = scan.split(" ");
+
+        Floor[] floors = new Floor[Integer.parseInt(strings[counter++])];
+
+        for (int i = 0; i < floors.length; i++) {
+            Space[] spaces = new Space[Integer.parseInt(strings[counter++])];
+
+            for (int j = 0; j < spaces.length; j++) {
+                int rooms = Integer.parseInt(strings[counter++]);
+                double area = Double.parseDouble(strings[counter++]);
                 spaces[j] = new Flat(rooms, area);
             }
             floors[i] = new DwellingFloor(spaces);

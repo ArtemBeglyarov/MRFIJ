@@ -163,7 +163,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
     }
 
     @Override
-    public Iterator<Space> iterator() {
+    public Iterator<Space> iterator()ЦВ {
         return new DwellingFloorIterator();
     }
 
