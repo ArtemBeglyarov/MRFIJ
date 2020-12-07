@@ -32,6 +32,6 @@ public interface Building extends Iterable<Floor>{
 
     Space[] getSortSpaceArray();
 
-     Object clone();
+     Object clone() throws CloneNotSupportedException;
      Iterator<Floor> iterator();
 }

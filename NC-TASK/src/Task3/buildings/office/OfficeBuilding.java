@@ -5,7 +5,6 @@ import Task3.Building;
 import Task3.Floor;
 import Task3.FloorIndexOutIfBoundsException;
 import Task3.Space;
-import com.sun.jdi.InternalException;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -97,6 +96,7 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
 
     public OfficeBuilding(Floor[] floor) {
         head = new Node(floor[0], null, null);
+        prev = head;
         head.next = head;
         head.prev = head;
         countFloor = 1;
@@ -107,8 +107,10 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
             current.next = newNode;
             newNode.prev = current;
             current = newNode;
+            prev = newNode;
             countFloor++;
         }
+
     }
 
     public OfficeBuilding(int floorNum) {
@@ -374,20 +376,23 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
     }
 
     @Override
-    public Object clone() {
-        Building cloneBuilding = null;
-        try {
-            cloneBuilding = (Building) super.clone();
-            for (int i = 0; i < cloneBuilding.getCountFloor(); i++) {
-                cloneBuilding.setFloor(i, (Floor) cloneBuilding.getFloorByNum(i).clone());
-                for (int j = 0; j < cloneBuilding.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(), j);
-                }
-            }
-        } catch (CloneNotSupportedException e) {
-            throw new InternalException();
+    public Object clone() throws CloneNotSupportedException {
+        OfficeBuilding clonedBuildings = (OfficeBuilding) super.clone();
+
+        clonedBuildings.head = new Node((Floor) getFloorByNum(1).clone(), null, null);
+        clonedBuildings.head.next = clonedBuildings.head;
+        Node current = clonedBuildings.head;
+        clonedBuildings.prev =current;
+
+        for (int i = 2; i <= countFloor; i++) {
+            current.next = new Node((Floor) getFloorByNum(i).clone(), clonedBuildings.head, current);
+            current= current.next;
+            clonedBuildings.head.prev = current;
+            clonedBuildings.prev =current;
+
         }
-        return cloneBuilding;
+
+        return clonedBuildings;
     }
 
     public class OfficeBuildingIterator implements Iterator<Floor> {

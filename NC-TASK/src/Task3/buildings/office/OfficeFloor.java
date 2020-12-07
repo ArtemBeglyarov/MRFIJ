@@ -4,6 +4,7 @@ package Task3.buildings.office;
 import Task3.Floor;
 import Task3.Space;
 import Task3.SpaceIndexOutOfBoundsException;
+import com.sun.jdi.InternalException;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Space>,Comparable<Floor> {
+public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Space>, Comparable<Floor> {
 
     public static class Node implements Serializable {
 
@@ -257,33 +258,23 @@ public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Spa
         return result;
     }
 
-
- @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
-    public Object clone() {
-        Space[] array = new Space[countOffices];
+    public Object clone() throws CloneNotSupportedException {
 
-        for (int i = 1; i <= countOffices; i++) {
-            array[i] = (Space) getSpaceByNum(i).clone();
+        OfficeFloor clone = (OfficeFloor) super.clone();
+
+        clone.head = new Node((Space) getSpaceByNum(1).clone(), null);
+        clone.head.next = clone.head;
+        Node current = clone.head;
+
+        for (int i = 2; i <= countOffices; i++) {
+            current.next = new Node((Space) getSpaceByNum(i).clone(), clone.head);
+            current = current.next;
         }
 
-        return new OfficeFloor(array);
+        return clone;
     }
 
-    //    @Override
-//    public Object clone() throws CloneNotSupportedException {
-//        OfficeFloor clone = (OfficeFloor) super.clone();
-//
-//        clone.head = new Node((Space) getSpaceByNum(1).clone(), null);
-//        clone.head.next = head;
-//        Node current = clone.head;
-//
-//        for (int i = 2; i <= countOffices; i++) {
-//            current.next = new Node((Space) getSpaceByNum(i).clone(), clone.head);
-//        }
-//
-//        return clone;
-//    }
     public class OfficeFloorIterator implements Iterator<Space> {
         Node current = head;
         int position = 0;

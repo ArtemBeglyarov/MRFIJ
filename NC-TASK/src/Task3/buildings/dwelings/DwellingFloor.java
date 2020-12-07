@@ -13,9 +13,7 @@ import java.util.Objects;
 public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<Space>, Comparable<Floor> {
 
     private Space[] flats;
-
     private int countFlats;
-
 
     public DwellingFloor(int spaceNum) {  //конструктор принимает колличесво
         if (spaceNum <= 0) {
@@ -27,7 +25,6 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
         for (int i = 0; i < this.flats.length; ++i) {
             this.flats[i] = new Flat();
         }
-
     }
 
     public DwellingFloor(Space[] flats) {  //конструктор принимает массив
@@ -163,7 +160,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
     }
 
     @Override
-    public Iterator<Space> iterator()ЦВ {
+    public Iterator<Space> iterator() {
         return new DwellingFloorIterator();
     }
 
@@ -197,18 +194,17 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
         result = 31 * result + Arrays.hashCode(flats);
         return result;
     }
+
     @Override
-    public Object clone() {
-        Floor cloneFloor;
-        try {
-            cloneFloor = (Floor) super.clone();
-            for (int i = 1; i < cloneFloor.getCountSpaceOnFloor(); i++) {
-                cloneFloor.setSpaceFloor((Space) cloneFloor.getSpaceByNum(i).clone(), i);
-            }
-        } catch (CloneNotSupportedException e) {
-            throw new InternalError();
+    public Object clone() throws CloneNotSupportedException {
+        DwellingFloor clonedFloor = (DwellingFloor) super.clone();
+        Space[] clonedSpaces = new Space[countFlats];
+        for (int i = 0; i < countFlats; i++) {
+            clonedSpaces[i] = ((Space) getSpaceByNum(i + 1).clone());
         }
-        return cloneFloor;
+        clonedFloor.flats = clonedSpaces;
+
+        return clonedFloor;
     }
 
     public class DwellingFloorIterator implements Iterator<Space> {
@@ -222,7 +218,6 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
             if (position >= spaces.length || spaces[position] == null) return false;
             return true;
         }
-
         @Override
         public Space next() {
             Space temp = spaces[position];

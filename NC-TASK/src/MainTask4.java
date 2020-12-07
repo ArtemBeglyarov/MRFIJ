@@ -14,22 +14,36 @@ import Task4.Buildings;
 import Task4.InexchangeableFloorsException;
 import Task4.InexchangeableSpacesException;
 import Task4.PlacementExchanger;
-import Task6.BuildingFactory;
 
 import java.io.*;
-import java.util.Comparator;
 
 public class MainTask4 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
         Space flat1 = new Flat(1, 40);
-        Space flat2 = new Flat(2, 25);
-        Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
-        Floor cloneFloor = (Floor) testFloor.clone();
+        Space flat2 = (Space) flat1.clone();
+
+        Space office1 = new Office(2, 30);
+        Space office2 = new Office(1,52);
+        Space office3 = new Office(3,22);
+        Space office4 = new Office(1,42);
+
+        Floor floor1 = new DwellingFloor(new Space[]{flat1, flat2});
+        Floor floor2 = (Floor) floor1.clone();
+
+        Floor officeFloor1 = new OfficeFloor(new Space[]{office1, office2});
+        Floor officeFloor2 = new OfficeFloor(new Space[]{office3,office4});
+
+        Building building = new Dwelling(new Floor[]{floor1, floor2});
+        Building building1Clone = (Building) building.clone();
+
+        Building building2 = new OfficeBuilding(new Floor[]{officeFloor1, officeFloor2});
+        Building building1Clone2 = (Building) building2.clone();
+
         System.out.println();
     }
 
-    private static void lab_6_Iter() {
+    private static void lab_6_iter() {
         Space flat1 = new Flat(1, 40);
         Space flat2 = new Flat(2, 25);
         Space flat3 = new Flat(5, 15);
@@ -41,8 +55,8 @@ public class MainTask4 {
 
         Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
 
-        Floor floor = new DwellingFloor(new Space[]{flat1, flat2,flat3,flat4,flat5,flat6});
-        Floor floor1 = new DwellingFloor(new Space[]{flat1, flat2,flat3});
+        Floor floor = new DwellingFloor(new Space[]{flat1, flat2, flat3, flat4, flat5, flat6});
+        Floor floor1 = new DwellingFloor(new Space[]{flat1, flat2, flat3});
         Floor floor2 = new DwellingFloor(new Space[]{flat3, flat4});
         Floor floor3 = new DwellingFloor(new Space[]{flat3, flat4});
 
@@ -90,14 +104,12 @@ public class MainTask4 {
 //
 
 
-
     }
 
     private static void lab4_5() {
         createDwelling();
         createOfficeBuilding();
 
-        Dwelling dwelling = (Dwelling) createDwelling().clone();
 
 
 //        testPlacementExchanger_checkExchangeSpace();
@@ -155,7 +167,6 @@ public class MainTask4 {
     private static Building createDwelling() {
         Space flat1 = new Flat(1, 10);
         Space flat2 = new Flat(2, 20);
-
 
 
         Space flat3 = new Flat(5, 50);

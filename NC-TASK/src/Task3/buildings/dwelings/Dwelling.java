@@ -253,20 +253,15 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
     }
 
     @Override
-    public Object clone() {
-        Building cloneBuilding = null;
-        try {
-            cloneBuilding = (Building) super.clone();
-            for (int i = 1; i < cloneBuilding.getCountFloor(); i++) {
-                cloneBuilding.setFloor(i, (Floor) cloneBuilding.getFloorByNum(i).clone());
-                for (int j = 1; j < cloneBuilding.getFloorByNum(i).getCountSpaceOnFloor(); j++) {
-                    cloneBuilding.getFloorByNum(i).setSpaceFloor((Space) cloneBuilding.getFloorByNum(i).getSpaceByNum(j).clone(), j);
-                }
+    public Object clone() throws CloneNotSupportedException {
+            Dwelling cloneBuilding = (Dwelling) super.clone();
+            Floor[] clonedFloors = new Floor[countFloor];
+            for (int i = 0; i < countFloor; i++) {
+                clonedFloors[i] = (Floor) getFloorByNum(i + 1).clone();
             }
-        } catch (CloneNotSupportedException e) {
-            throw new InternalException();
-        }
-        return cloneBuilding;
+            cloneBuilding.floors = clonedFloors;
+
+            return cloneBuilding;
     }
 
     public class DwellingIterator implements Iterator<Floor> {
