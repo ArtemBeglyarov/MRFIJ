@@ -23,6 +23,12 @@ public class MainTask4 {
     private static Object Class;
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
+        double a = 50.0;
+        int r = 2;
+        Buildings.createSpace(r,a,Space.class);
+        System.out.println();
+
+//        lab4_5();
 
     }
 
@@ -136,7 +142,8 @@ public class MainTask4 {
             Buildings.outputBuilding(createDwelling(), outputStream);
 
 
-            Building resultBuilding = Buildings.inputBuilding(dataInputStream, Class <Space> ; Class <Floor> Class <Building >);
+
+            Building resultBuilding = Buildings.inputBuilding(dataInputStream, Space.class, Floor.class, Building.class);
             System.out.println(resultBuilding);
         }
 
@@ -182,26 +189,10 @@ public class MainTask4 {
         Floor floor1 = new DwellingFloor(new Space[]{flat3, flat4});
 
         Floor[] floors = {floor, floor1};
-        System.out.println(floor.hashCode() + "1111");
-
-        Floor testFloor = new DwellingFloor(new Space[]{flat1, flat2});
-        System.out.println(floor.equals(testFloor));
-
-        Space testFlat = new Flat(1, 10);
-        System.out.println(flat1.equals(testFlat));
-
-        Building building = new Dwelling(floors);
-        Building buildingtest = new Dwelling(floors);
-
-        System.out.println(building.equals(buildingtest));
 
 
-        HotelFloor hotelFloor = new HotelFloor(new Space[]{flat1, flat2});
-        HotelFloor hotelFloor1 = new HotelFloor(new Space[]{flat3, flat4});
+        Building building = new Dwelling(new Floor[]{floor,floor1});
 
-        Hotel hotel = new Hotel(new HotelFloor[]{hotelFloor, hotelFloor1});
-        hotel.getFloorByNum(1).getSpaceByNum(1);
-        System.out.println("hotel@ - " + hotel.toString());
 
 
         return new Dwelling(floors);
