@@ -8,10 +8,10 @@ public interface BuildingFactory{
 
     Floor createFloor(int spaceCount);
 
-    Floor createFloor(Space[] spaces);
+    Floor createFloor(Space... spaces);
 
     Building createBuilding(int floorsCount);
 
-    Building createBuilding(Floor[] floors);
+    Building createBuilding(Floor... floors);
 
 }

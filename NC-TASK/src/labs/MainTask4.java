@@ -23,6 +23,7 @@ public class MainTask4 {
     private static Object Class;
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
+        lab_6_iter();
 
     }
 
@@ -67,11 +68,14 @@ public class MainTask4 {
         Floor floor2 = new DwellingFloor(new Space[]{flat3, flat4});
         Floor floor3 = new DwellingFloor(new Space[]{flat3, flat4});
 
-        SpaceComparator spaceComparator = new SpaceComparator();
 
 
-        Buildings.sortArrayAsc(floor.getArrayFloor());
 
+//        Buildings.sortArrayAsc(floor.getArrayFloor());
+        Buildings.sortArrayDesc(floor.getArrayFloor(),(o1,o2)->{
+            if ( o1.getRoom() > o2.getRoom()){return 1;}
+        else if (o1.getRoom() < o2.getRoom()) { return -1;}
+            return 0;});
 
 //
 //        Building building = new Dwelling(new Floor[]{floor,floor1});
@@ -129,16 +133,16 @@ public class MainTask4 {
 //        System.out.println(dwelling.toString());
 //        System.out.println(floor.toString());
 //
-        String filePath = ".\\test.txt";
-        try (DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(filePath));
-             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filePath))) {
-
-            Buildings.outputBuilding(createDwelling(), outputStream);
-
-
-            Building resultBuilding = Buildings.inputBuilding(dataInputStream, Class <Space> ; Class <Floor> Class <Building >);
-            System.out.println(resultBuilding);
-        }
+//        String filePath = ".\\test.txt";
+//        try (DataOutputStream outputStream = new DataOutputStream(new FileOutputStream(filePath));
+//             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filePath))) {
+//
+//            Buildings.outputBuilding(createDwelling(), outputStream);
+//
+//
+//            Building resultBuilding = Buildings.inputBuilding(dataInputStream, Class <Space> ; Class <Floor> Class <Building >);
+//            System.out.println(resultBuilding);
+//        }
 
 //
 //        try (OutputStreamWriter out = new OutputStreamWriter(System.out);
