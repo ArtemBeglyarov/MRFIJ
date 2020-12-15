@@ -4,6 +4,7 @@ import labs.inter.Floor;
 import labs.inter.Space;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SynchronizedFloor implements Floor {
     private Floor floor;
@@ -58,17 +59,37 @@ public class SynchronizedFloor implements Floor {
     }
 
     @Override
-    public synchronized Object clone() throws CloneNotSupportedException {
-        return null;
+    public synchronized Object clone()  {
+        return floor.clone();
     }
 
     @Override
     public synchronized Iterator<Space> iterator() {
-        return null;
+        return floor.iterator();
     }
 
     @Override
     public synchronized int compareTo(Floor o) {
-        return 0;
+        return floor.compareTo(o);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SynchronizedFloor spaces = (SynchronizedFloor) o;
+        return Objects.equals(floor, spaces.floor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(floor);
+    }
+
+    @Override
+    public String toString() {
+        return "SynchronizedFloor{" +
+                "floor=" + floor +
+                '}';
     }
 }

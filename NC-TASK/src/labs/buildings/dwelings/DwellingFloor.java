@@ -196,14 +196,19 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        DwellingFloor clonedFloor = (DwellingFloor) super.clone();
+    public Object clone()  {
+        DwellingFloor clonedFloor = null;
+        try {
+            clonedFloor = (DwellingFloor) super.clone();
         Space[] clonedSpaces = new Space[countFlats];
         for (int i = 0; i < countFlats; i++) {
             clonedSpaces[i] = ((Space) getSpaceByNum(i + 1).clone());
         }
         clonedFloor.flats = clonedSpaces;
 
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         return clonedFloor;
     }
 

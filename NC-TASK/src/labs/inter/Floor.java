@@ -23,7 +23,7 @@ public interface Floor extends Iterable<Space>,Comparable<Floor>,Cloneable{
 
     Space getBestSpace();
 
-    Object clone() throws CloneNotSupportedException;
+    Object clone();
     
     Iterator<Space> iterator();
 
