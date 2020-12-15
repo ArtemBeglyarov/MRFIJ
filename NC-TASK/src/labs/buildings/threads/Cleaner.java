@@ -14,7 +14,7 @@ public class Cleaner extends Thread {
     public void run() {
         Space[] spaces = floor.getArrayFloor();
         for (int i = 0; i < spaces.length; i++) {
-            System.out.println("«Cleaning space number" + i + " with total area" + spaces[i].getArea() + "square meters».");
+            System.out.println("«Cleaning space number" +" "+  i +" "+  " with total area" +" "+  spaces[i].getArea() +" "+  "square meters»."+ " "+ getName());
         }
     }
 }

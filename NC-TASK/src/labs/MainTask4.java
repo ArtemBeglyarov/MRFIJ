@@ -1,11 +1,11 @@
 package labs;
 
 import labs.buildings.Buildings;
-import labs.buildings.comparators.SpaceComparator;
 import labs.buildings.dwelings.Dwelling;
 import labs.buildings.dwelings.DwellingFloor;
 import labs.buildings.dwelings.Flat;
 import labs.buildings.PlacementExchanger;
+import labs.buildings.threads.*;
 import labs.inter.Building;
 import labs.buildings.dwelings.hotel.Hotel;
 import labs.buildings.dwelings.hotel.HotelFloor;
@@ -23,8 +23,22 @@ public class MainTask4 {
     private static Object Class;
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
-        lab_6_iter();
+//        lab_6_iter();
+        lab_7();
 
+    }
+
+    private static void lab_7() {
+        DwellingFloor dwellingFloor = new DwellingFloor(6);
+//        Repairer repairer = new Repairer(dwellingFloor);
+//        Cleaner cleaner = new Cleaner(dwellingFloor);
+//
+
+        Sem sem = new Sem();
+//        Thread rep = new Thread(new SequentialRepairer(dwellingFloor,sem));
+//        Thread cl = new Thread(new SequentialCleaner(dwellingFloor,sem));
+//        rep.start();
+//        cl.start();
     }
 
     private static void lab_5_Clone() throws CloneNotSupportedException {

@@ -3,25 +3,32 @@ package labs.buildings.threads;
 import labs.inter.Floor;
 import labs.inter.Space;
 
-public class SequentialRepairer  implements Runnable{
+public class SequentialRepairer implements Runnable {
     private Floor floor;
 
-    Semaphor semaphore;
+    Sem sem;
 
-    public SequentialRepairer(Floor floor, Semaphor sem)
-    {
+    public SequentialRepairer(Floor floor, Sem sem) {
         this.floor = floor;
-        this.semaphore = sem;
+        this.sem = sem;
     }
 
     @Override
     public void run() {
-
         Space[] spaces = floor.getArrayFloor();
-        synchronized (semaphore) {
 
-            for (int i = 0; i <spaces.length ; i++) {
-                System.out.println("«Repairing space number" + i + " with total area" +  spaces[i].getArea() + "square meters».");
+        synchronized (sem) {
+            for (int i = 0; i < spaces.length; i++) {
+                if (sem.semaphore == false) {
+                    try {
+                        sem.notify();
+                        System.out.println("«Repairing space number" + i + " with total area" + spaces[i].getArea() + "square meters».");
+                        sem.semaphore = true;
+                        sem.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
 
