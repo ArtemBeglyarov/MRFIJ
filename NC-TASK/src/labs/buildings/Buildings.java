@@ -225,7 +225,7 @@ public class Buildings {
         return buildingFactory.createBuilding(floors);
     }
 
-    public static Space createSpace(double area, Class<Space> spaceClass) {
+    public static Space createSpace(Double area, Class<Space> spaceClass) {
         try {
             Constructor<Space> constructor = spaceClass.getConstructor(double.class);
             return constructor.newInstance(area);
@@ -234,7 +234,7 @@ public class Buildings {
         }
     }
 
-    public static Space createSpace(int roomsCount, double area, Class<Space> spaceClass) {
+    public static Space createSpace(Integer roomsCount, Double area, Class<Space> spaceClass) {
         try {
             Constructor<Space> constructor = spaceClass.getConstructor(int.class, double.class);
             return constructor.newInstance(roomsCount, area);
@@ -244,7 +244,7 @@ public class Buildings {
 
     }
 
-    public static Floor createFloor(int spacesCount, Class<Floor> createFloor) {
+    public static Floor createFloor(Integer spacesCount, Class<Floor> createFloor) {
         try {
             Constructor<Floor> constructor = createFloor.getConstructor(int.class);
             return constructor.newInstance(spacesCount);
@@ -253,7 +253,7 @@ public class Buildings {
         }
     }
 
-    public static Floor createFloor(Space[] spaces, Class<Floor> createFloor) {
+    public static Floor createFloor(Class<Floor> createFloor, Space... spaces) {
         try {
             Constructor<Floor> constructor = createFloor.getConstructor(Space.class);
             return constructor.newInstance(spaces);
@@ -262,7 +262,7 @@ public class Buildings {
         }
     }
 
-    public static Building createBuilding(int floorsCount, Class<Building> createBuilding) {
+    public static Building createBuilding(Integer floorsCount, Class<Building> createBuilding) {
         try {
             Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
             return constructor.newInstance(floorsCount);
@@ -271,7 +271,7 @@ public class Buildings {
         }
     }
 
-    public static Building createBuilding(Floor[] floors, Class<Building> createBuilding) {
+    public static Building createBuilding(Class<Building> createBuilding, Floor... floors) {
         try {
             Constructor<Building> constructor = createBuilding.getConstructor(Building.class);
             return constructor.newInstance(floors);
@@ -300,9 +300,9 @@ public class Buildings {
                     spaces[j] = createSpace(rooms, area,spaceClass);
 
                 }
-                floors[i] = createFloor(spaces,floorClass);
+                floors[i] = createFloor(spaces);
             }
-            return createBuilding(floors,buildingClass);
+            return createBuilding(floors);
     }
 
 
@@ -323,9 +323,9 @@ public class Buildings {
                 double area = tokenizer.nval;
                 spaces[j] = createSpace(rooms, area,spaceClass);
             }
-            floors[i] =  createFloor(spaces,floorClass);
+            floors[i] =  createFloor(spaces);
         }
-        return createBuilding(floors,buildingClass);
+        return createBuilding(floors);
 
     }
 
@@ -344,9 +344,9 @@ public class Buildings {
                 double area = Double.parseDouble(strings[counter++]);
                 spaces[j] =createSpace(rooms, area,spaceClass);
             }
-            floors[i] = createFloor(spaces,floorClass);
+            floors[i] = createFloor(spaces);
         }
-        return createBuilding(floors,buildingClass);
+        return createBuilding(floors);
 
     }
 }

@@ -110,7 +110,7 @@ public class OfficeFloor implements Floor, Serializable, Cloneable, Iterable<Spa
     }
 
 
-    public OfficeFloor(Space[] offices) {   //конструктор принимает массив
+    public OfficeFloor(Space... offices) {   //конструктор принимает массив
         head = new Node(offices[0], null);
         head.next = head;
         Node current = head;

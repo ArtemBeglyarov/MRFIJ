@@ -27,7 +27,7 @@ public class DwellingFloor implements Floor, Serializable, Cloneable, Iterable<S
         }
     }
 
-    public DwellingFloor(Space[] flats) {  //конструктор принимает массив
+    public DwellingFloor(Space... flats) {  //конструктор принимает массив
         this.flats = flats;
         this.countFlats = flats.length;
     }

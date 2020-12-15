@@ -30,7 +30,7 @@ public class Dwelling implements Building, Serializable, Cloneable, Iterable<Flo
     }
 
 
-    public Dwelling(Floor[] floors) {
+    public Dwelling(Floor... floors) {
         this.floors = floors;
         this.countFloor = floors.length;
     }

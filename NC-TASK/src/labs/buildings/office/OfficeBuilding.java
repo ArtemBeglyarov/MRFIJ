@@ -94,7 +94,7 @@ public class OfficeBuilding implements Building, Serializable, Cloneable, Iterab
     }
 
 
-    public OfficeBuilding(Floor[] floor) {
+    public OfficeBuilding(Floor... floor) {
         head = new Node(floor[0], null, null);
         prev = head;
         head.next = head;
